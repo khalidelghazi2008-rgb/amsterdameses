@@ -58,6 +58,21 @@ wishlist-button.is-active .icon-heart {
   text-transform: uppercase;
 }
 
+/* Mismo tratamiento tipográfico (mayúsculas + tracking) para el nivel 1
+   del menú del cajón (drawer) móvil. */
+.menu-drawer__navigation > ul.menu-drawer__menu > li > summary.menu-drawer__menu-item,
+.menu-drawer__navigation > ul.menu-drawer__menu > li > a.menu-drawer__menu-item {
+  font-weight: 600;
+  letter-spacing: var(--amstershop-tracking-wide);
+  text-transform: uppercase;
+}
+
+/* Hover/foco azul también en el menú móvil y sus submenús */
+.menu-drawer__menu-item:hover,
+.menu-drawer__menu-item:focus-visible {
+  color: rgb(var(--amstershop-blue));
+}
+
 /* Sombra premium del header cuando queda fijo al hacer scroll */
 .shopify-section-header-sticky .header-wrapper {
   box-shadow: 0 0.4rem 1.6rem rgba(var(--amstershop-black), 0.18);

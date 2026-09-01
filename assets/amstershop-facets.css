@@ -23,8 +23,15 @@
   outline-color: rgba(var(--amstershop-blue), 0.5);
 }
 
-/* Casilla marcada (checkbox) */
-.facet-checkbox > input[type='checkbox']:checked ~ .svg-wrapper > .icon-checkmark {
+/* Casilla marcada (checkbox), escritorio y drawer de filtros móvil */
+.facet-checkbox > input[type='checkbox']:checked ~ .svg-wrapper > .icon-checkmark,
+.mobile-facets__label > input[type='checkbox']:checked ~ .icon-checkmark {
+  color: rgb(var(--amstershop-blue));
+}
+
+/* Filtro seleccionado en el drawer de filtros móvil */
+.mobile-facets__label:hover,
+.mobile-facets__summary:hover {
   color: rgb(var(--amstershop-blue));
 }
 
