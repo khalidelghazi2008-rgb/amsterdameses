@@ -2,6 +2,45 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
+    "top-announcement-bar": {
+      "type": "top-announcement-bar",
+      "settings": {
+        "enabled": true,
+        "change_slides_speed": 4
+      },
+      "blocks": {
+        "top-announcement-bar-0": {
+          "type": "message",
+          "settings": {
+            "text": "🚚 ENVÍOS 24H"
+          }
+        },
+        "top-announcement-bar-1": {
+          "type": "message",
+          "settings": {
+            "text": "💳 PAGA AL RECIBIR"
+          }
+        },
+        "top-announcement-bar-2": {
+          "type": "message",
+          "settings": {
+            "text": "🔥 NUEVAS NOVEDADES CADA SEMANA"
+          }
+        },
+        "top-announcement-bar-3": {
+          "type": "message",
+          "settings": {
+            "text": "⭐ CALIDAD Y CONFIANZA"
+          }
+        }
+      },
+      "block_order": [
+        "top-announcement-bar-0",
+        "top-announcement-bar-1",
+        "top-announcement-bar-2",
+        "top-announcement-bar-3"
+      ]
+    },
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
@@ -62,6 +101,7 @@
     }
   },
   "order": [
+    "top-announcement-bar",
     "announcement-bar",
     "header"
   ]

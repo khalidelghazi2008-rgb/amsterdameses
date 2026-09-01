@@ -565,6 +565,9 @@
       "free_shipping_remaining_html": "Te faltan <strong>{{ amount }}</strong> para el envío gratis",
       "free_shipping_achieved": "¡Tu pedido tiene envío gratis!",
       "upsell_heading": "También te puede interesar"
+    },
+    "top_announcement_bar": {
+      "title": "Destacados de la tienda"
     }
   }
 }

@@ -1,0 +1,184 @@
+{% comment %}
+  Barra rotatoria superior (AMSTERSHOP)
+  --------------------------------------------------------------------------
+  Tira pequeña y elegante, siempre arriba de todo (por encima de la barra
+  de anuncios existente y del header), que va rotando entre varios
+  mensajes cortos configurados como bloques desde el editor de temas
+  (añadir/quitar mensajes, velocidad, activar/desactivar).
+
+  Implementación 100% CSS: para N mensajes se generan aquí, en el
+  {% style %}, N animaciones @keyframes (una por mensaje) que reparten el
+  ciclo total a partes iguales, con un breve fundido (fade) en cada
+  cambio. Cada mensaje lleva su animación (nombre + duración) puesta
+  directamente en su propio elemento, así que no hace falta JavaScript
+  para la rotación: todos comparten la misma duración total, así que
+  quedan perfectamente sincronizados sin temporizadores ni scripts.
+
+  Nunca se desplaza en horizontal (no es un "marquee"): solo cambia de
+  opacidad entre un mensaje y el siguiente. Respeta
+  prefers-reduced-motion (deja fijo el primer mensaje, sin animar).
+
+  No modifica sections/header.liquid ni sections/announcement-bar.liquid:
+  es una sección independiente que solo se añade antes de ellas en
+  sections/header-group.json.
+{% endcomment %}
+
+{{ 'component-top-announcement-bar.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign message_blocks = section.blocks | where: 'type', 'message'
+  assign message_count = message_blocks.size
+  assign show_bar = false
+  if section.settings.enabled and message_count > 0
+    assign show_bar = true
+  endif
+
+  comment
+    Evita dividir por 0 si se borran todos los mensajes: estos valores solo
+    se usan más abajo cuando show_bar es true (message_count > 0).
+  endcomment
+  assign safe_message_count = message_count | at_least: 1
+  assign total_duration = section.settings.change_slides_speed | times: safe_message_count
+  assign fade_pct = 20.0 | divided_by: safe_message_count
+  assign slot_width = 100.0 | divided_by: safe_message_count
+-%}
+
+{%- if show_bar -%}
+  <div
+    class="top-announcement-bar"
+    role="region"
+    aria-label="{{ 'amstershop.top_announcement_bar.title' | t }}"
+  >
+    <div class="top-announcement-bar__inner page-width">
+      <div class="top-announcement-bar__viewport">
+        {%- comment -%}
+          Sin JavaScript no hay forma de ir avisando a los lectores de
+          pantalla de qué mensaje toca en cada momento, así que solo el
+          primer mensaje con texto queda accesible (aria-hidden en el
+          resto): evita que se lean todos los mensajes superpuestos a la
+          vez. "first_visible_rendered" (en vez de forloop.first) es lo que
+          garantiza que sea el primero que realmente se pinta, aunque el
+          primer bloque se deje vacío.
+        {%- endcomment -%}
+        {%- assign first_visible_rendered = false -%}
+        {%- for block in message_blocks -%}
+          {%- if block.settings.text != blank -%}
+            {%- liquid
+              assign is_first_visible = false
+              unless first_visible_rendered
+                assign is_first_visible = true
+                assign first_visible_rendered = true
+              endunless
+            -%}
+            <p
+              class="top-announcement-bar__message"
+              aria-hidden="{% if is_first_visible %}false{% else %}true{% endif %}"
+              {%- if message_count > 1 %}
+                style="animation-name: amstershop-top-bar-msg-{{ section.id }}-{{ forloop.index0 }}; animation-duration: {{ total_duration }}s;"
+              {%- endif %}
+              {{ block.shopify_attributes }}
+            >
+              {{- block.settings.text | escape -}}
+            </p>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if message_count > 1 -%}
+    {%- style -%}
+      {%- for block in message_blocks -%}
+        {%- liquid
+          assign i = forloop.index0
+          assign slot_start = i | times: slot_width
+          assign slot_end = forloop.index | times: slot_width
+          assign fade_in_end = slot_start | plus: fade_pct
+          assign fade_out_start = slot_end | minus: fade_pct
+        -%}
+        @keyframes amstershop-top-bar-msg-{{ section.id }}-{{ i }} {
+          0% { opacity: 0; }
+          {{ slot_start }}% { opacity: 0; }
+          {{ fade_in_end }}% { opacity: 1; }
+          {{ fade_out_start }}% { opacity: 1; }
+          {{ slot_end }}% { opacity: 0; }
+          100% { opacity: 0; }
+        }
+      {%- endfor -%}
+    {%- endstyle -%}
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Barra rotatoria superior",
+  "class": "section",
+  "max_blocks": 10,
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Activar barra",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "change_slides_speed",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Segundos por mensaje",
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Mensaje",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Nuevo mensaje"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra rotatoria superior",
+      "blocks": [
+        {
+          "type": "message",
+          "settings": {
+            "text": "🚚 ENVÍOS 24H"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "💳 PAGA AL RECIBIR"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "🔥 NUEVAS NOVEDADES CADA SEMANA"
+          }
+        },
+        {
+          "type": "message",
+          "settings": {
+            "text": "⭐ CALIDAD Y CONFIANZA"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

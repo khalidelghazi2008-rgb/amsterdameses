@@ -1,0 +1,62 @@
+/* ==========================================================================
+   AMSTERSHOP · Barra rotatoria superior
+   --------------------------------------------------------------------------
+   Tira pequeña y elegante por encima de todo el sitio. Fondo negro mate,
+   texto blanco, acento azul intenso (línea inferior). La rotación entre
+   mensajes es 100% CSS (@keyframes generados en el propio
+   sections/top-announcement-bar.liquid, uno por mensaje): nunca se
+   desplaza en horizontal, solo cambia de opacidad entre un mensaje y el
+   siguiente.
+   ========================================================================== */
+
+.top-announcement-bar {
+  background-color: rgb(var(--amstershop-black));
+  border-bottom: 0.2rem solid rgb(var(--amstershop-blue));
+  color: rgb(var(--amstershop-white));
+}
+
+.top-announcement-bar__inner {
+  padding-bottom: 0.7rem;
+  padding-top: 0.7rem;
+}
+
+/* Todos los mensajes ocupan la misma celda de grid, superpuestos: así el
+   contenedor se ajusta solo a la altura del texto (una línea), sin tener
+   que calcular ninguna altura fija a mano. */
+.top-announcement-bar__viewport {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.top-announcement-bar__message {
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  font-size: 1.2rem;
+  font-weight: 600;
+  grid-area: 1 / 1;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+  margin: 0;
+  opacity: 1;
+}
+
+@media screen and (min-width: 750px) {
+  .top-announcement-bar__message {
+    font-size: 1.3rem;
+  }
+}
+
+/* Accesibilidad: si el usuario prefiere menos movimiento, se detiene la
+   rotación y se deja fijo el primer mensaje (el resto queda oculto en
+   vez de superpuesto). */
+@media (prefers-reduced-motion: reduce) {
+  .top-announcement-bar__message {
+    animation: none !important;
+    opacity: 0;
+  }
+
+  .top-announcement-bar__message:first-child {
+    opacity: 1;
+  }
+}
