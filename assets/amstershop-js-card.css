@@ -1,0 +1,129 @@
+/* ==========================================================================
+   AMSTERSHOP · Tarjeta de producto "cliente" (JS)
+   --------------------------------------------------------------------------
+   Usada por secciones cuyo contenido se pinta en el navegador a partir de
+   datos obtenidos por fetch (no renderizados por Liquid), como la página
+   de Wishlist y "Vistos recientemente". Es deliberadamente independiente
+   de la tarjeta de producto normal (snippets/card-product.liquid) porque
+   esta se genera con JavaScript puro a partir del JSON público del
+   producto, pero comparte la misma identidad visual de marca.
+   ========================================================================== */
+
+.amstershop-js-card-grid {
+  display: grid;
+  gap: 2.4rem;
+  grid-template-columns: repeat(2, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .amstershop-js-card-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.amstershop-js-card {
+  position: relative;
+}
+
+.amstershop-js-card__media-link {
+  background-color: rgb(var(--color-background));
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.amstershop-js-card__image {
+  aspect-ratio: 1 / 1;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  transition: transform var(--duration-long) ease;
+  width: 100%;
+}
+
+.amstershop-js-card:hover .amstershop-js-card__image {
+  transform: scale(1.05);
+}
+
+.amstershop-js-card__badge {
+  background-color: rgb(var(--amstershop-blue));
+  color: rgb(var(--amstershop-white));
+  font-size: 1.1rem;
+  font-weight: 700;
+  left: 1rem;
+  padding: 0.3rem 0.8rem;
+  position: absolute;
+  top: 1rem;
+}
+
+.amstershop-js-card__content {
+  padding-top: 1.2rem;
+}
+
+.amstershop-js-card__title {
+  font-size: 1.4rem;
+  margin: 0 0 0.4rem;
+}
+
+.amstershop-js-card__title a {
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+}
+
+.amstershop-js-card__title a:hover {
+  color: rgb(var(--amstershop-blue));
+}
+
+.amstershop-js-card__price {
+  align-items: baseline;
+  display: flex;
+  gap: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.amstershop-js-card__price-compare {
+  color: rgba(var(--color-foreground), 0.55);
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.amstershop-js-card__wishlist {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.amstershop-js-card__wishlist-button {
+  align-items: center;
+  background-color: rgb(var(--color-background));
+  border: none;
+  cursor: pointer;
+  display: flex;
+  height: 3.6rem;
+  justify-content: center;
+  padding: 0;
+  width: 3.6rem;
+}
+
+.amstershop-js-card__wishlist-button .icon-heart {
+  fill: rgb(var(--amstershop-blue));
+  height: 1.8rem;
+  stroke: rgb(var(--amstershop-blue));
+  width: 1.8rem;
+}
+
+/* Estado vacío (wishlist sin productos, sin "vistos recientemente" aún) */
+.amstershop-empty-state {
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.amstershop-empty-state__text {
+  color: rgba(var(--color-foreground), 0.75);
+  margin: 0 auto 2.4rem;
+  max-width: 40rem;
+}

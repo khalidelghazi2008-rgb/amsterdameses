@@ -274,7 +274,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -527,6 +526,18 @@
       "max_characters": "{{ max_chars }} characters max",
       "send_on": "YYYY-MM-DD",
       "send_on_label": "Send on (optional)"
+    }
+  },
+  "amstershop": {
+    "wishlist": {
+      "title": "Wishlist",
+      "add": "Add to wishlist",
+      "remove": "Remove from wishlist",
+      "count": "products in your wishlist",
+      "empty_heading": "Your wishlist is empty",
+      "empty_text": "Save your favorite sneakers and gear to find them easily later.",
+      "continue_shopping": "Continue shopping",
+      "view_product": "View product"
     }
   }
 }

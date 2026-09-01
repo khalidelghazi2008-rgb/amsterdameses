@@ -279,6 +279,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'amstershop-theme.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -358,6 +359,13 @@
         cart_url: '{{ routes.cart_url }}',
         predictive_search_url: '{{ routes.predictive_search_url }}',
       };
+
+      {%- comment -%}
+        Formato de moneda de la tienda, para poder formatear precios en
+        JavaScript (wishlist y "vistos recientemente", que se pintan en el
+        cliente a partir de datos obtenidos por fetch, no por Liquid).
+      {%- endcomment -%}
+      window.AmstershopMoneyFormat = {{ shop.money_format | json }};
 
       window.cartStrings = {
         error: `{{ 'sections.cart.cart_error' | t }}`,

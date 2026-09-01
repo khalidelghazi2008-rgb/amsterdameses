@@ -7,6 +7,8 @@
   media="print"
   onload="this.media='all'"
 >
+{{ 'amstershop-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'wishlist.js' | asset_url }}" defer="defer"></script>
 
 {%- if settings.predictive_search_enabled -%}
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -298,6 +300,25 @@
             {% render block %}
         {%- endcase -%}
       {%- endfor -%}
+
+      {%- comment -%}
+        Wishlist: no existe de forma nativa en Shopify/Dawn, así que se
+        implementa 100% en el cliente (localStorage) con assets/wishlist.js.
+        El enlace de destino es configurable (página "Wishlist" del editor).
+      {%- endcomment -%}
+      {%- assign wishlist_url = section.settings.wishlist_url | default: '/pages/wishlist' -%}
+      <a
+        href="{{ wishlist_url }}"
+        class="header__icon header__icon--wishlist link focus-inset"
+        id="wishlist-icon-bubble"
+      >
+        <span class="svg-wrapper">{{ 'icon-heart.svg' | inline_asset_content }}</span>
+        <span class="visually-hidden">{{ 'amstershop.wishlist.title' | t }}</span>
+        <div class="wishlist-count-bubble" hidden>
+          <span aria-hidden="true">0</span>
+          <span class="visually-hidden">{{ 'amstershop.wishlist.count' | t }}</span>
+        </div>
+      </a>
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
         {% if cart == empty %}
@@ -616,6 +637,16 @@
       "id": "menu_color_scheme",
       "label": "t:sections.header.settings.menu_color_scheme.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Wishlist"
+    },
+    {
+      "type": "url",
+      "id": "wishlist_url",
+      "label": "Enlace de la página de wishlist",
+      "info": "Página donde se muestran los productos guardados. Por defecto: /pages/wishlist (crea una página con ese handle y la plantilla \"page.wishlist\")."
     },
     {
       "type": "header",

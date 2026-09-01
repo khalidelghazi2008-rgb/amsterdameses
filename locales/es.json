@@ -539,5 +539,17 @@
       "expanded": "Formulario del destinatario de la tarjeta de regalo expandido",
       "collapsed": "Formulario del destinatario de tarjeta de regalo contraído"
     }
+  },
+  "amstershop": {
+    "wishlist": {
+      "title": "Wishlist",
+      "add": "Añadir a la wishlist",
+      "remove": "Quitar de la wishlist",
+      "count": "productos en tu wishlist",
+      "empty_heading": "Tu wishlist está vacía",
+      "empty_text": "Guarda tus zapatillas y prendas favoritas para encontrarlas fácilmente más tarde.",
+      "continue_shopping": "Seguir comprando",
+      "view_product": "Ver producto"
+    }
   }
 }

@@ -1,7 +1,7 @@
 {
-  "current": "Dawn",
+  "current": "AMSTERSHOP",
   "presets": {
-    "Dawn": {
+    "AMSTERSHOP": {
       "logo_width": 90,
       "customer_account_menu": "customer-account-main-menu",
       "color_schemes": {
@@ -9,55 +9,55 @@
           "settings": {
             "background": "#FFFFFF",
             "background_gradient": "",
-            "text": "#121212",
-            "button": "#121212",
+            "text": "#0A0A0A",
+            "button": "#0A0A0A",
             "button_label": "#FFFFFF",
-            "secondary_button_label": "#121212",
-            "shadow": "#121212"
+            "secondary_button_label": "#0A0A0A",
+            "shadow": "#0A0A0A"
           }
         },
         "scheme-2": {
           "settings": {
-            "background": "#F3F3F3",
+            "background": "#F2F2F2",
             "background_gradient": "",
-            "text": "#121212",
-            "button": "#121212",
-            "button_label": "#F3F3F3",
-            "secondary_button_label": "#121212",
-            "shadow": "#121212"
+            "text": "#0A0A0A",
+            "button": "#0A0A0A",
+            "button_label": "#F2F2F2",
+            "secondary_button_label": "#0A0A0A",
+            "shadow": "#0A0A0A"
           }
         },
         "scheme-3": {
           "settings": {
-            "background": "#242833",
+            "background": "#101A33",
             "background_gradient": "",
             "text": "#FFFFFF",
-            "button": "#FFFFFF",
-            "button_label": "#000000",
+            "button": "#2B4CFF",
+            "button_label": "#FFFFFF",
             "secondary_button_label": "#FFFFFF",
-            "shadow": "#121212"
+            "shadow": "#000000"
           }
         },
         "scheme-4": {
           "settings": {
-            "background": "#121212",
+            "background": "#0A0A0A",
             "background_gradient": "",
             "text": "#FFFFFF",
-            "button": "#FFFFFF",
-            "button_label": "#121212",
+            "button": "#2B4CFF",
+            "button_label": "#FFFFFF",
             "secondary_button_label": "#FFFFFF",
-            "shadow": "#121212"
+            "shadow": "#000000"
           }
         },
         "scheme-5": {
           "settings": {
-            "background": "#334FB4",
+            "background": "#2B4CFF",
             "background_gradient": "",
             "text": "#FFFFFF",
             "button": "#FFFFFF",
-            "button_label": "#334FB4",
+            "button_label": "#2B4CFF",
             "secondary_button_label": "#FFFFFF",
-            "shadow": "#121212"
+            "shadow": "#14224E"
           }
         }
       },
@@ -152,10 +152,10 @@
       "drawer_shadow_horizontal_offset": 0,
       "drawer_shadow_vertical_offset": 4,
       "drawer_shadow_blur": 5,
-      "badge_position": "bottom left",
-      "badge_corner_radius": 40,
-      "sale_badge_color_scheme": "scheme-4",
-      "sold_out_badge_color_scheme": "scheme-3",
+      "badge_position": "top left",
+      "badge_corner_radius": 0,
+      "sale_badge_color_scheme": "scheme-5",
+      "sold_out_badge_color_scheme": "scheme-4",
       "brand_headline": "",
       "brand_description": "<p></p>",
       "brand_image_width": 100,
@@ -172,9 +172,9 @@
       "predictive_search_show_vendor": false,
       "predictive_search_show_price": false,
       "currency_code_enabled": true,
-      "cart_type": "notification",
+      "cart_type": "drawer",
       "show_vendor": false,
-      "show_cart_note": false,
+      "show_cart_note": true,
       "cart_drawer_collection": "",
       "cart_color_scheme": "scheme-1",
       "sections": {

@@ -1,0 +1,65 @@
+/* ==========================================================================
+   AMSTERSHOP · Header premium
+   Estilos propios del header por encima de los de Dawn: icono de wishlist,
+   hover azul en los iconos, y una sombra sutil cuando el header queda
+   "pegado" (sticky) al hacer scroll.
+   ========================================================================== */
+
+/* Icono de wishlist: mismo tamaño/posicionamiento que el resto de iconos
+   del header, con su propio contador (burbuja) en azul de marca. */
+.header__icon--wishlist {
+  position: relative;
+}
+
+.wishlist-count-bubble {
+  align-items: center;
+  background-color: rgb(var(--amstershop-blue));
+  border-radius: 100%;
+  bottom: 0.8rem;
+  color: rgb(var(--amstershop-white));
+  display: flex;
+  font-size: 0.9rem;
+  height: 1.7rem;
+  justify-content: center;
+  left: 2.2rem;
+  line-height: calc(1 + 0.1 / var(--font-body-scale));
+  position: absolute;
+  width: 1.7rem;
+}
+
+.wishlist-count-bubble[hidden] {
+  display: none;
+}
+
+/* Corazón relleno cuando el producto ya está en la wishlist */
+wishlist-button.is-active .icon-heart {
+  fill: rgb(var(--amstershop-blue));
+  stroke: rgb(var(--amstershop-blue));
+}
+
+.header__icon--wishlist:hover .icon,
+.header__icon--wishlist:focus-visible .icon,
+.header__icon--account:hover .icon,
+.header__icon--account:focus-visible .icon,
+.header__icon--cart:hover .icon,
+.header__icon--cart:focus-visible .icon,
+.header__icon--search:hover .icon,
+.header__icon--search:focus-visible .icon {
+  color: rgb(var(--amstershop-blue));
+}
+
+/* Navegación principal en mayúsculas con tracking, look urbano/premium.
+   Solo afecta al nivel 1 del menú (Inicio, Tienda, Hombre...), nunca a los
+   submenús del mega menú ni del desplegable clásico. */
+.header__inline-menu > ul.list-menu > li > a.header__menu-item,
+.header__inline-menu > ul.list-menu > li > header-menu > details > summary.header__menu-item {
+  font-weight: 600;
+  letter-spacing: var(--amstershop-tracking-wide);
+  text-transform: uppercase;
+}
+
+/* Sombra premium del header cuando queda fijo al hacer scroll */
+.shopify-section-header-sticky .header-wrapper {
+  box-shadow: 0 0.4rem 1.6rem rgba(var(--amstershop-black), 0.18);
+  transition: box-shadow var(--duration-default) ease;
+}
