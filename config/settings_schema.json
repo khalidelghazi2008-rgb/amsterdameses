@@ -1449,6 +1449,32 @@
         "id": "cart_color_scheme",
         "label": "t:sections.all.colors.label",
         "default": "scheme-1"
+      },
+      {
+        "type": "header",
+        "content": "Envío gratis"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_free_shipping_enabled",
+        "label": "Mostrar barra de progreso de envío gratis",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "cart_free_shipping_threshold",
+        "label": "Importe para envío gratis",
+        "info": "En la moneda de la tienda, sin símbolo (ej. 50)."
+      },
+      {
+        "type": "header",
+        "content": "Recomendaciones en el carrito"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_upsell_enabled",
+        "label": "Mostrar productos recomendados en el carrito",
+        "default": true
       }
     ]
   },

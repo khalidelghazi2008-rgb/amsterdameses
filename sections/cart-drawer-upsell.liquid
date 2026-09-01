@@ -1,0 +1,36 @@
+{% comment %}
+  Fila de "También te puede interesar" para el carrito lateral. No se usa
+  como sección normal de una plantilla: se solicita mediante el endpoint
+  público de recomendaciones de productos de Shopify (igual que
+  sections/related-products.liquid), a partir del último producto añadido
+  al carrito. Ver snippets/cart-drawer.liquid y assets/global.js
+  (customElement "product-recommendations", ya incluido en el tema).
+{% endcomment %}
+
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+{% if recommendations.performed and recommendations.products_count > 0 %}
+  <div class="cart-drawer__upsell-heading caption-large text-body">
+    {{ 'amstershop.cart.upsell_heading' | t }}
+  </div>
+  <ul class="cart-drawer__upsell-list" role="list">
+    {% assign skip_card_product_styles = false %}
+    {% for recommendation in recommendations.products limit: 3 %}
+      <li class="cart-drawer__upsell-item">
+        {% render 'card-product',
+          card_product: recommendation,
+          media_aspect_ratio: 'square',
+          show_secondary_image: false,
+          skip_styles: skip_card_product_styles,
+          quick_add: 'standard',
+          horizontal_class: true,
+          horizontal_quick_add: true,
+          extend_height: false,
+          product_view_context: 'recommendation'
+        %}
+      </li>
+      {%- assign skip_card_product_styles = true -%}
+    {% endfor %}
+  </ul>
+{% endif %}

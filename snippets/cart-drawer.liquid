@@ -7,6 +7,8 @@
 
 {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'amstershop-cart.css' | asset_url | stylesheet_tag }}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
@@ -74,6 +76,38 @@
           </span>
         </button>
       </div>
+      {%- comment -%}
+        Barra de progreso de envío gratis: se recalcula en Liquid en cada
+        render, y como Dawn ya vuelve a pedir esta sección completa cada
+        vez que el carrito cambia (AJAX), se mantiene sincronizada sola,
+        sin JavaScript adicional.
+      {%- endcomment -%}
+      {%- if cart != empty and settings.cart_free_shipping_enabled and settings.cart_free_shipping_threshold > 0 -%}
+        {%- liquid
+          assign threshold_cents = settings.cart_free_shipping_threshold | times: 100
+          assign remaining_cents = threshold_cents | minus: cart.total_price
+          assign progress_percent = cart.total_price | times: 100.0 | divided_by: threshold_cents
+          if progress_percent > 100
+            assign progress_percent = 100
+          endif
+        -%}
+        <div class="cart-drawer__free-shipping">
+          {%- if remaining_cents > 0 -%}
+            {%- assign remaining_money = remaining_cents | money -%}
+            <p class="cart-drawer__free-shipping-text">
+              {{ 'amstershop.cart.free_shipping_remaining_html' | t: amount: remaining_money }}
+            </p>
+          {%- else -%}
+            <p class="cart-drawer__free-shipping-text cart-drawer__free-shipping-text--success">
+              <span class="svg-wrapper">{{- 'icon-checkmark.svg' | inline_asset_content -}}</span>
+              {{ 'amstershop.cart.free_shipping_achieved' | t }}
+            </p>
+          {%- endif -%}
+          <div class="cart-drawer__free-shipping-bar">
+            <div class="cart-drawer__free-shipping-bar-fill" style="width: {{ progress_percent }}%;"></div>
+          </div>
+        </div>
+      {%- endif -%}
       <cart-drawer-items
         view-event-payload="{{ cart | standard_event_data: 'view', context: 'dialog' | escape }}"
         view-event-trigger="manual"
@@ -487,6 +521,19 @@
           <div id="CartDrawer-CartErrors" role="alert"></div>
         </form>
       </cart-drawer-items>
+      {%- comment -%}
+        Recomendaciones ("también te puede interesar") basadas en el
+        último producto añadido, vía el endpoint público de
+        recomendaciones de Shopify. Ver sections/cart-drawer-upsell.liquid.
+      {%- endcomment -%}
+      {%- if cart != empty and settings.cart_upsell_enabled -%}
+        <product-recommendations
+          class="cart-drawer__upsell"
+          data-url="{{ routes.product_recommendations_url }}?limit=6&intent=related"
+          data-section-id="cart-drawer-upsell"
+          data-product-id="{{ cart.items.last.product_id }}"
+        ></product-recommendations>
+      {%- endif -%}
       <div class="drawer__footer">
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">
