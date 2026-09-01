@@ -56,6 +56,45 @@
   font-weight: bold;
 }
 
+/* Nivel 2: columna del mega menú (ej. "NIKE"). Se muestra en línea con la
+   flecha/indicador cuando el elemento tiene hijos de nivel 3. */
+.mega-menu__link--has-children {
+  align-items: center;
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+/* Flecha/indicador visual para los elementos de nivel 2 que tienen submenú
+   (nivel 3). Es puramente informativa: en el mega menú los 3 niveles se
+   muestran siempre desplegados, no es un acordeón. */
+.mega-menu__caret {
+  display: inline-flex;
+  flex-shrink: 0;
+  height: 0.6rem;
+  opacity: 0.6;
+  transform: rotate(-90deg);
+  width: 0.6rem;
+}
+
+.mega-menu__caret svg {
+  height: 100%;
+  width: 100%;
+}
+
+/* Nivel 3: lista de enlaces (ej. "AIR FORCE 1") anidada bajo cada columna
+   de nivel 2, con sangría para reforzar visualmente la jerarquía. */
+.mega-menu__sublist {
+  margin-top: 0.4rem;
+}
+
+.mega-menu__link--level-3 {
+  font-size: 0.95em;
+  font-weight: normal;
+  padding-bottom: 0.4rem;
+  padding-left: 0.4rem;
+  padding-top: 0.4rem;
+}
+
 .header--top-center .mega-menu__list {
   display: flex;
   justify-content: center;

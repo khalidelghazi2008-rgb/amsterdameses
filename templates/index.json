@@ -1,48 +1,162 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "slideshow_principal": {
+      "type": "slideshow",
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "large",
+        "slider_visual": "counter",
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "Diapositivas de la colección"
+      },
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "slide_zapatillas": {
+          "type": "slide",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "image_overlay_opacity": 30,
+            "heading": "Nueva colección de zapatillas",
+            "heading_size": "h0",
+            "subheading": "Rendimiento y estilo urbano para cada movimiento",
+            "button_label": "Comprar ahora",
+            "link": "shopify://collections/zapatillas",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
           }
         },
-        "button": {
-          "type": "buttons",
+        "slide_ropa": {
+          "type": "slide",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "image_overlay_opacity": 30,
+            "heading": "Ropa deportiva y streetwear",
+            "heading_size": "h0",
+            "subheading": "Comodidad técnica pensada para entrenar y para la calle",
+            "button_label": "Ver colección",
+            "link": "shopify://collections/all",
+            "button_style_secondary": true,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
-      ],
-      "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
+        "slide_zapatillas",
+        "slide_ropa"
+      ]
     },
-    "featured_collection": {
+    "iconos_confianza": {
+      "type": "multicolumn",
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "square",
+        "column_alignment": "center",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "envio": {
+          "type": "column",
+          "settings": {
+            "title": "Envío rápido",
+            "text": "<p>Envío gratis en pedidos superiores a 50€. Recíbelo en 24/48h.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "pago": {
+          "type": "column",
+          "settings": {
+            "title": "Pago 100% seguro",
+            "text": "<p>Paga con tarjeta, PayPal o Bizum de forma segura y cifrada.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "devoluciones": {
+          "type": "column",
+          "settings": {
+            "title": "Devoluciones fáciles",
+            "text": "<p>30 días para cambios y devoluciones sin complicaciones.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "envio",
+        "pago",
+        "devoluciones"
+      ]
+    },
+    "carrusel_zapatillas": {
+      "type": "collection-list",
+      "settings": {
+        "title": "Compra por categoría de zapatillas",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "coleccion_1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "coleccion_2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "coleccion_3": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        },
+        "coleccion_4": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "coleccion_1",
+        "coleccion_2",
+        "coleccion_3",
+        "coleccion_4"
+      ]
+    },
+    "productos_destacados": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
+        "title": "Productos destacados",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -66,10 +180,46 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Únete al club",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Suscríbete y entérate antes que nadie de los nuevos lanzamientos y ofertas exclusivas.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ]
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "slideshow_principal",
+    "iconos_confianza",
+    "carrusel_zapatillas",
+    "productos_destacados",
+    "newsletter"
   ]
 }

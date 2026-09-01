@@ -134,6 +134,41 @@
                       {%- endif -%}
                     </div>
                   {%- endif -%}
+                  {%- comment -%}
+                    Bloque fijo de confianza justo debajo del precio: 3 líneas
+                    (envío, forma de pago, devoluciones) con texto enriquecido
+                    100% editable desde el editor de temas (ajustes de la
+                    sección, no un bloque movible), para que siempre aparezca
+                    pegado al precio tal y como pide el negocio.
+                  {%- endcomment -%}
+                  {%- if section.settings.show_trust_info -%}
+                    <div class="product__trust-info">
+                      {%- if section.settings.trust_shipping_text != blank -%}
+                        <div class="product__trust-info-item">
+                          <span class="svg-wrapper product__trust-info-icon" aria-hidden="true">
+                            {{- 'icon-truck.svg' | inline_asset_content -}}
+                          </span>
+                          <div class="product__trust-info-text rte">{{ section.settings.trust_shipping_text }}</div>
+                        </div>
+                      {%- endif -%}
+                      {%- if section.settings.trust_payment_text != blank -%}
+                        <div class="product__trust-info-item">
+                          <span class="svg-wrapper product__trust-info-icon" aria-hidden="true">
+                            {{- 'icon-lock.svg' | inline_asset_content -}}
+                          </span>
+                          <div class="product__trust-info-text rte">{{ section.settings.trust_payment_text }}</div>
+                        </div>
+                      {%- endif -%}
+                      {%- if section.settings.trust_returns_text != blank -%}
+                        <div class="product__trust-info-item">
+                          <span class="svg-wrapper product__trust-info-icon" aria-hidden="true">
+                            {{- 'icon-return.svg' | inline_asset_content -}}
+                          </span>
+                          <div class="product__trust-info-text rte">{{ section.settings.trust_returns_text }}</div>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
                   <div {{ block.shopify_attributes }}>
                     {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
                     {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
@@ -2158,6 +2193,37 @@
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
       "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Información de confianza"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_info",
+      "default": true,
+      "label": "Mostrar bloque de confianza debajo del precio"
+    },
+    {
+      "type": "richtext",
+      "id": "trust_shipping_text",
+      "default": "<p>Envío gratis a partir de 50€</p>",
+      "label": "Línea de envío",
+      "info": "Se muestra con el icono de camión, justo debajo del precio."
+    },
+    {
+      "type": "richtext",
+      "id": "trust_payment_text",
+      "default": "<p>Pago 100% seguro (tarjeta, PayPal, Bizum)</p>",
+      "label": "Línea de forma de pago",
+      "info": "Se muestra con el icono de candado."
+    },
+    {
+      "type": "richtext",
+      "id": "trust_returns_text",
+      "default": "<p>Devoluciones gratuitas en 30 días</p>",
+      "label": "Línea de devoluciones",
+      "info": "Se muestra con el icono de devolución."
     },
     {
       "type": "header",

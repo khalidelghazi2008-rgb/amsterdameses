@@ -1492,3 +1492,41 @@ a.product__text {
     border: none;
   }
 }
+
+/* ==========================================================================
+   Bloque de confianza de la ficha de producto (envío / pago / devoluciones).
+   Se renderiza siempre debajo del precio, con 3 líneas configurables desde
+   el editor de temas (settings de la sección "main-product").
+   ========================================================================== */
+.product__trust-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.product__trust-info-item {
+  align-items: flex-start;
+  color: rgb(var(--color-foreground));
+  display: flex;
+  gap: 1rem;
+}
+
+.product__trust-info-icon {
+  flex-shrink: 0;
+  height: 2rem;
+  width: 2rem;
+}
+
+.product__trust-info-icon svg {
+  height: 100%;
+  width: 100%;
+}
+
+.product__trust-info-text {
+  font-size: 1.4rem;
+}
+
+.product__trust-info-text p {
+  margin: 0;
+}
