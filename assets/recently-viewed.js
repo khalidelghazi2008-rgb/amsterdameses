@@ -54,6 +54,12 @@
     const root = document.querySelector('[data-amstershop-recently-viewed]');
     if (!root) return;
 
+    // Evita pintar los productos por duplicado si este script se carga más
+    // de una vez en la misma página (ej. la ficha de producto incluye a la
+    // vez el tracker y, si el comercio la ha añadido, la propia sección).
+    if (root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
+
     const grid = root.querySelector('.amstershop-js-card-grid');
     const currentHandle = root.dataset.currentProductHandle || '';
     const maxProducts = parseInt(root.dataset.maxProducts, 10) || 4;

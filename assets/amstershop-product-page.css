@@ -66,7 +66,9 @@
   right: 0;
   transform: translateY(100%);
   transition: transform var(--duration-default) ease, opacity var(--duration-default) ease;
-  z-index: 500;
+  /* Por debajo del quick-add/quick-view (z-index: 101) y del carrito
+     lateral (z-index: 1000), para que ambos puedan abrirse por encima. */
+  z-index: 50;
 }
 
 .sticky-add-to-cart.is-visible {

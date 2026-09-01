@@ -12,6 +12,11 @@
     const root = document.querySelector('[data-amstershop-wishlist-page]');
     if (!root) return;
 
+    // Evita registrar el listener y hacer fetch por duplicado si este
+    // script se cargara más de una vez en la misma página.
+    if (root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
+
     const grid = root.querySelector('.amstershop-js-card-grid');
     const emptyState = root.querySelector('.amstershop-empty-state');
     const loading = root.querySelector('[data-wishlist-loading]');

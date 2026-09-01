@@ -82,8 +82,10 @@
         "price",
         "inventory",
         "variant_picker",
+        "size_guide",
         "quantity_selector",
         "buy_buttons",
+        "wishlist",
         "description",
         "complementary",
         "share"
