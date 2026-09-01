@@ -556,6 +556,10 @@
     },
     "category_cards": {
       "shop_now": "Comprar"
+    },
+    "quick_view": {
+      "open": "Vista rápida de {{ product }}",
+      "title": "Vista rápida: {{ product }}"
     }
   }
 }

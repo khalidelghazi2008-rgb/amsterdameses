@@ -544,6 +544,10 @@
     },
     "category_cards": {
       "shop_now": "Shop now"
+    },
+    "quick_view": {
+      "open": "Quick view {{ product }}",
+      "title": "Quick view: {{ product }}"
     }
   }
 }

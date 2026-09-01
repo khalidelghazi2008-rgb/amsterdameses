@@ -27,6 +27,15 @@
   {{ 'component-price.css' | asset_url | stylesheet_tag }}
   {{ 'quick-order-list.css' | asset_url | stylesheet_tag }}
   {{ 'quantity-popover.css' | asset_url | stylesheet_tag }}
+  {{ 'amstershop-product-card.css' | asset_url | stylesheet_tag }}
+  {%- comment -%}
+    "Vista rápida" reutiliza el mismo componente <quick-add-modal> que usa
+    "Quick Add: standard" (assets/quick-add.js/.css), pero siempre
+    disponible en la tarjeta, sin depender del ajuste "quick_add" de la
+    sección.
+  {%- endcomment -%}
+  {{ 'quick-add.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
 {%- if card_product and card_product != empty -%}
   {%- liquid
@@ -61,6 +70,33 @@
         >
           {%- if card_product.featured_media -%}
             <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
+              {%- comment -%}
+                Acciones rápidas sobre la imagen: wishlist (localStorage,
+                assets/wishlist.js) y vista rápida (reutiliza el modal de
+                Quick Add de Dawn, ver más abajo).
+              {%- endcomment -%}
+              <div class="card__quick-actions">
+                <wishlist-button
+                  class="card__quick-action-button card__quick-action-button--wishlist"
+                  data-product-handle="{{ card_product.handle }}"
+                >
+                  <button type="button" aria-pressed="false" aria-label="{{ 'amstershop.wishlist.add' | t }}">
+                    <span class="svg-wrapper">{{ 'icon-heart.svg' | inline_asset_content }}</span>
+                  </button>
+                </wishlist-button>
+                <modal-opener data-modal="#QuickView-{{ card_product.id }}">
+                  <button
+                    type="button"
+                    class="card__quick-action-button card__quick-action-button--quick-view"
+                    aria-haspopup="dialog"
+                    aria-label="{{ 'amstershop.quick_view.open' | t: product: card_product.title | escape }}"
+                    data-product-url="{{ card_product.url }}"
+                  >
+                    <span class="svg-wrapper">{{ 'icon-eye.svg' | inline_asset_content }}</span>
+                    {%- render 'loading-spinner' -%}
+                  </button>
+                </modal-opener>
+              </div>
               <div class="media media--transparent media--hover-effect">
                 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
                 <img
@@ -570,6 +606,32 @@
         </div>
       </div>
     </div>
+    {%- if card_product.featured_media -%}
+      {%- comment -%}
+        Modal de "vista rápida": misma infraestructura que el Quick Add
+        estándar de Dawn (assets/quick-add.js hace fetch de la URL del
+        producto y extrae el <product-info>), pero siempre disponible,
+        con su propio id "QuickView-" para no chocar con el de Quick Add.
+      {%- endcomment -%}
+      <quick-add-modal id="QuickView-{{ card_product.id }}" class="quick-add-modal">
+        <div
+          role="dialog"
+          aria-label="{{ 'amstershop.quick_view.title' | t: product: card_product.title | escape }}"
+          aria-modal="true"
+          class="quick-add-modal__content global-settings-popup"
+          tabindex="-1"
+        >
+          <button
+            type="button"
+            class="quick-add-modal__toggle"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            {{- 'icon-close.svg' | inline_asset_content -}}
+          </button>
+          <div id="QuickAddInfo-QuickView-{{ card_product.id }}" class="quick-add-modal__content-info"></div>
+        </div>
+      </quick-add-modal>
+    {%- endif -%}
   </product-component>
 {%- else -%}
   {%- liquid
