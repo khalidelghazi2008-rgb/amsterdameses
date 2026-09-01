@@ -93,6 +93,21 @@
 }
 
 /* --------------------------------------------------------------------------
+   Campos de formulario (buscador, filtros de colección, newsletter,
+   contacto...): foco en azul de marca en toda la tienda.
+   -------------------------------------------------------------------------- */
+.field__input:focus-visible,
+.field__input:focus,
+.select__select:focus-visible,
+.select__select:focus,
+.customer .field input:focus-visible,
+.customer .field input:focus,
+.customer select:focus-visible,
+.customer select:focus {
+  box-shadow: 0 0 0 calc(0.1rem + var(--inputs-border-width)) rgb(var(--amstershop-blue));
+}
+
+/* --------------------------------------------------------------------------
    Botones: pequeño "lift" premium y acento azul en el estado hover del
    botón secundario (outline), manteniendo el resto de la paleta de Dawn.
    -------------------------------------------------------------------------- */
