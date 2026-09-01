@@ -4,12 +4,45 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {},
-      "block_order": [],
+      "blocks": {
+        "marca": {
+          "type": "brand_information",
+          "settings": {
+            "show_social": true
+          }
+        },
+        "categorias": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Categorías",
+            "menu": "footer"
+          }
+        },
+        "ayuda": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Ayuda",
+            "menu": "footer"
+          }
+        },
+        "legal": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Legal",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "marca",
+        "categorias",
+        "ayuda",
+        "legal"
+      ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "Únete al club AMSTERSHOP",
         "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": true,
@@ -17,7 +50,7 @@
         "payment_enable": true,
         "show_policy": true,
         "margin_top": 0,
-        "padding_top": 36,
+        "padding_top": 52,
         "padding_bottom": 36
       }
     }
