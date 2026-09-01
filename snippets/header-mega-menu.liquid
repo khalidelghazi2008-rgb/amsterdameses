@@ -1,13 +1,15 @@
 {% comment %}
-  Renderiza el mega menú del header con soporte para 3 niveles de profundidad:
-  Nivel 1 (link)      -> ej. "ZAPATILLAS"      -> abre el desplegable del mega menú
-  Nivel 2 (childlink) -> ej. "NIKE"            -> columna/título dentro del desplegable
-  Nivel 3 (grandchild)-> ej. "AIR FORCE 1"     -> enlaces bajo cada columna de nivel 2
+  Renderiza el mega menú premium del header con soporte para 3 niveles:
+  Nivel 1 (link)      -> ej. "ZAPATILLAS"      -> abre el desplegable
+  Nivel 2 (childlink) -> ej. "NIKE"            -> columna dentro del desplegable
+  Nivel 3 (grandchild)-> ej. "AIR FORCE 1"     -> enlaces bajo cada columna
 
-  El menú se sigue configurando desde el admin de Shopify > Navegación.
-  Este snippet solo se encarga de RENDERIZAR correctamente los 3 niveles,
-  añadiendo una flecha/indicador visual en los elementos de nivel 2 que
-  tienen hijos de nivel 3.
+  El menú se configura 100% desde el admin de Shopify > Navegación; este
+  snippet solo se encarga de RENDERIZARLO con un diseño premium:
+  - Flecha/indicador visual en los elementos de nivel 2 con submenú.
+  - CTA "Ver todo" al final de cada columna del nivel 1.
+  - Imagen promocional opcional por elemento de nivel 1, configurable
+    como bloque "menu_promo" del propio header (se empareja por título).
 
   Uso:
   {% render 'header-mega-menu' %}
@@ -19,6 +21,18 @@
       <li>
         {%- if link.links != blank -%}
           {%- comment -%} Nivel 1: elemento con submenú -> se muestra como mega menú desplegable {%- endcomment -%}
+          {%- liquid
+            assign menu_promo = null
+            assign link_title_downcase = link.title | downcase
+            for block in section.blocks
+              if block.type == 'menu_promo' and block.settings.menu_item_title != blank
+                assign promo_title_downcase = block.settings.menu_item_title | downcase
+                if promo_title_downcase == link_title_downcase
+                  assign menu_promo = block
+                endif
+              endif
+            endfor
+          -%}
           <header-menu>
             <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu">
               <summary
@@ -39,51 +53,93 @@
                 class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
                 tabindex="-1"
               >
-                <ul
-                  class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
-                  role="list"
-                >
-                  {%- for childlink in link.links -%}
-                    {%- comment -%} Nivel 2: columna del mega menú (ej. marca "NIKE") {%- endcomment -%}
-                    <li class="mega-menu__column{% if childlink.links != blank %} mega-menu__column--has-submenu{% endif %}">
-                      <a
-                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                        href="{{ childlink.url }}"
-                        class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}{% if childlink.links != blank %} mega-menu__link--has-children{% endif %}"
-                        {% if childlink.current %}
-                          aria-current="page"
-                        {% endif %}
-                      >
-                        {{ childlink.title | escape }}
+                <div class="mega-menu__inner page-width{% if menu_promo %} mega-menu__inner--with-promo{% endif %}">
+                  <ul
+                    class="mega-menu__list{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
+                    role="list"
+                  >
+                    {%- for childlink in link.links -%}
+                      {%- comment -%} Nivel 2: columna del mega menú (ej. marca "NIKE") {%- endcomment -%}
+                      <li class="mega-menu__column{% if childlink.links != blank %} mega-menu__column--has-submenu{% endif %}">
+                        <a
+                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                          href="{{ childlink.url }}"
+                          class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}{% if childlink.links != blank %} mega-menu__link--has-children{% endif %}"
+                          {% if childlink.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{ childlink.title | escape }}
+                          {%- if childlink.links != blank -%}
+                            {%- comment -%} Indicador visual (flecha) para avisar de que hay un nivel 3 debajo {%- endcomment -%}
+                            <span class="mega-menu__caret svg-wrapper" aria-hidden="true">
+                              {{- 'icon-caret.svg' | inline_asset_content -}}
+                            </span>
+                          {%- endif -%}
+                        </a>
                         {%- if childlink.links != blank -%}
-                          {%- comment -%} Indicador visual (flecha) para avisar de que hay un nivel 3 debajo {%- endcomment -%}
-                          <span class="mega-menu__caret svg-wrapper" aria-hidden="true">
-                            {{- 'icon-caret.svg' | inline_asset_content -}}
-                          </span>
+                          {%- comment -%} Nivel 3: productos/modelos dentro de la marca (ej. "AIR FORCE 1") {%- endcomment -%}
+                          <ul class="mega-menu__sublist list-unstyled" role="list">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li class="mega-menu__subitem">
+                                <a
+                                  id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                  href="{{ grandchildlink.url }}"
+                                  class="mega-menu__link mega-menu__link--level-3 link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
+                                  {% if grandchildlink.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
                         {%- endif -%}
-                      </a>
-                      {%- if childlink.links != blank -%}
-                        {%- comment -%} Nivel 3: productos/modelos dentro de la marca (ej. "AIR FORCE 1") {%- endcomment -%}
-                        <ul class="mega-menu__sublist list-unstyled" role="list">
-                          {%- for grandchildlink in childlink.links -%}
-                            <li class="mega-menu__subitem">
-                              <a
-                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                href="{{ grandchildlink.url }}"
-                                class="mega-menu__link mega-menu__link--level-3 link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
-                                {% if grandchildlink.current %}
-                                  aria-current="page"
-                                {% endif %}
-                              >
-                                {{ grandchildlink.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+
+                  {%- if menu_promo -%}
+                    {%- comment -%} Columna promocional configurable desde el editor (bloque "menu_promo") {%- endcomment -%}
+                    <a
+                      href="{{ menu_promo.settings.link | default: link.url }}"
+                      class="mega-menu__promo"
+                      {{ menu_promo.shopify_attributes }}
+                    >
+                      {%- if menu_promo.settings.image != blank -%}
+                        <span class="mega-menu__promo-image-wrapper">
+                          {{
+                            menu_promo.settings.image
+                            | image_url: width: 800
+                            | image_tag: loading: 'lazy', sizes: '320px', widths: '320,480,640,800', class: 'mega-menu__promo-image'
+                          }}
+                        </span>
                       {%- endif -%}
-                    </li>
-                  {%- endfor -%}
-                </ul>
+                      {%- if menu_promo.settings.heading != blank or menu_promo.settings.button_label != blank -%}
+                        <span class="mega-menu__promo-caption">
+                          {%- if menu_promo.settings.heading != blank -%}
+                            <span class="mega-menu__promo-heading">{{ menu_promo.settings.heading | escape }}</span>
+                          {%- endif -%}
+                          {%- if menu_promo.settings.button_label != blank -%}
+                            <span class="mega-menu__promo-button link animate-arrow">
+                              {{ menu_promo.settings.button_label | escape }}
+                              {{- 'icon-arrow.svg' | inline_asset_content -}}
+                            </span>
+                          {%- endif -%}
+                        </span>
+                      {%- endif -%}
+                    </a>
+                  {%- endif -%}
+                </div>
+
+                {%- comment -%} CTA final: acceso directo a la página completa de este nivel 1 {%- endcomment -%}
+                <div class="mega-menu__footer page-width">
+                  <a href="{{ link.url }}" class="mega-menu__view-all link animate-arrow">
+                    {{ 'amstershop.header.view_all' | t: title: link.title }}
+                    {{- 'icon-arrow.svg' | inline_asset_content -}}
+                  </a>
+                </div>
               </div>
             </details>
           </header-menu>

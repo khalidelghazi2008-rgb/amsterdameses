@@ -1,3 +1,10 @@
+/* ==========================================================================
+   AMSTERSHOP · Mega menú premium (3 niveles)
+   Nivel 1 abre el desplegable, nivel 2 son las columnas (marcas), nivel 3
+   son los enlaces finales (modelos). Incluye columna promocional opcional
+   y transición de apertura suave (fade + desplazamiento + leve escala).
+   ========================================================================== */
+
 .mega-menu {
   position: static;
 }
@@ -9,8 +16,8 @@
   border-right: 0;
   left: 0;
   overflow-y: auto;
-  padding-bottom: 3rem;
-  padding-top: 3rem;
+  padding-bottom: 3.6rem;
+  padding-top: 3.6rem;
   position: absolute;
   right: 0;
   top: 100%;
@@ -26,19 +33,44 @@
 
 .js .mega-menu__content {
   opacity: 0;
-  transform: translateY(-1.5rem);
+  transform: translateY(-1rem) scale(0.99);
 }
 
 .mega-menu[open] .mega-menu__content {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  transition:
+    opacity var(--duration-default) ease,
+    transform var(--duration-default) ease;
+}
+
+/* Franja superior de acento en azul de marca, muy sutil */
+.mega-menu__content::before {
+  background-color: rgb(var(--amstershop-blue));
+  content: '';
+  display: block;
+  height: 0.2rem;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.mega-menu__inner {
+  display: flex;
+  gap: 4.8rem;
 }
 
 .mega-menu__list {
   display: grid;
-  gap: 1.8rem 4rem;
+  gap: 2.4rem 4rem;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   list-style: none;
+  flex: 1 1 auto;
+}
+
+.mega-menu__inner--with-promo .mega-menu__list {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .mega-menu__link {
@@ -48,20 +80,27 @@
   padding-bottom: 0.6rem;
   padding-top: 0.6rem;
   text-decoration: none;
-  transition: text-decoration var(--duration-short) ease;
+  transition: color var(--duration-short) ease, text-decoration var(--duration-short) ease;
   word-wrap: break-word;
 }
 
+/* Nivel 2: columna del mega menú (ej. "NIKE"), tratamiento tipográfico
+   destacado (mayúsculas + tracking) con una pequeña línea de acento. */
 .mega-menu__link--level-2 {
-  font-weight: bold;
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  font-weight: 700;
+  letter-spacing: var(--amstershop-tracking-wide);
+  margin-bottom: 0.6rem;
+  padding-bottom: 1rem;
+  text-transform: uppercase;
 }
 
-/* Nivel 2: columna del mega menú (ej. "NIKE"). Se muestra en línea con la
-   flecha/indicador cuando el elemento tiene hijos de nivel 3. */
 .mega-menu__link--has-children {
   align-items: center;
   display: inline-flex;
   gap: 0.5rem;
+  justify-content: space-between;
+  width: 100%;
 }
 
 /* Flecha/indicador visual para los elementos de nivel 2 que tienen submenú
@@ -82,17 +121,117 @@
 }
 
 /* Nivel 3: lista de enlaces (ej. "AIR FORCE 1") anidada bajo cada columna
-   de nivel 2, con sangría para reforzar visualmente la jerarquía. */
+   de nivel 2. */
 .mega-menu__sublist {
-  margin-top: 0.4rem;
+  margin-top: 0.2rem;
 }
 
 .mega-menu__link--level-3 {
   font-size: 0.95em;
   font-weight: normal;
-  padding-bottom: 0.4rem;
-  padding-left: 0.4rem;
-  padding-top: 0.4rem;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.mega-menu__link:hover,
+.mega-menu__link--active {
+  color: rgb(var(--amstershop-blue));
+  text-decoration: underline;
+}
+
+.mega-menu__link--level-2:hover,
+.mega-menu__link--level-2.mega-menu__link--active {
+  border-bottom-color: rgb(var(--amstershop-blue));
+  text-decoration: none;
+}
+
+.mega-menu__link--active:hover {
+  text-decoration-thickness: 0.2rem;
+}
+
+.mega-menu .mega-menu__list--condensed {
+  display: block;
+}
+
+.mega-menu__list--condensed .mega-menu__link {
+  font-weight: normal;
+}
+
+/* --------------------------------------------------------------------------
+   Columna promocional (bloque "menu_promo" del header, opcional)
+   -------------------------------------------------------------------------- */
+.mega-menu__promo {
+  color: rgb(var(--color-foreground));
+  display: block;
+  flex: 0 0 26rem;
+  position: relative;
+  text-decoration: none;
+}
+
+.mega-menu__promo-image-wrapper {
+  background-color: rgba(var(--color-foreground), 0.04);
+  display: block;
+  overflow: hidden;
+}
+
+.mega-menu__promo-image {
+  aspect-ratio: 4 / 5;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  transition: transform var(--duration-long) ease;
+  width: 100%;
+}
+
+.mega-menu__promo:hover .mega-menu__promo-image {
+  transform: scale(1.04);
+}
+
+.mega-menu__promo-caption {
+  display: block;
+  margin-top: 1.2rem;
+}
+
+.mega-menu__promo-heading {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.mega-menu__promo-button {
+  align-items: center;
+  color: rgb(var(--amstershop-blue));
+  display: inline-flex;
+  font-size: 1.3rem;
+  font-weight: 600;
+  gap: 0.6rem;
+  letter-spacing: var(--amstershop-tracking-wide);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   CTA "Ver todo" al pie del desplegable
+   -------------------------------------------------------------------------- */
+.mega-menu__footer {
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  margin-top: 3.2rem;
+  padding-top: 2rem;
+}
+
+.mega-menu__view-all {
+  align-items: center;
+  color: rgb(var(--color-foreground));
+  display: inline-flex;
+  font-size: 1.3rem;
+  font-weight: 700;
+  gap: 0.8rem;
+  letter-spacing: var(--amstershop-tracking-wide);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.mega-menu__view-all:hover {
+  color: rgb(var(--amstershop-blue));
 }
 
 .header--top-center .mega-menu__list {
@@ -107,20 +246,18 @@
   padding-right: 2.4rem;
 }
 
-.mega-menu__link:hover,
-.mega-menu__link--active {
-  color: rgb(var(--color-foreground));
-  text-decoration: underline;
-}
+/* En pantallas más estrechas de escritorio, la columna promocional se
+   apila debajo de las columnas de enlaces en lugar de encogerlas demasiado. */
+@media screen and (max-width: 1200px) {
+  .mega-menu__inner--with-promo {
+    flex-direction: column;
+  }
 
-.mega-menu__link--active:hover {
-  text-decoration-thickness: 0.2rem;
-}
+  .mega-menu__promo {
+    flex: 1 1 auto;
+  }
 
-.mega-menu .mega-menu__list--condensed {
-  display: block;
-}
-
-.mega-menu__list--condensed .mega-menu__link {
-  font-weight: normal;
+  .mega-menu__promo-image {
+    aspect-ratio: 21 / 9;
+  }
 }

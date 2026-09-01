@@ -538,6 +538,9 @@
       "empty_text": "Save your favorite sneakers and gear to find them easily later.",
       "continue_shopping": "Continue shopping",
       "view_product": "View product"
+    },
+    "header": {
+      "view_all": "View all {{ title }}"
     }
   }
 }

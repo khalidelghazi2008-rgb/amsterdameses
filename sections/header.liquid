@@ -523,7 +523,7 @@
 {
   "name": "t:sections.header.name",
   "class": "section-header",
-  "max_blocks": 3,
+  "max_blocks": 20,
   "settings": [
     {
       "type": "select",
@@ -712,6 +712,42 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "menu_promo",
+      "name": "Mega menú: imagen promocional",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Añade una imagen destacada dentro del desplegable del mega menú de un elemento de nivel 1 concreto (por ejemplo \"ZAPATILLAS\"). El texto debe coincidir exactamente con el título de ese elemento en el menú de Navegación."
+        },
+        {
+          "type": "text",
+          "id": "menu_item_title",
+          "label": "Título del elemento de nivel 1",
+          "info": "Debe coincidir con el texto del enlace en Navegación (no distingue mayúsculas/minúsculas)."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título de la imagen"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto del botón"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Enlace"
+        }
+      ]
     }
   ]
 }

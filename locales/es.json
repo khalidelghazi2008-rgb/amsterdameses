@@ -550,6 +550,9 @@
       "empty_text": "Guarda tus zapatillas y prendas favoritas para encontrarlas fácilmente más tarde.",
       "continue_shopping": "Seguir comprando",
       "view_product": "Ver producto"
+    },
+    "header": {
+      "view_all": "Ver todo {{ title }}"
     }
   }
 }
