@@ -1,0 +1,17 @@
+{% comment %}
+  Registra el producto actual en el histórico de "vistos recientemente"
+  (localStorage, ver assets/recently-viewed.js). Debe incluirse una vez en
+  la ficha de producto (sections/main-product.liquid).
+
+  Uso:
+  {% render 'recently-viewed-tracker', product: product %}
+{% endcomment %}
+
+<script src="{{ 'recently-viewed.js' | asset_url }}" defer="defer"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (window.AmstershopRecentlyViewed) {
+      window.AmstershopRecentlyViewed.track({{ product.handle | json }});
+    }
+  });
+</script>

@@ -81,10 +81,10 @@
         </div>
       </div>
       <wishlist-button
-        class="amstershop-js-card__wishlist is-active"
+        class="amstershop-js-card__wishlist"
         data-product-handle="${product.handle}"
       >
-        <button type="button" class="amstershop-js-card__wishlist-button" aria-pressed="true">
+        <button type="button" class="amstershop-js-card__wishlist-button" aria-pressed="false">
           <span class="svg-wrapper">${HEART_ICON_SVG}</span>
         </button>
       </wishlist-button>

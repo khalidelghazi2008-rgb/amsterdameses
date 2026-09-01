@@ -328,6 +328,17 @@
         "padding_bottom": 52
       }
     },
+    "vistos_recientemente": {
+      "type": "recently-viewed",
+      "settings": {
+        "heading": "Vistos recientemente",
+        "heading_size": "h2",
+        "max_products": 4,
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -371,6 +382,7 @@
     "novedades_productos",
     "mas_vendidos",
     "ofertas_productos",
+    "vistos_recientemente",
     "newsletter"
   ]
 }

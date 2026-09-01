@@ -15,6 +15,8 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'amstershop-product-page.css' | asset_url | stylesheet_tag }}
+  {%- render 'recently-viewed-tracker', product: product -%}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -526,6 +528,31 @@
                     block: block,
                     product_form_id: product_form_id
                   %}
+                {%- when 'wishlist' -%}
+                  {%- comment -%}
+                    Wishlist en la ficha de producto: mismo <wishlist-button>
+                    (localStorage) que en las tarjetas de producto y el
+                    header, ver assets/wishlist.js.
+                  {%- endcomment -%}
+                  <wishlist-button
+                    class="product__wishlist-button"
+                    data-product-handle="{{ product.handle }}"
+                    {{ block.shopify_attributes }}
+                  >
+                    <button type="button" aria-pressed="false">
+                      <span class="svg-wrapper">{{ 'icon-heart.svg' | inline_asset_content }}</span>
+                      <span class="product__wishlist-label product__wishlist-label--add">
+                        {%- if block.settings.text != blank -%}
+                          {{- block.settings.text -}}
+                        {%- else -%}
+                          {{- 'amstershop.wishlist.add' | t -}}
+                        {%- endif -%}
+                      </span>
+                      <span class="product__wishlist-label product__wishlist-label--remove">
+                        {{- 'amstershop.wishlist.remove' | t -}}
+                      </span>
+                    </button>
+                  </wishlist-button>
                 {%- when 'buy_buttons' -%}
                   {%- render 'buy-buttons',
                     block: block,
@@ -788,6 +815,38 @@
   </product-component>
 </product-info>
 
+{%- if section.settings.enable_sticky_add_to_cart and product != empty -%}
+  {%- comment -%}
+    Barra de "Añadir al carrito" fija: aparece cuando el botón real de
+    compra deja de estar visible. Al pulsarla, simplemente activa el botón
+    real (misma variante/cantidad ya seleccionadas), sin duplicar lógica
+    de carrito. El precio se sincroniza en vivo observando el bloque de
+    precio real (ver assets/sticky-add-to-cart.js).
+  {%- endcomment -%}
+  <sticky-add-to-cart
+    class="sticky-add-to-cart color-{{ section.settings.color_scheme }} gradient"
+    data-price-id="price-{{ section.id }}"
+    data-submit-id="ProductSubmitButton-{{ section.id }}"
+    data-observe-id="MainProduct-{{ section.id }}"
+  >
+    <div class="sticky-add-to-cart__inner page-width">
+      {%- if product.featured_media -%}
+        <span class="sticky-add-to-cart__media">
+          {{ product.featured_media | image_url: width: 100 | image_tag: loading: 'lazy', width: 100, height: 100 }}
+        </span>
+      {%- endif -%}
+      <span class="sticky-add-to-cart__info">
+        <span class="sticky-add-to-cart__title">{{ product.title | escape }}</span>
+        <span class="sticky-add-to-cart__price" data-sticky-price></span>
+      </span>
+      <button type="button" class="button button--primary sticky-add-to-cart__button" data-sticky-submit>
+        {{ 'products.product.add_to_cart' | t }}
+      </button>
+    </div>
+  </sticky-add-to-cart>
+  <script src="{{ 'sticky-add-to-cart.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "t:sections.main-product.name",
@@ -954,6 +1013,19 @@
             }
           ],
           "default": "circle"
+        }
+      ]
+    },
+    {
+      "type": "wishlist",
+      "name": "Wishlist",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto del botón",
+          "info": "Si se deja vacío, se usa \"Añadir a la wishlist\" / \"Quitar de la wishlist\" según el estado."
         }
       ]
     },
@@ -2187,6 +2259,13 @@
       "id": "enable_sticky_info",
       "default": true,
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_add_to_cart",
+      "default": true,
+      "label": "Barra de \"Añadir al carrito\" fija",
+      "info": "Aparece en la parte inferior de la pantalla cuando el botón de compra deja de estar visible."
     },
     {
       "type": "color_scheme",
