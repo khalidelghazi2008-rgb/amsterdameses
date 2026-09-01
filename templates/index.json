@@ -16,35 +16,38 @@
         "slide_zapatillas": {
           "type": "slide",
           "settings": {
-            "image_overlay_opacity": 30,
+            "image_overlay_opacity": 40,
             "heading": "Nueva colección de zapatillas",
             "heading_size": "h0",
             "subheading": "Rendimiento y estilo urbano para cada movimiento",
-            "button_label": "Comprar ahora",
-            "link": "shopify://collections/zapatillas",
-            "button_style_secondary": false,
+            "button_label_1": "Comprar ahora",
+            "button_link_1": "shopify://collections/zapatillas",
+            "button_style_secondary_1": false,
+            "button_label_2": "Ver novedades",
+            "button_link_2": "shopify://collections/novedades",
+            "button_style_secondary_2": true,
             "show_text_box": true,
             "box_align": "middle-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
-            "color_scheme": "scheme-1"
+            "color_scheme": "scheme-4"
           }
         },
         "slide_ropa": {
           "type": "slide",
           "settings": {
-            "image_overlay_opacity": 30,
+            "image_overlay_opacity": 40,
             "heading": "Ropa deportiva y streetwear",
             "heading_size": "h0",
             "subheading": "Comodidad técnica pensada para entrenar y para la calle",
-            "button_label": "Ver colección",
-            "link": "shopify://collections/all",
-            "button_style_secondary": true,
+            "button_label_1": "Ver colección",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": false,
             "show_text_box": true,
             "box_align": "middle-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
-            "color_scheme": "scheme-1"
+            "color_scheme": "scheme-4"
           }
         }
       },

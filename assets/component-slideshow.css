@@ -199,3 +199,31 @@ slideshow-component:not(.page-width) .slider-buttons {
   opacity: 0;
   transform: scale(0.8);
 }
+
+/* --------------------------------------------------------------------------
+   AMSTERSHOP: imagen móvil independiente por slide (opcional).
+   ".media > *" ya coloca estos <span> en position:absolute a pantalla
+   completa (ver .media en base.css); aquí solo hace falta que la <img>
+   interior rellene ese espacio y que se muestre el <span> correcto según
+   el ancho de pantalla.
+   -------------------------------------------------------------------------- */
+.slideshow__media-mobile img,
+.slideshow__media-desktop img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  width: 100%;
+}
+
+@media screen and (max-width: 749px) {
+  .slideshow__media-desktop {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .slideshow__media-mobile {
+    display: none;
+  }
+}

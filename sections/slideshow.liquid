@@ -136,7 +136,44 @@
                 assign fetch_priority = 'high'
               endif
             -%}
-            {%- if forloop.first %}
+            {%- comment -%}
+              Imagen móvil opcional: si el bloque tiene "image_mobile" se
+              muestra en pantallas pequeñas y la imagen "image" (desktop)
+              queda reservada a partir de 750px. Si no hay imagen móvil, se
+              usa la misma imagen para todos los tamaños, como en Dawn.
+            {%- endcomment -%}
+            {%- if block.settings.image_mobile != blank -%}
+              <span class="slideshow__media-mobile">
+                {%- if forloop.first -%}
+                  {{
+                    block.settings.image_mobile
+                    | image_url: width: 1500
+                    | image_tag: sizes: '100vw', widths: '375, 550, 750, 1100, 1500', fetchpriority: fetch_priority
+                  }}
+                {%- else -%}
+                  {{
+                    block.settings.image_mobile
+                    | image_url: width: 1500
+                    | image_tag: loading: 'lazy', sizes: '100vw', widths: '375, 550, 750, 1100, 1500'
+                  }}
+                {%- endif -%}
+              </span>
+              <span class="slideshow__media-desktop">
+                {%- if forloop.first %}
+                  {{
+                    block.settings.image
+                    | image_url: width: 3840
+                    | image_tag: height: height, sizes: sizes, widths: widths, fetchpriority: fetch_priority
+                  }}
+                {%- else -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 3840
+                    | image_tag: loading: 'lazy', height: height, sizes: sizes, widths: widths
+                  }}
+                {%- endif -%}
+              </span>
+            {%- elsif forloop.first -%}
               {{
                 block.settings.image
                 | image_url: width: 3840
@@ -170,18 +207,33 @@
                 <p>{{ block.settings.subheading }}</p>
               </div>
             {%- endif -%}
-            {%- if block.settings.button_label != blank -%}
-              <div class="banner__buttons">
-                <a
-                  {% if block.settings.link %}
-                    href="{{ block.settings.link }}"
-                  {% else %}
-                    role="link" aria-disabled="true"
-                  {% endif %}
-                  class="button {% if block.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}"
-                >
-                  {{- block.settings.button_label | escape -}}
-                </a>
+            {%- if block.settings.button_label_1 != blank or block.settings.button_label_2 != blank -%}
+              <div class="banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %}">
+                {%- if block.settings.button_label_1 != blank -%}
+                  <a
+                    {% if block.settings.button_link_1 %}
+                      href="{{ block.settings.button_link_1 }}"
+                    {% else %}
+                      role="link" aria-disabled="true"
+                    {% endif %}
+                    class="button {% if block.settings.button_style_secondary_1 %}button--secondary{% else %}button--primary{% endif %}"
+                  >
+                    {{- block.settings.button_label_1 | escape -}}
+                  </a>
+                {%- endif -%}
+                {%- comment -%} Segundo botón, opcional (ej. "Ver hombre" / "Ver mujer") {%- endcomment -%}
+                {%- if block.settings.button_label_2 != blank -%}
+                  <a
+                    {% if block.settings.button_link_2 %}
+                      href="{{ block.settings.button_link_2 }}"
+                    {% else %}
+                      role="link" aria-disabled="true"
+                    {% endif %}
+                    class="button {% if block.settings.button_style_secondary_2 %}button--secondary{% else %}button--primary{% endif %}"
+                  >
+                    {{- block.settings.button_label_2 | escape -}}
+                  </a>
+                {%- endif -%}
               </div>
             {%- endif -%}
           </div>
@@ -393,7 +445,13 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "t:sections.slideshow.blocks.slide.settings.image.label"
+          "label": "Imagen (escritorio)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Imagen (móvil)",
+          "info": "Opcional. Si no se indica, se usa la imagen de escritorio también en móvil."
         },
         {
           "type": "range",
@@ -452,24 +510,40 @@
         {
           "type": "header",
           "content": "t:sections.slideshow.blocks.slide.settings.header_button.content"
-        },        
+        },
         {
           "type": "text",
-          "id": "button_label",
+          "id": "button_label_1",
           "default": "t:sections.slideshow.blocks.slide.settings.button_label.default",
-          "label": "t:sections.slideshow.blocks.slide.settings.button_label.label", 
+          "label": "Texto del botón 1",
           "info": "t:sections.slideshow.blocks.slide.settings.button_label.info"
         },
         {
           "type": "url",
-          "id": "link",
-          "label": "t:sections.slideshow.blocks.slide.settings.link.label"
+          "id": "button_link_1",
+          "label": "Enlace del botón 1"
         },
         {
           "type": "checkbox",
-          "id": "button_style_secondary",
-          "label": "t:sections.slideshow.blocks.slide.settings.secondary_style.label",
+          "id": "button_style_secondary_1",
+          "label": "Usar estilo de botón secundario para el botón 1",
           "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_label_2",
+          "label": "Texto del botón 2 (opcional)"
+        },
+        {
+          "type": "url",
+          "id": "button_link_2",
+          "label": "Enlace del botón 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_style_secondary_2",
+          "label": "Usar estilo de botón secundario para el botón 2",
+          "default": true
         },
         {
           "type": "header",
