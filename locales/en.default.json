@@ -541,6 +541,9 @@
     },
     "header": {
       "view_all": "View all {{ title }}"
+    },
+    "category_cards": {
+      "shop_now": "Shop now"
     }
   }
 }

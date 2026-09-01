@@ -553,6 +553,9 @@
     },
     "header": {
       "view_all": "Ver todo {{ title }}"
+    },
+    "category_cards": {
+      "shop_now": "Comprar"
     }
   }
 }

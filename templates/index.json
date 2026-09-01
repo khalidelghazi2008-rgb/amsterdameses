@@ -56,6 +56,66 @@
         "slide_ropa"
       ]
     },
+    "categorias_visuales": {
+      "type": "category-cards",
+      "settings": {
+        "heading": "Compra por categoría",
+        "heading_size": "h1",
+        "columns_desktop": 5,
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 36
+      },
+      "blocks": {
+        "hombre": {
+          "type": "category",
+          "settings": {
+            "title": "Hombre",
+            "subtitle": "",
+            "link": "shopify://collections/hombre"
+          }
+        },
+        "mujer": {
+          "type": "category",
+          "settings": {
+            "title": "Mujer",
+            "subtitle": "",
+            "link": "shopify://collections/mujer"
+          }
+        },
+        "zapatillas": {
+          "type": "category",
+          "settings": {
+            "title": "Zapatillas",
+            "subtitle": "",
+            "link": "shopify://collections/zapatillas"
+          }
+        },
+        "novedades": {
+          "type": "category",
+          "settings": {
+            "title": "Novedades",
+            "subtitle": "",
+            "link": "shopify://collections/novedades"
+          }
+        },
+        "ofertas": {
+          "type": "category",
+          "settings": {
+            "title": "Ofertas",
+            "subtitle": "",
+            "link": "shopify://collections/ofertas"
+          }
+        }
+      },
+      "block_order": [
+        "hombre",
+        "mujer",
+        "zapatillas",
+        "novedades",
+        "ofertas"
+      ]
+    },
     "iconos_confianza": {
       "type": "multicolumn",
       "settings": {
@@ -220,6 +280,7 @@
   },
   "order": [
     "slideshow_principal",
+    "categorias_visuales",
     "iconos_confianza",
     "carrusel_zapatillas",
     "productos_destacados",
