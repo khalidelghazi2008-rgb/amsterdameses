@@ -1,0 +1,408 @@
+{% comment %}
+  Parallax Showcase (GSAP + ScrollTrigger)
+  --------------------------------------------------------------------------
+  Versión "tal cual" para Shopify de la landing de scroll AMSTERSHOP SS25:
+  cada pieza tiene un panel de imagen que se expande suavemente a pantalla
+  completa al hacer scroll, con una capa de número gigante y rayas
+  diagonales en parallax. Editable por completo desde el editor de temas
+  (bloques "Pieza" y "Frase destacada").
+
+  GSAP, ScrollTrigger y las tipografías de esta sección (Big Shoulders
+  Display / Space Mono) solo se cargan en las páginas donde se usa esta
+  sección, para no afectar al rendimiento del resto de la tienda. No
+  incluye su propia barra de navegación ni footer: usa el header y footer
+  reales del tema.
+{% endcomment %}
+
+{{ 'component-parallax-showcase.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Space+Mono:wght@400;700&display=swap"
+  rel="stylesheet"
+>
+
+{%- liquid
+  assign panel_blocks = section.blocks | where: 'type', 'panel'
+-%}
+
+<div class="parallax-showcase">
+  {%- if section.settings.heading != blank -%}
+    <div class="parallax-showcase__wrap parallax-showcase__intro">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="parallax-showcase__eyebrow mono">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2>{{ section.settings.heading }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <div class="parallax-showcase__sub">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+      {%- if section.settings.show_scroll_cue and section.settings.scroll_cue_text != blank -%}
+        <div class="parallax-showcase__scroll-cue">
+          <span class="line"></span> {{ section.settings.scroll_cue_text | escape }}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- assign panel_counter = 0 -%}
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'panel' -%}
+        {%- liquid
+          assign panel_counter = panel_counter | plus: 1
+          assign is_reverse = false
+          assign remainder = panel_counter | modulo: 2
+          if remainder == 0
+            assign is_reverse = true
+          endif
+          assign padded_index = panel_counter
+          if panel_counter < 10
+            assign padded_index = '0' | append: panel_counter
+          endif
+        -%}
+        <section
+          class="drop parallax-showcase__wrap{% if is_reverse %} drop--reverse{% endif %}"
+          {{ block.shopify_attributes }}
+          style="--panel-a:{{ block.settings.color_a }}; --panel-b:{{ block.settings.color_b }};"
+        >
+          <div class="drop__media-stage">
+            <div class="drop__media{% if block.settings.image != blank %} drop__media--has-image{% endif %}" data-media>
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 1600
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 750px) 74rem, 100vw',
+                    widths: '400, 800, 1200, 1600',
+                    class: 'drop__media-image'
+                }}
+              {%- endif -%}
+              <div class="drop__stripe" data-parallax data-parallax-speed="0.4"></div>
+              <span class="drop__glyph" data-parallax data-parallax-speed="0.15">{{ padded_index }}</span>
+              {%- if block.settings.tag_text != blank -%}
+                <span class="drop__tag mono">{{ block.settings.tag_text | escape }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="drop__grid">
+            <div class="drop__copy">
+              {%- if block.settings.eyebrow_label != blank -%}
+                <p class="drop__eyebrow">
+                  {{ block.settings.eyebrow_label | escape }}
+                  {%- if block.settings.eyebrow_detail != blank -%}
+                    <span class="mono">— {{ block.settings.eyebrow_detail | escape }}</span>
+                  {%- endif -%}
+                </p>
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <h2>{{ block.settings.title | escape }}</h2>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <div class="drop__desc">{{ block.settings.description }}</div>
+              {%- endif -%}
+              {%- if block.settings.spec_1_value != blank or block.settings.spec_2_value != blank or block.settings.spec_3_value != blank -%}
+                <dl class="drop__specs">
+                  {%- if block.settings.spec_1_value != blank -%}
+                    <div>
+                      <dt>{{ block.settings.spec_1_label | escape }}</dt>
+                      <dd>{{ block.settings.spec_1_value | escape }}</dd>
+                    </div>
+                  {%- endif -%}
+                  {%- if block.settings.spec_2_value != blank -%}
+                    <div>
+                      <dt>{{ block.settings.spec_2_label | escape }}</dt>
+                      <dd>{{ block.settings.spec_2_value | escape }}</dd>
+                    </div>
+                  {%- endif -%}
+                  {%- if block.settings.spec_3_value != blank -%}
+                    <div>
+                      <dt>{{ block.settings.spec_3_label | escape }}</dt>
+                      <dd class="mono">{{ block.settings.spec_3_value | escape }}</dd>
+                    </div>
+                  {%- endif -%}
+                </dl>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank -%}
+                <a
+                  href="{{ block.settings.button_link | default: '#' }}"
+                  class="drop__cta"
+                >
+                  {{ block.settings.button_label | escape }} →
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </section>
+      {%- when 'statement' -%}
+        <div class="parallax-showcase__wrap">
+          <section class="parallax-showcase__manifesto" {{ block.shopify_attributes }}>
+            <p>{{ block.settings.text }}</p>
+          </section>
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+</div>
+
+{%- if panel_blocks.size > 0 -%}
+  {%- comment -%}
+    GSAP y ScrollTrigger no se pueden alojar como asset propio del tema
+    (son una librería de terceros), así que se cargan desde cdnjs, con
+    versión fijada, y solo en las páginas donde se usa esta sección.
+  {%- endcomment -%}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer="defer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer="defer"></script>
+  <script src="{{ 'parallax-showcase.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Parallax Showcase",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto pequeño superior",
+      "default": "Colección SS25 — Ref. AMS/SS25"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Hechos para <em>la calle</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "<p>Varias piezas, un mismo lenguaje: negro mate, azul intenso, corte urbano. Baja para ver la colección tomar forma — cada imagen se abre a pantalla completa a tu ritmo de scroll.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_cue",
+      "label": "Mostrar aviso de \"sigue bajando\"",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "scroll_cue_text",
+      "label": "Texto del aviso",
+      "default": "Sigue bajando"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Pieza",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen",
+          "info": "Si se deja vacía, se muestra un panel de color de marca (como en la demo)."
+        },
+        {
+          "type": "color",
+          "id": "color_a",
+          "label": "Color base del panel",
+          "default": "#0c1830"
+        },
+        {
+          "type": "color",
+          "id": "color_b",
+          "label": "Color de acento del panel",
+          "default": "#2b4cff"
+        },
+        {
+          "type": "header",
+          "content": "Texto"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow_label",
+          "label": "Etiqueta (ej. \"Drop 01\")",
+          "default": "Drop 01"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow_detail",
+          "label": "Detalle de la etiqueta (ej. \"Running\")",
+          "default": "Running"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Nombre de la pieza",
+          "default": "Air Pulse"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Descripción",
+          "default": "<p>Entresuela de doble densidad y malla de punto continuo. La línea azul intenso recorre el lateral como un latido: visible de día, reflectante de noche.</p>"
+        },
+        {
+          "type": "text",
+          "id": "tag_text",
+          "label": "Etiqueta sobre la imagen",
+          "default": "AMS-AP01 — Negro / Azul intenso"
+        },
+        {
+          "type": "header",
+          "content": "Datos (colorway, precio, referencia...)"
+        },
+        {
+          "type": "text",
+          "id": "spec_1_label",
+          "label": "Dato 1 — etiqueta",
+          "default": "Colorway"
+        },
+        {
+          "type": "text",
+          "id": "spec_1_value",
+          "label": "Dato 1 — valor",
+          "default": "Negro / Azul intenso"
+        },
+        {
+          "type": "text",
+          "id": "spec_2_label",
+          "label": "Dato 2 — etiqueta",
+          "default": "Precio"
+        },
+        {
+          "type": "text",
+          "id": "spec_2_value",
+          "label": "Dato 2 — valor",
+          "default": "129 €"
+        },
+        {
+          "type": "text",
+          "id": "spec_3_label",
+          "label": "Dato 3 — etiqueta",
+          "default": "Ref."
+        },
+        {
+          "type": "text",
+          "id": "spec_3_value",
+          "label": "Dato 3 — valor",
+          "default": "AP01-BLK"
+        },
+        {
+          "type": "header",
+          "content": "Botón"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto del botón",
+          "default": "Ver producto"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Enlace del botón"
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "name": "Frase destacada",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "info": "Pon en cursiva la parte que quieras resaltar en azul.",
+          "default": "<p>No hacemos <em>temporadas.</em> Hacemos piezas que aguantan la calle, el metro y el entrenamiento — en ese orden, el mismo día.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Parallax Showcase",
+      "blocks": [
+        {
+          "type": "panel",
+          "settings": {
+            "color_a": "#0c1830",
+            "color_b": "#2b4cff",
+            "eyebrow_label": "Drop 01",
+            "eyebrow_detail": "Running",
+            "title": "Air Pulse",
+            "tag_text": "AMS-AP01 — Negro / Azul intenso",
+            "spec_1_label": "Colorway",
+            "spec_1_value": "Negro / Azul intenso",
+            "spec_2_label": "Precio",
+            "spec_2_value": "129 €",
+            "spec_3_label": "Ref.",
+            "spec_3_value": "AP01-BLK",
+            "button_label": "Ver producto"
+          }
+        },
+        {
+          "type": "panel",
+          "settings": {
+            "color_a": "#131722",
+            "color_b": "#0c1830",
+            "eyebrow_label": "Drop 02",
+            "eyebrow_detail": "Capa media",
+            "title": "Urban Track Hoodie",
+            "description": "<p>Felpa de 380 g cepillada por dentro, cordón plano y bolsillo canguro reforzado. Bordado tonal, sin ruido visual — la calidad se nota al tacto, no a gritos.</p>",
+            "tag_text": "AMS-UTH02 — Azul marino / Blanco",
+            "spec_1_label": "Colorway",
+            "spec_1_value": "Azul marino / Blanco",
+            "spec_2_label": "Precio",
+            "spec_2_value": "89 €",
+            "spec_3_label": "Ref.",
+            "spec_3_value": "UTH02-NVY",
+            "button_label": "Ver producto"
+          }
+        },
+        {
+          "type": "panel",
+          "settings": {
+            "color_a": "#0a0a0a",
+            "color_b": "#2b4cff",
+            "eyebrow_label": "Drop 03",
+            "eyebrow_detail": "Cargo",
+            "title": "Street Cargo Pant",
+            "description": "<p>Sarga de algodón con elastano, seis bolsillos y bajo ajustable con cordón oculto. Corte recto pensado para moverse — patinar, entrenar, ir de un sitio a otro.</p>",
+            "tag_text": "AMS-SCP03 — Negro / Blanco",
+            "spec_1_label": "Colorway",
+            "spec_1_value": "Negro / Blanco",
+            "spec_2_label": "Precio",
+            "spec_2_value": "99 €",
+            "spec_3_label": "Ref.",
+            "spec_3_value": "SCP03-BLK",
+            "button_label": "Ver producto"
+          }
+        },
+        {
+          "type": "panel",
+          "settings": {
+            "color_a": "#0c1830",
+            "color_b": "#2b4cff",
+            "eyebrow_label": "Drop 04",
+            "eyebrow_detail": "Night",
+            "title": "Night Runner",
+            "description": "<p>Suela de tracción multidireccional y upper con hilo reflectante 3M. Pensada para la sesión de después de cenar, cuando la ciudad se queda para los que siguen entrenando.</p>",
+            "tag_text": "AMS-NR04 — Azul intenso / Negro",
+            "spec_1_label": "Colorway",
+            "spec_1_value": "Azul intenso / Negro",
+            "spec_2_label": "Precio",
+            "spec_2_value": "139 €",
+            "spec_3_label": "Ref.",
+            "spec_3_value": "NR04-BLU",
+            "button_label": "Ver producto"
+          }
+        },
+        {
+          "type": "statement"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
