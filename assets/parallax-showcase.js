@@ -15,10 +15,15 @@
  * antes de animarlos (con GSAP), nunca por CSS puro — así una carga
  * fallida de GSAP, un bloqueador de scripts o prefers-reduced-motion
  * simplemente dejan la sección estática y perfectamente legible.
+ *
+ * Este script se incluye una vez por cada instancia de la sección en la
+ * página, así que si hay más de una, el archivo se ejecuta varias veces:
+ * el atributo "data-parallax-initialized" evita procesar dos veces la
+ * misma sección (y por tanto, duplicar sus animaciones de ScrollTrigger).
  */
 (function () {
   function init() {
-    var sections = document.querySelectorAll('.parallax-showcase');
+    var sections = document.querySelectorAll('.parallax-showcase:not([data-parallax-initialized])');
     if (!sections.length) return;
 
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -28,6 +33,8 @@
     gsap.registerPlugin(ScrollTrigger);
 
     sections.forEach(function (section) {
+      section.setAttribute('data-parallax-initialized', 'true');
+
       gsap.utils.toArray(section.querySelectorAll('[data-media]')).forEach(function (media) {
         gsap.fromTo(
           media,

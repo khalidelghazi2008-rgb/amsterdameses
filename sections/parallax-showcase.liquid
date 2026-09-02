@@ -62,7 +62,7 @@
         <section
           class="drop parallax-showcase__wrap{% if is_reverse %} drop--reverse{% endif %}"
           {{ block.shopify_attributes }}
-          style="--panel-a:{{ block.settings.color_a }}; --panel-b:{{ block.settings.color_b }};"
+          style="--panel-a:{{ block.settings.color_a | default: '#0c1830' }}; --panel-b:{{ block.settings.color_b | default: '#2b4cff' }};"
         >
           <div class="drop__media-stage">
             <div class="drop__media{% if block.settings.image != blank %} drop__media--has-image{% endif %}" data-media>

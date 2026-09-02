@@ -6,13 +6,14 @@
   mensajes cortos configurados como bloques desde el editor de temas
   (añadir/quitar mensajes, velocidad, activar/desactivar).
 
-  Implementación 100% CSS: para N mensajes se generan aquí, en el
-  {% style %}, N animaciones @keyframes (una por mensaje) que reparten el
-  ciclo total a partes iguales, con un breve fundido (fade) en cada
-  cambio. Cada mensaje lleva su animación (nombre + duración) puesta
-  directamente en su propio elemento, así que no hace falta JavaScript
-  para la rotación: todos comparten la misma duración total, así que
-  quedan perfectamente sincronizados sin temporizadores ni scripts.
+  Implementación 100% CSS: para N mensajes (solo se cuentan los que
+  tienen texto) se generan aquí, en el {% style %}, N animaciones
+  @keyframes (una por mensaje) que reparten el ciclo total a partes
+  iguales, con un breve fundido (fade) en cada cambio. Cada mensaje lleva
+  su animación (nombre + duración) puesta directamente en su propio
+  elemento, así que no hace falta JavaScript para la rotación: todos
+  comparten la misma duración total, así que quedan perfectamente
+  sincronizados sin temporizadores ni scripts.
 
   Nunca se desplaza en horizontal (no es un "marquee"): solo cambia de
   opacidad entre un mensaje y el siguiente. Respeta
@@ -27,15 +28,27 @@
 
 {%- liquid
   assign message_blocks = section.blocks | where: 'type', 'message'
-  assign message_count = message_blocks.size
+
+  comment
+    message_count cuenta solo los bloques con texto: si un mensaje se
+    deja vacío en medio de otros, no debe "robar" un hueco del ciclo (eso
+    dejaría la barra en blanco durante ese tramo).
+  endcomment
+  assign message_count = 0
+  for block in message_blocks
+    if block.settings.text != blank
+      assign message_count = message_count | plus: 1
+    endif
+  endfor
+
   assign show_bar = false
   if section.settings.enabled and message_count > 0
     assign show_bar = true
   endif
 
   comment
-    Evita dividir por 0 si se borran todos los mensajes: estos valores solo
-    se usan más abajo cuando show_bar es true (message_count > 0).
+    Evita dividir por 0 si no queda ningún mensaje con texto: estos
+    valores solo se usan más abajo cuando show_bar es true.
   endcomment
   assign safe_message_count = message_count | at_least: 1
   assign total_duration = section.settings.change_slides_speed | times: safe_message_count
@@ -56,25 +69,18 @@
           pantalla de qué mensaje toca en cada momento, así que solo el
           primer mensaje con texto queda accesible (aria-hidden en el
           resto): evita que se lean todos los mensajes superpuestos a la
-          vez. "first_visible_rendered" (en vez de forloop.first) es lo que
-          garantiza que sea el primero que realmente se pinta, aunque el
-          primer bloque se deje vacío.
+          vez. "visible_index" numera solo los mensajes con texto, en el
+          mismo orden que las animaciones @keyframes de más abajo.
         {%- endcomment -%}
-        {%- assign first_visible_rendered = false -%}
+        {%- assign visible_index = -1 -%}
         {%- for block in message_blocks -%}
           {%- if block.settings.text != blank -%}
-            {%- liquid
-              assign is_first_visible = false
-              unless first_visible_rendered
-                assign is_first_visible = true
-                assign first_visible_rendered = true
-              endunless
-            -%}
+            {%- assign visible_index = visible_index | plus: 1 -%}
             <p
               class="top-announcement-bar__message"
-              aria-hidden="{% if is_first_visible %}false{% else %}true{% endif %}"
+              aria-hidden="{% if visible_index == 0 %}false{% else %}true{% endif %}"
               {%- if message_count > 1 %}
-                style="animation-name: amstershop-top-bar-msg-{{ section.id }}-{{ forloop.index0 }}; animation-duration: {{ total_duration }}s;"
+                style="animation-name: amstershop-top-bar-msg-{{ section.id }}-{{ visible_index }}; animation-duration: {{ total_duration }}s;"
               {%- endif %}
               {{ block.shopify_attributes }}
             >
@@ -88,22 +94,26 @@
 
   {%- if message_count > 1 -%}
     {%- style -%}
+      {%- assign visible_index = -1 -%}
       {%- for block in message_blocks -%}
-        {%- liquid
-          assign i = forloop.index0
-          assign slot_start = i | times: slot_width
-          assign slot_end = forloop.index | times: slot_width
-          assign fade_in_end = slot_start | plus: fade_pct
-          assign fade_out_start = slot_end | minus: fade_pct
-        -%}
-        @keyframes amstershop-top-bar-msg-{{ section.id }}-{{ i }} {
-          0% { opacity: 0; }
-          {{ slot_start }}% { opacity: 0; }
-          {{ fade_in_end }}% { opacity: 1; }
-          {{ fade_out_start }}% { opacity: 1; }
-          {{ slot_end }}% { opacity: 0; }
-          100% { opacity: 0; }
-        }
+        {%- if block.settings.text != blank -%}
+          {%- liquid
+            assign visible_index = visible_index | plus: 1
+            assign slot_start = visible_index | times: slot_width
+            assign slot_end = visible_index | plus: 1
+            assign slot_end = slot_end | times: slot_width
+            assign fade_in_end = slot_start | plus: fade_pct
+            assign fade_out_start = slot_end | minus: fade_pct
+          -%}
+          @keyframes amstershop-top-bar-msg-{{ section.id }}-{{ visible_index }} {
+            0% { opacity: 0; }
+            {{ slot_start }}% { opacity: 0; }
+            {{ fade_in_end }}% { opacity: 1; }
+            {{ fade_out_start }}% { opacity: 1; }
+            {{ slot_end }}% { opacity: 0; }
+            100% { opacity: 0; }
+          }
+        {%- endif -%}
       {%- endfor -%}
     {%- endstyle -%}
   {%- endif -%}

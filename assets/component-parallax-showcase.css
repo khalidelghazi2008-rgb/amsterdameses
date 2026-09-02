@@ -116,6 +116,15 @@
   position: relative;
   width: 100%;
   will-change: clip-path;
+  /*
+    z-index: 0 crea aquí un contexto de apilamiento propio: así, el
+    z-index: -1 de .drop__media-image (más abajo) queda contenido dentro de
+    esta tarjeta y solo la coloca por debajo del tinte de marca (::before);
+    sin esto, un z-index negativo se apilaría respecto al contexto de
+    apilamiento más cercano hacia arriba (que podría ser el de toda la
+    página), arriesgándose a esconder la imagen detrás de otras secciones.
+  */
+  z-index: 0;
 }
 
 .drop__media-image {
@@ -126,6 +135,7 @@
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: -1;
 }
 
 .drop__media::before {
