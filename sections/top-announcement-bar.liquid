@@ -29,11 +29,9 @@
 {%- liquid
   assign message_blocks = section.blocks | where: 'type', 'message'
 
-  comment
-    message_count cuenta solo los bloques con texto: si un mensaje se
-    deja vacío en medio de otros, no debe "robar" un hueco del ciclo (eso
-    dejaría la barra en blanco durante ese tramo).
-  endcomment
+  # message_count cuenta solo los bloques con texto: si un mensaje se
+  # deja vacío en medio de otros, no debe "robar" un hueco del ciclo (eso
+  # dejaría la barra en blanco durante ese tramo).
   assign message_count = 0
   for block in message_blocks
     if block.settings.text != blank
@@ -46,10 +44,8 @@
     assign show_bar = true
   endif
 
-  comment
-    Evita dividir por 0 si no queda ningún mensaje con texto: estos
-    valores solo se usan más abajo cuando show_bar es true.
-  endcomment
+  # Evita dividir por 0 si no queda ningún mensaje con texto: estos
+  # valores solo se usan más abajo cuando show_bar es true.
   assign safe_message_count = message_count | at_least: 1
   assign total_duration = section.settings.change_slides_speed | times: safe_message_count
   assign fade_pct = 20.0 | divided_by: safe_message_count

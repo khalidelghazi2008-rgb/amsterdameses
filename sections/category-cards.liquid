@@ -34,12 +34,10 @@
             assign card_title = block.settings.title
             assign card_image = block.settings.image
 
-            comment
-              Si el bloque tiene una colección real de Shopify enlazada,
-              su título y su URL siempre tienen prioridad sobre los campos
-              manuales; su imagen de portada solo se usa como último
-              recurso, si no se ha subido una imagen manual.
-            endcomment
+            # Si el bloque tiene una colección real de Shopify enlazada,
+            # su título y su URL siempre tienen prioridad sobre los campos
+            # manuales; su imagen de portada solo se usa como último
+            # recurso, si no se ha subido una imagen manual.
             if card_collection != blank
               assign card_link = card_collection.url
               assign card_title = card_collection.title

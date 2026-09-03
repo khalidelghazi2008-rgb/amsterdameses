@@ -50,14 +50,12 @@
         {%- liquid
           assign panel_product = block.settings.product
 
-          comment
-            Si el bloque tiene un producto real de Shopify enlazado, sus
-            datos (imagen, nombre, precio, disponibilidad, enlace) tienen
-            prioridad sobre los campos manuales — así el panel siempre
-            refleja el catálogo real en lugar de texto fijo desactualizado.
-            Si no hay producto enlazado, se usan los campos manuales tal
-            cual (útil para contenido editorial que no es un producto).
-          endcomment
+          # Si el bloque tiene un producto real de Shopify enlazado, sus
+          # datos (imagen, nombre, precio, disponibilidad, enlace) tienen
+          # prioridad sobre los campos manuales — así el panel siempre
+          # refleja el catálogo real en lugar de texto fijo desactualizado.
+          # Si no hay producto enlazado, se usan los campos manuales tal
+          # cual (útil para contenido editorial que no es un producto).
           assign panel_image = block.settings.image
           assign panel_title = block.settings.title
           assign panel_price_value = block.settings.spec_2_value
