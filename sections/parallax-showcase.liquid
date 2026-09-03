@@ -74,7 +74,9 @@
             else
               assign panel_price_value = 'amstershop.parallax_showcase.sold_out' | t
             endif
-            assign panel_button_label = panel_button_label | default: 'amstershop.parallax_showcase.view_product' | t
+            if panel_button_label == blank
+              assign panel_button_label = 'amstershop.parallax_showcase.view_product' | t
+            endif
             assign panel_button_link = panel_product.url
           endif
 

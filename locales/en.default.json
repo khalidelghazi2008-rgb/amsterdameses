@@ -546,6 +546,10 @@
     "category_cards": {
       "shop_now": "Shop now"
     },
+    "parallax_showcase": {
+      "view_product": "View product",
+      "sold_out": "Sold out"
+    },
     "quick_view": {
       "open": "Quick view {{ product }}",
       "title": "Quick view: {{ product }}"
