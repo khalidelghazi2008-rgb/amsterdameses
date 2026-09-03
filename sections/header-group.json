@@ -12,33 +12,26 @@
         "top-announcement-bar-0": {
           "type": "message",
           "settings": {
-            "text": "🚚 ENVÍOS 24H"
+            "text": "Envío gratis"
           }
         },
         "top-announcement-bar-1": {
           "type": "message",
           "settings": {
-            "text": "💳 PAGA AL RECIBIR"
+            "text": "Pago contrarreembolso"
           }
         },
         "top-announcement-bar-2": {
           "type": "message",
           "settings": {
-            "text": "🔥 NUEVAS NOVEDADES CADA SEMANA"
-          }
-        },
-        "top-announcement-bar-3": {
-          "type": "message",
-          "settings": {
-            "text": "⭐ CALIDAD Y CONFIANZA"
+            "text": "Originales verificados"
           }
         }
       },
       "block_order": [
         "top-announcement-bar-0",
         "top-announcement-bar-1",
-        "top-announcement-bar-2",
-        "top-announcement-bar-3"
+        "top-announcement-bar-2"
       ]
     },
     "announcement-bar": {

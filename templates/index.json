@@ -17,13 +17,13 @@
           "type": "slide",
           "settings": {
             "image_overlay_opacity": 40,
-            "heading": "Nueva colección de zapatillas",
+            "heading": "Sneakers que no pasan desapercibidas",
             "heading_size": "h0",
-            "subheading": "Rendimiento y estilo urbano para cada movimiento",
-            "button_label_1": "Comprar ahora",
+            "subheading": "Selección urbana de sneakers y ropa. Piezas contadas, calidad premium, envío gratis y pago contrarreembolso.",
+            "button_label_1": "Ver catálogo",
             "button_link_1": "shopify://collections/zapatillas",
             "button_style_secondary_1": false,
-            "button_label_2": "Ver novedades",
+            "button_label_2": "Novedades",
             "button_link_2": "shopify://collections/novedades",
             "button_style_secondary_2": true,
             "show_text_box": true,
@@ -54,6 +54,57 @@
       "block_order": [
         "slide_zapatillas",
         "slide_ropa"
+      ]
+    },
+    "marquesina_marca": {
+      "type": "brand-marquee",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "speed": 26
+      },
+      "blocks": {
+        "word_1": {
+          "type": "word",
+          "settings": {
+            "text": "AMSTERSHOP",
+            "accent": true
+          }
+        },
+        "word_2": {
+          "type": "word",
+          "settings": {
+            "text": "SNEAKERS",
+            "accent": false
+          }
+        },
+        "word_3": {
+          "type": "word",
+          "settings": {
+            "text": "STREETWEAR",
+            "accent": false
+          }
+        },
+        "word_4": {
+          "type": "word",
+          "settings": {
+            "text": "DROP 04",
+            "accent": true
+          }
+        },
+        "word_5": {
+          "type": "word",
+          "settings": {
+            "text": "STOCK LIMITADO",
+            "accent": false
+          }
+        }
+      },
+      "block_order": [
+        "word_1",
+        "word_2",
+        "word_3",
+        "word_4",
+        "word_5"
       ]
     },
     "categorias_visuales": {
@@ -243,8 +294,8 @@
         "envio": {
           "type": "column",
           "settings": {
-            "title": "Envío rápido",
-            "text": "<p>Envío gratis en pedidos superiores a 50€. Recíbelo en 24/48h.</p>",
+            "title": "Envío gratis",
+            "text": "<p>Salidas diarias con seguimiento. Envío gratis en todos los pedidos.</p>",
             "link_label": "",
             "link": ""
           }
@@ -252,8 +303,8 @@
         "pago": {
           "type": "column",
           "settings": {
-            "title": "Pago 100% seguro",
-            "text": "<p>Paga con tarjeta, PayPal o Bizum de forma segura y cifrada.</p>",
+            "title": "Cambios en 14 días",
+            "text": "<p>Si la talla no encaja, la cambiamos sin preguntas raras.</p>",
             "link_label": "",
             "link": ""
           }
@@ -261,8 +312,8 @@
         "devoluciones": {
           "type": "column",
           "settings": {
-            "title": "Devoluciones fáciles",
-            "text": "<p>30 días para cambios y devoluciones sin complicaciones.</p>",
+            "title": "Atención directa",
+            "text": "<p>Nos escribes por WhatsApp o Instagram y te contestamos nosotros.</p>",
             "link_label": "",
             "link": ""
           }
@@ -480,6 +531,7 @@
   },
   "order": [
     "slideshow_principal",
+    "marquesina_marca",
     "categorias_visuales",
     "parallax_showcase",
     "iconos_confianza",

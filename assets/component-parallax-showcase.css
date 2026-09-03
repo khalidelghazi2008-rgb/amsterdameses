@@ -140,7 +140,7 @@
 
 .drop__media::before {
   background:
-    radial-gradient(120% 140% at 15% 0%, var(--panel-b, #2b4cff) 0%, transparent 55%),
+    radial-gradient(120% 140% at 15% 0%, var(--panel-b, #2f6bff) 0%, transparent 55%),
     linear-gradient(200deg, var(--panel-a, #0c1830) 10%, #0a0a0a 92%);
   content: '';
   inset: 0;

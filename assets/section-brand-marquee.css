@@ -1,0 +1,59 @@
+/* ==========================================================================
+   Marquesina de marca — scroll horizontal infinito 100% CSS
+   ========================================================================== */
+.brand-marquee {
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.09);
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.09);
+  overflow: hidden;
+}
+
+.brand-marquee__viewport {
+  overflow: hidden;
+}
+
+.brand-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: brand-marquee-scroll var(--brand-marquee-duration, 26s) linear infinite;
+}
+
+.brand-marquee__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 5.6rem;
+  padding-right: 5.6rem;
+}
+
+.brand-marquee__word {
+  font-family: var(--amstershop-font-display, var(--font-heading-family));
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(var(--color-foreground), 0.22);
+}
+
+.brand-marquee__word--accent {
+  color: rgb(var(--amstershop-blue, 47, 107, 255));
+}
+
+@keyframes brand-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-marquee__track {
+    animation: none;
+  }
+
+  .brand-marquee__group[aria-hidden='true'] {
+    display: none;
+  }
+}

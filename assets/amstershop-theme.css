@@ -15,16 +15,53 @@
    ========================================================================== */
 
 :root {
-  /* Azul intenso/marino de marca, en formato "R, G, B" para poder combinarlo
+  /* Azul intenso de marca, en formato "R, G, B" para poder combinarlo
      con rgba() igual que hace Dawn con sus variables --color-*. */
-  --amstershop-blue: 43, 76, 255;
-  --amstershop-navy: 16, 26, 51;
-  --amstershop-black: 10, 10, 10;
+  --amstershop-blue: 47, 107, 255;
+  --amstershop-navy: 10, 12, 18;
+  --amstershop-black: 5, 6, 10;
   --amstershop-white: 255, 255, 255;
 
   /* Tracking (espaciado de letras) para la estética urbana/streetwear */
   --amstershop-tracking-wide: 0.08em;
   --amstershop-tracking-wider: 0.14em;
+
+  /* Tipografía de marca: Anton (display), Barlow Condensed (UI/botones/nav)
+     y Barlow (texto de párrafo). Se cargan como Google Fonts en theme.liquid. */
+  --amstershop-font-display: 'Anton', Impact, sans-serif;
+  --amstershop-font-condensed: 'Barlow Condensed', 'Barlow', sans-serif;
+  --amstershop-font-body: 'Barlow', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Tipografía de marca aplicada por encima del sistema de fuentes de Dawn:
+   titulares grandes en Anton, texto de párrafo en Barlow, y elementos de
+   interfaz (nav, botones, badges, precios de tarjeta) en Barlow Condensed.
+   -------------------------------------------------------------------------- */
+:root {
+  --font-heading-family: var(--amstershop-font-display);
+  --font-body-family: var(--amstershop-font-body);
+}
+
+h1, h2, h3,
+.h1, .h2, .h3,
+.banner__heading,
+.collection-hero__title {
+  font-family: var(--amstershop-font-display);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.button,
+.header__menu-item,
+.header__submenu .header__menu-item,
+.mega-menu__link,
+.card__heading,
+.price,
+.product__title,
+.badge,
+.amstershop-eyebrow {
+  font-family: var(--amstershop-font-condensed);
 }
 
 /* --------------------------------------------------------------------------

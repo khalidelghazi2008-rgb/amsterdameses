@@ -1,0 +1,129 @@
+{% comment %}
+  Marquesina de marca (AMSTERSHOP)
+  --------------------------------------------------------------------------
+  Tira horizontal con scroll infinito (100% CSS, sin JavaScript) que repite
+  palabras de marca separadas por un punto — p. ej. "Amstershop · Sneakers ·
+  Streetwear · Drop 04 · Stock limitado". Cada palabra es un bloque "word"
+  configurable desde el editor de temas.
+
+  El contenido se duplica una vez en el marcado (dos grupos idénticos) y se
+  anima con translateX(-50%) en bucle infinito, de forma que el segundo
+  grupo entra justo cuando el primero sale, sin salto visible.
+  Respeta prefers-reduced-motion (se muestra fijo, sin animar).
+{% endcomment %}
+
+{{ 'section-brand-marquee.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign word_blocks = section.blocks | where: 'type', 'word'
+  assign word_count = 0
+  for block in word_blocks
+    if block.settings.text != blank
+      word_count = word_count | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if word_count > 0 -%}
+  <div class="color-{{ section.settings.color_scheme }} brand-marquee section-{{ section.id }}-padding">
+    <div class="brand-marquee__viewport" style="--brand-marquee-duration: {{ section.settings.speed }}s;">
+      <div class="brand-marquee__track">
+        {%- for i in (1..2) -%}
+          <div class="brand-marquee__group" aria-hidden="{% if i == 2 %}true{% else %}false{% endif %}">
+            {%- for block in word_blocks -%}
+              {%- if block.settings.text != blank -%}
+                <span
+                  class="brand-marquee__word{% if block.settings.accent %} brand-marquee__word--accent{% endif %}"
+                  {{ block.shopify_attributes }}
+                >
+                  {{- block.settings.text -}}
+                </span>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Marquesina de marca",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-4"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "unit": "s",
+      "label": "Velocidad del scroll",
+      "default": 26
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 18
+    }
+  ],
+  "blocks": [
+    {
+      "type": "word",
+      "name": "Palabra",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "AMSTERSHOP"
+        },
+        {
+          "type": "checkbox",
+          "id": "accent",
+          "label": "Destacar en azul de marca",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquesina de marca",
+      "blocks": [
+        { "type": "word", "settings": { "text": "AMSTERSHOP", "accent": true } },
+        { "type": "word", "settings": { "text": "SNEAKERS", "accent": false } },
+        { "type": "word", "settings": { "text": "STREETWEAR", "accent": false } },
+        { "type": "word", "settings": { "text": "DROP 04", "accent": true } },
+        { "type": "word", "settings": { "text": "STOCK LIMITADO", "accent": false } }
+      ]
+    }
+  ]
+}
+{% endschema %}

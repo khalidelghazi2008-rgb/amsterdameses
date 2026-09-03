@@ -207,7 +207,17 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <div class="header__heading-logo-wrapper">
+            <img
+              src="{{ 'logo-amsterdameses.png' | asset_url }}"
+              alt="{{ shop.name }}"
+              class="header__heading-logo motion-reduce"
+              height="{{ settings.logo_width | divided_by: 1.5 | round }}"
+              width="{{ settings.logo_width }}"
+              style="width: {{ settings.logo_width }}px; height: auto;"
+              loading="eager"
+            >
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -250,7 +260,17 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <div class="header__heading-logo-wrapper">
+            <img
+              src="{{ 'logo-amsterdameses.png' | asset_url }}"
+              alt="{{ shop.name }}"
+              class="header__heading-logo"
+              height="{{ settings.logo_width | divided_by: 1.5 | round }}"
+              width="{{ settings.logo_width }}"
+              style="width: {{ settings.logo_width }}px; height: auto;"
+              loading="eager"
+            >
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
