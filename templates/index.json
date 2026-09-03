@@ -170,7 +170,7 @@
     "parallax_showcase": {
       "type": "parallax-showcase",
       "settings": {
-        "eyebrow": "Colección SS25 — Ref. AMS/SS25",
+        "eyebrow": "Nueva colección",
         "heading": "Hechos para <em>la calle</em>",
         "subheading": "<p>Varias piezas, un mismo lenguaje: negro mate, azul intenso, corte urbano. Baja para ver la colección tomar forma — cada imagen se abre a pantalla completa a tu ritmo de scroll.</p>",
         "show_scroll_cue": true,
@@ -181,80 +181,44 @@
           "type": "panel",
           "settings": {
             "color_a": "#0c1830",
-            "color_b": "#2b4cff",
-            "eyebrow_label": "Drop 01",
-            "eyebrow_detail": "Running",
-            "title": "Air Pulse",
-            "description": "<p>Entresuela de doble densidad y malla de punto continuo. La línea azul intenso recorre el lateral como un latido: visible de día, reflectante de noche.</p>",
-            "tag_text": "AMS-AP01 — Negro / Azul intenso",
+            "color_b": "#2f6bff",
             "spec_1_label": "Colorway",
-            "spec_1_value": "Negro / Azul intenso",
             "spec_2_label": "Precio",
-            "spec_2_value": "129 €",
             "spec_3_label": "Ref.",
-            "spec_3_value": "AP01-BLK",
-            "button_label": "Ver producto",
-            "button_link": ""
+            "button_label": "Ver producto"
           }
         },
         "drop_02": {
           "type": "panel",
           "settings": {
             "color_a": "#131722",
-            "color_b": "#0c1830",
-            "eyebrow_label": "Drop 02",
-            "eyebrow_detail": "Capa media",
-            "title": "Urban Track Hoodie",
-            "description": "<p>Felpa de 380 g cepillada por dentro, cordón plano y bolsillo canguro reforzado. Bordado tonal, sin ruido visual — la calidad se nota al tacto, no a gritos.</p>",
-            "tag_text": "AMS-UTH02 — Azul marino / Blanco",
+            "color_b": "#2f6bff",
             "spec_1_label": "Colorway",
-            "spec_1_value": "Azul marino / Blanco",
             "spec_2_label": "Precio",
-            "spec_2_value": "89 €",
             "spec_3_label": "Ref.",
-            "spec_3_value": "UTH02-NVY",
-            "button_label": "Ver producto",
-            "button_link": ""
+            "button_label": "Ver producto"
           }
         },
         "drop_03": {
           "type": "panel",
           "settings": {
             "color_a": "#0a0a0a",
-            "color_b": "#2b4cff",
-            "eyebrow_label": "Drop 03",
-            "eyebrow_detail": "Cargo",
-            "title": "Street Cargo Pant",
-            "description": "<p>Sarga de algodón con elastano, seis bolsillos y bajo ajustable con cordón oculto. Corte recto pensado para moverse — patinar, entrenar, ir de un sitio a otro.</p>",
-            "tag_text": "AMS-SCP03 — Negro / Blanco",
+            "color_b": "#2f6bff",
             "spec_1_label": "Colorway",
-            "spec_1_value": "Negro / Blanco",
             "spec_2_label": "Precio",
-            "spec_2_value": "99 €",
             "spec_3_label": "Ref.",
-            "spec_3_value": "SCP03-BLK",
-            "button_label": "Ver producto",
-            "button_link": ""
+            "button_label": "Ver producto"
           }
         },
         "drop_04": {
           "type": "panel",
           "settings": {
             "color_a": "#0c1830",
-            "color_b": "#2b4cff",
-            "eyebrow_label": "Drop 04",
-            "eyebrow_detail": "Night",
-            "title": "Night Runner",
-            "description": "<p>Suela de tracción multidireccional y upper con hilo reflectante 3M. Pensada para la sesión de después de cenar, cuando la ciudad se queda para los que siguen entrenando.</p>",
-            "tag_text": "AMS-NR04 — Azul intenso / Negro",
+            "color_b": "#2f6bff",
             "spec_1_label": "Colorway",
-            "spec_1_value": "Azul intenso / Negro",
             "spec_2_label": "Precio",
-            "spec_2_value": "139 €",
             "spec_3_label": "Ref.",
-            "spec_3_value": "NR04-BLU",
-            "button_label": "Ver producto",
-            "button_link": ""
+            "button_label": "Ver producto"
           }
         },
         "manifiesto": {

@@ -13,6 +13,43 @@
   margin: 1rem 0;
 }
 
+/* --------------------------------------------------------------------------
+   Botón de WhatsApp en la ficha de producto: usa siempre los datos reales
+   del producto (ver sections/main-product.liquid), estilo de botón sólido
+   verde WhatsApp coherente con el resto de botones del tema (esquinas
+   rectas, tipografía condensada en mayúsculas).
+   -------------------------------------------------------------------------- */
+.product__whatsapp-button {
+  align-items: center;
+  background-color: #25d366;
+  color: #05060a;
+  display: inline-flex;
+  font-family: var(--amstershop-font-condensed, inherit);
+  font-size: 1.7rem;
+  font-weight: 700;
+  gap: 1rem;
+  justify-content: center;
+  letter-spacing: var(--amstershop-tracking-wide, 0.08em);
+  margin: 1rem 0;
+  min-height: 5.2rem;
+  padding: 1.2rem 2.4rem;
+  text-transform: uppercase;
+  transition: opacity var(--duration-short, 0.1s) ease;
+  width: 100%;
+}
+
+.product__whatsapp-button:hover,
+.product__whatsapp-button:focus-visible {
+  color: #05060a;
+  opacity: 0.85;
+}
+
+.product__whatsapp-button .icon-whatsapp {
+  flex-shrink: 0;
+  height: 2.2rem;
+  width: 2.2rem;
+}
+
 .product__wishlist-button button {
   align-items: center;
   background: none;

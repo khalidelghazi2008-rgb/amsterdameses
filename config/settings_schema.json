@@ -1479,6 +1479,36 @@
     ]
   },
   {
+    "name": "WhatsApp",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "whatsapp_enabled",
+        "label": "Activar botón de WhatsApp en la página de producto",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "Número de WhatsApp",
+        "info": "Formato internacional, solo dígitos, sin espacios ni signo +. Ejemplo para España: 34600111222."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_button_label",
+        "label": "Texto del botón",
+        "default": "Preguntar por WhatsApp"
+      },
+      {
+        "type": "textarea",
+        "id": "whatsapp_message_template",
+        "label": "Mensaje prellenado",
+        "info": "Variables disponibles: [producto], [precio] y [enlace]. Se sustituyen automáticamente por los datos reales del producto que se esté viendo.",
+        "default": "Hola, me interesa este producto: [producto] ([precio]). ¿Está disponible? [enlace]"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.customer_accounts.name",
     "settings": [
       {

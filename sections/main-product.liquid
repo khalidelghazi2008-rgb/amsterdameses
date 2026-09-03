@@ -561,6 +561,36 @@
                     section_id: section.id,
                     show_pickup_availability: true
                   -%}
+                {%- when 'whatsapp' -%}
+                  {%- comment -%}
+                    Botón de WhatsApp: usa siempre los datos reales del
+                    producto que se está viendo (nombre, precio y enlace).
+                    El número y el texto del mensaje se configuran desde
+                    Configuración del tema → WhatsApp; si no hay número
+                    configurado, el botón no se muestra.
+                  {%- endcomment -%}
+                  {%- if settings.whatsapp_enabled and settings.whatsapp_number != blank -%}
+                    {%- liquid
+                      assign whatsapp_price = product.price | money
+                      assign whatsapp_url = product.url | prepend: shop.url
+                      assign whatsapp_template = settings.whatsapp_message_template | default: '[producto] ([precio]) [enlace]'
+                      assign whatsapp_message = whatsapp_template
+                        | replace: '[producto]', product.title
+                        | replace: '[precio]', whatsapp_price
+                        | replace: '[enlace]', whatsapp_url
+                      assign whatsapp_digits = settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-'
+                    -%}
+                    <a
+                      href="https://wa.me/{{ whatsapp_digits }}?text={{ whatsapp_message | url_encode }}"
+                      class="product__whatsapp-button"
+                      target="_blank"
+                      rel="noopener"
+                      {{ block.shopify_attributes }}
+                    >
+                      <span class="svg-wrapper">{{ 'icon-whatsapp.svg' | inline_asset_content }}</span>
+                      {{- settings.whatsapp_button_label | default: 'Preguntar por WhatsApp' -}}
+                    </a>
+                  {%- endif -%}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">
@@ -1028,6 +1058,11 @@
           "info": "Si se deja vacío, se usa \"Añadir a la wishlist\" / \"Quitar de la wishlist\" según el estado."
         }
       ]
+    },
+    {
+      "type": "whatsapp",
+      "name": "Botón de WhatsApp",
+      "limit": 1
     },
     {
       "type": "buy_buttons",

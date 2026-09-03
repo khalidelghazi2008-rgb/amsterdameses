@@ -28,6 +28,26 @@
         role="list"
       >
         {%- for block in section.blocks -%}
+          {%- liquid
+            assign card_collection = block.settings.collection
+            assign card_link = block.settings.link
+            assign card_title = block.settings.title
+            assign card_image = block.settings.image
+
+            comment
+              Si el bloque tiene una colección real de Shopify enlazada,
+              su título y su URL siempre tienen prioridad sobre los campos
+              manuales; su imagen de portada solo se usa como último
+              recurso, si no se ha subido una imagen manual.
+            endcomment
+            if card_collection != blank
+              assign card_link = card_collection.url
+              assign card_title = card_collection.title
+              if card_image == blank and card_collection.image != blank
+                assign card_image = card_collection.image
+              endif
+            endif
+          -%}
           <li
             class="category-cards__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
             {% if settings.animations_reveal_on_scroll %}
@@ -37,16 +57,16 @@
             {{ block.shopify_attributes }}
           >
             <a
-              href="{{ block.settings.link | default: '#' }}"
-              class="category-cards__link{% if block.settings.link == blank %} category-cards__link--disabled{% endif %}"
-              {% if block.settings.link == blank %}
+              href="{{ card_link | default: '#' }}"
+              class="category-cards__link{% if card_link == blank %} category-cards__link--disabled{% endif %}"
+              {% if card_link == blank %}
                 role="link" aria-disabled="true" tabindex="-1"
               {% endif %}
             >
               <span class="category-cards__media">
-                {%- if block.settings.image != blank -%}
+                {%- if card_image != blank -%}
                   {{
-                    block.settings.image
+                    card_image
                     | image_url: width: 1200
                     | image_tag:
                       loading: 'lazy',
@@ -59,8 +79,8 @@
                 {%- endif -%}
               </span>
               <span class="category-cards__caption">
-                {%- if block.settings.title != blank -%}
-                  <span class="category-cards__title">{{ block.settings.title | escape }}</span>
+                {%- if card_title != blank -%}
+                  <span class="category-cards__title">{{ card_title | escape }}</span>
                 {%- endif -%}
                 {%- if block.settings.subtitle != blank -%}
                   <span class="category-cards__subtitle">{{ block.settings.subtitle | escape }}</span>
@@ -169,15 +189,20 @@
       "name": "Categoría",
       "settings": [
         {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección de Shopify",
+          "info": "Recomendado: si enlazas una colección real, su título y su enlace se usan automáticamente. Su imagen de portada se usa solo si no subes una imagen manual abajo."
+        },
+        {
           "type": "image_picker",
           "id": "image",
-          "label": "Imagen"
+          "label": "Imagen (opcional si hay colección enlazada)"
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Título",
-          "default": "Categoría"
+          "label": "Título (si no hay colección enlazada)"
         },
         {
           "type": "text",
@@ -187,7 +212,7 @@
         {
           "type": "url",
           "id": "link",
-          "label": "Enlace"
+          "label": "Enlace (si no hay colección enlazada)"
         }
       ]
     }

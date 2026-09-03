@@ -48,6 +48,9 @@
             "show_gift_card_recipient": true
           }
         },
+        "whatsapp": {
+          "type": "whatsapp"
+        },
         "wishlist": {
           "type": "wishlist",
           "settings": {
@@ -85,6 +88,7 @@
         "size_guide",
         "quantity_selector",
         "buy_buttons",
+        "whatsapp",
         "wishlist",
         "description",
         "complementary",
