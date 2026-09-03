@@ -78,3 +78,60 @@ wishlist-button.is-active .icon-heart {
   box-shadow: 0 0.4rem 1.6rem rgba(var(--amstershop-black), 0.18);
   transition: box-shadow var(--duration-default) ease;
 }
+
+/* --------------------------------------------------------------------------
+   Botón "Cesta": en vez del icono discreto de Dawn, un botón sólido en azul
+   de marca con la etiqueta de texto y el contador, siempre visible, tal
+   como en el diseño original (icono del carrito + contador integrado).
+   -------------------------------------------------------------------------- */
+.amstershop-cart-button {
+  align-items: center;
+  background-color: rgb(var(--amstershop-blue));
+  color: rgb(var(--amstershop-white));
+  display: inline-flex;
+  gap: 1rem;
+  height: 4.8rem;
+  margin-right: 0;
+  padding: 0 1.8rem;
+  width: auto;
+}
+
+.amstershop-cart-button:hover,
+.amstershop-cart-button:focus-visible {
+  background-color: rgb(var(--amstershop-blue));
+  color: rgb(var(--amstershop-white));
+  opacity: 0.88;
+}
+
+.amstershop-cart-button__label {
+  font-family: var(--amstershop-font-condensed);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: var(--amstershop-tracking-wide);
+  text-transform: uppercase;
+}
+
+.amstershop-cart-button__count {
+  align-items: center;
+  background-color: rgb(var(--amstershop-black));
+  color: rgb(var(--amstershop-white));
+  display: inline-flex;
+  font-family: var(--amstershop-font-body);
+  font-size: 1.2rem;
+  font-weight: 800;
+  height: 2.2rem;
+  justify-content: center;
+  min-width: 2.2rem;
+  padding: 0 0.5rem;
+}
+
+@media screen and (max-width: 749px) {
+  .amstershop-cart-button__label {
+    display: none;
+  }
+
+  .amstershop-cart-button {
+    gap: 0;
+    padding: 0 1.2rem;
+  }
+}

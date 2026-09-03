@@ -552,7 +552,8 @@
       "view_product": "Ver producto"
     },
     "header": {
-      "view_all": "Ver todo {{ title }}"
+      "view_all": "Ver todo {{ title }}",
+      "cart_label": "Cesta"
     },
     "category_cards": {
       "shop_now": "Comprar"

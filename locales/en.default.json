@@ -540,7 +540,8 @@
       "view_product": "View product"
     },
     "header": {
-      "view_all": "View all {{ title }}"
+      "view_all": "View all {{ title }}",
+      "cart_label": "Bag"
     },
     "category_cards": {
       "shop_now": "Shop now"
