@@ -77,17 +77,18 @@
         "category_jtgKrV": {
           "type": "category",
           "settings": {
-            "title": "Categoría",
+            "image": "shopify://shop_images/2.jpg",
+            "title": "ROPA INVIERNO",
             "subtitle": "",
-            "link": ""
+            "link": "shopify://collections/ropa-de-invierno"
           }
         },
         "hombre": {
           "type": "category",
           "settings": {
-            "title": "Hombre",
+            "title": "ZAPATILLAS",
             "subtitle": "",
-            "link": "shopify://collections/hombre"
+            "link": "shopify://collections/zapatillas"
           }
         },
         "mujer": {
