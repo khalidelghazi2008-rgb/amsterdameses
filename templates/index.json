@@ -1,25 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "slideshow_principal": {
       "type": "slideshow",
-      "settings": {
-        "layout": "full_bleed",
-        "slide_height": "large",
-        "slider_visual": "counter",
-        "auto_rotate": true,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": false,
-        "accessibility_info": "Diapositivas de la colección"
-      },
       "blocks": {
         "slide_zapatillas": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_28_ago_2026_16_57_19.png",
+            "image_mobile": "shopify://shop_images/77C23104-A2CC-4676-BA9D-E5E8DEEC5AA6.png",
             "image_overlay_opacity": 40,
-            "heading": "Nueva colección de zapatillas",
+            "heading": "",
             "heading_size": "h0",
-            "subheading": "Rendimiento y estilo urbano para cada movimiento",
+            "subheading": "",
             "button_label_1": "Comprar ahora",
             "button_link_1": "shopify://collections/zapatillas",
             "button_style_secondary_1": false,
@@ -36,13 +37,17 @@
         "slide_ropa": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/77C23104-A2CC-4676-BA9D-E5E8DEEC5AA6.png",
             "image_overlay_opacity": 40,
-            "heading": "Ropa deportiva y streetwear",
+            "heading": "",
             "heading_size": "h0",
-            "subheading": "Comodidad técnica pensada para entrenar y para la calle",
+            "subheading": "",
             "button_label_1": "Ver colección",
             "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": true,
             "show_text_box": true,
             "box_align": "middle-center",
             "text_alignment": "center",
@@ -54,18 +59,20 @@
       "block_order": [
         "slide_zapatillas",
         "slide_ropa"
-      ]
+      ],
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "large",
+        "slider_visual": "counter",
+        "auto_rotate": true,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": false,
+        "accessibility_info": "Diapositivas de la colección"
+      }
     },
     "categorias_visuales": {
       "type": "category-cards",
-      "settings": {
-        "heading": "Compra por categoría",
-        "heading_size": "h1",
-        "columns_desktop": 5,
-        "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 36
-      },
       "blocks": {
         "hombre": {
           "type": "category",
@@ -114,131 +121,18 @@
         "zapatillas",
         "novedades",
         "ofertas"
-      ]
-    },
-    "parallax_showcase": {
-      "type": "parallax-showcase",
+      ],
       "settings": {
-        "eyebrow": "Colección SS25 — Ref. AMS/SS25",
-        "heading": "Hechos para <em>la calle</em>",
-        "subheading": "<p>Varias piezas, un mismo lenguaje: negro mate, azul intenso, corte urbano. Baja para ver la colección tomar forma — cada imagen se abre a pantalla completa a tu ritmo de scroll.</p>",
-        "show_scroll_cue": true,
-        "scroll_cue_text": "Sigue bajando"
-      },
-      "blocks": {
-        "drop_01": {
-          "type": "panel",
-          "settings": {
-            "color_a": "#0c1830",
-            "color_b": "#2b4cff",
-            "eyebrow_label": "Drop 01",
-            "eyebrow_detail": "Running",
-            "title": "Air Pulse",
-            "description": "<p>Entresuela de doble densidad y malla de punto continuo. La línea azul intenso recorre el lateral como un latido: visible de día, reflectante de noche.</p>",
-            "tag_text": "AMS-AP01 — Negro / Azul intenso",
-            "spec_1_label": "Colorway",
-            "spec_1_value": "Negro / Azul intenso",
-            "spec_2_label": "Precio",
-            "spec_2_value": "129 €",
-            "spec_3_label": "Ref.",
-            "spec_3_value": "AP01-BLK",
-            "button_label": "Ver producto",
-            "button_link": ""
-          }
-        },
-        "drop_02": {
-          "type": "panel",
-          "settings": {
-            "color_a": "#131722",
-            "color_b": "#0c1830",
-            "eyebrow_label": "Drop 02",
-            "eyebrow_detail": "Capa media",
-            "title": "Urban Track Hoodie",
-            "description": "<p>Felpa de 380 g cepillada por dentro, cordón plano y bolsillo canguro reforzado. Bordado tonal, sin ruido visual — la calidad se nota al tacto, no a gritos.</p>",
-            "tag_text": "AMS-UTH02 — Azul marino / Blanco",
-            "spec_1_label": "Colorway",
-            "spec_1_value": "Azul marino / Blanco",
-            "spec_2_label": "Precio",
-            "spec_2_value": "89 €",
-            "spec_3_label": "Ref.",
-            "spec_3_value": "UTH02-NVY",
-            "button_label": "Ver producto",
-            "button_link": ""
-          }
-        },
-        "drop_03": {
-          "type": "panel",
-          "settings": {
-            "color_a": "#0a0a0a",
-            "color_b": "#2b4cff",
-            "eyebrow_label": "Drop 03",
-            "eyebrow_detail": "Cargo",
-            "title": "Street Cargo Pant",
-            "description": "<p>Sarga de algodón con elastano, seis bolsillos y bajo ajustable con cordón oculto. Corte recto pensado para moverse — patinar, entrenar, ir de un sitio a otro.</p>",
-            "tag_text": "AMS-SCP03 — Negro / Blanco",
-            "spec_1_label": "Colorway",
-            "spec_1_value": "Negro / Blanco",
-            "spec_2_label": "Precio",
-            "spec_2_value": "99 €",
-            "spec_3_label": "Ref.",
-            "spec_3_value": "SCP03-BLK",
-            "button_label": "Ver producto",
-            "button_link": ""
-          }
-        },
-        "drop_04": {
-          "type": "panel",
-          "settings": {
-            "color_a": "#0c1830",
-            "color_b": "#2b4cff",
-            "eyebrow_label": "Drop 04",
-            "eyebrow_detail": "Night",
-            "title": "Night Runner",
-            "description": "<p>Suela de tracción multidireccional y upper con hilo reflectante 3M. Pensada para la sesión de después de cenar, cuando la ciudad se queda para los que siguen entrenando.</p>",
-            "tag_text": "AMS-NR04 — Azul intenso / Negro",
-            "spec_1_label": "Colorway",
-            "spec_1_value": "Azul intenso / Negro",
-            "spec_2_label": "Precio",
-            "spec_2_value": "139 €",
-            "spec_3_label": "Ref.",
-            "spec_3_value": "NR04-BLU",
-            "button_label": "Ver producto",
-            "button_link": ""
-          }
-        },
-        "manifiesto": {
-          "type": "statement",
-          "settings": {
-            "text": "<p>No hacemos <em>temporadas.</em> Hacemos piezas que aguantan la calle, el metro y el entrenamiento — en ese orden, el mismo día.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "drop_01",
-        "drop_02",
-        "drop_03",
-        "drop_04",
-        "manifiesto"
-      ]
+        "heading": "Compra por categoría",
+        "heading_size": "h1",
+        "columns_desktop": 5,
+        "color_scheme": "scheme-1",
+        "padding_top": 52,
+        "padding_bottom": 36
+      }
     },
     "iconos_confianza": {
       "type": "multicolumn",
-      "settings": {
-        "title": "",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "square",
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-1",
-        "columns_desktop": 3,
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      },
       "blocks": {
         "envio": {
           "type": "column",
@@ -272,22 +166,26 @@
         "envio",
         "pago",
         "devoluciones"
-      ]
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_width": "third",
+        "image_ratio": "square",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "carrusel_zapatillas": {
       "type": "collection-list",
-      "settings": {
-        "title": "Compra por categoría de zapatillas",
-        "heading_size": "h2",
-        "image_ratio": "square",
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
-      },
       "blocks": {
         "coleccion_1": {
           "type": "featured_collection",
@@ -319,25 +217,36 @@
         "coleccion_2",
         "coleccion_3",
         "coleccion_4"
-      ]
+      ],
+      "settings": {
+        "title": "Compra por categoría de zapatillas",
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "show_view_all": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "productos_destacados": {
       "type": "featured-collection",
       "settings": {
+        "collection": "all",
+        "products_to_show": 8,
         "title": "Productos destacados",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -345,6 +254,7 @@
         "show_rating": false,
         "quick_add": "standard",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 44,
         "padding_bottom": 36
       }
@@ -352,20 +262,19 @@
     "novedades_productos": {
       "type": "featured-collection",
       "settings": {
+        "collection": "",
+        "products_to_show": 8,
         "title": "Novedades",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": true,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -373,6 +282,7 @@
         "show_rating": false,
         "quick_add": "standard",
         "columns_mobile": "2",
+        "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -380,20 +290,19 @@
     "mas_vendidos": {
       "type": "featured-collection",
       "settings": {
+        "collection": "",
+        "products_to_show": 8,
         "title": "Más vendidos",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": true,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -401,6 +310,7 @@
         "show_rating": false,
         "quick_add": "standard",
         "columns_mobile": "2",
+        "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -408,20 +318,19 @@
     "ofertas_productos": {
       "type": "featured-collection",
       "settings": {
+        "collection": "",
+        "products_to_show": 8,
         "title": "Ofertas",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-4",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": true,
+        "color_scheme": "scheme-4",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -429,6 +338,7 @@
         "show_rating": false,
         "quick_add": "standard",
         "columns_mobile": "2",
+        "swipe_on_mobile": true,
         "padding_top": 36,
         "padding_bottom": 52
       }
@@ -446,12 +356,6 @@
     },
     "newsletter": {
       "type": "newsletter",
-      "settings": {
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 52,
-        "padding_bottom": 52
-      },
       "blocks": {
         "heading": {
           "type": "heading",
@@ -475,13 +379,18 @@
         "heading",
         "paragraph",
         "email_form"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "slideshow_principal",
     "categorias_visuales",
-    "parallax_showcase",
     "iconos_confianza",
     "carrusel_zapatillas",
     "productos_destacados",
