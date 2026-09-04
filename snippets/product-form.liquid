@@ -1,0 +1,52 @@
+{%- comment -%}
+  Full add-to-cart form: variant picker + quantity + add to cart / buy now.
+  Accepts:
+    product     {Object} required
+    show_quantity {Boolean} default true
+    show_buy_now  {Boolean} default true
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign show_qty = show_quantity | default: true
+  assign show_buy_now = show_buy_now | default: true
+-%}
+
+{% render 'variant-picker', product: product %}
+
+  {%- form 'product', product, data-type: 'add-to-cart-form', class: 'product-form' -%}
+    <input type="hidden" name="id" value="{{ current_variant.id }}" {% unless current_variant.available %}disabled{% endunless %}>
+
+    <div data-form-error class="field__error" role="alert"></div>
+
+    <div class="product-form__row">
+      {%- if show_qty -%}
+        {% render 'quantity-selector', id: product.id %}
+      {%- endif -%}
+    </div>
+
+    <div class="product-form__buttons">
+      <button
+        type="submit"
+        name="add"
+        class="button button--full"
+        data-add-text="{{ 'products.product.add_to_cart' | t }}"
+        data-soldout-text="{{ 'products.product.sold_out' | t }}"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >
+        <span data-btn-text>
+          {%- if current_variant.available -%}
+            {{ 'products.product.add_to_cart' | t }}
+          {%- else -%}
+            {{ 'products.product.sold_out' | t }}
+          {%- endif -%}
+        </span>
+      </button>
+
+      {%- if show_buy_now and current_variant.available -%}
+        <button type="submit" name="checkout" class="button button--secondary button--full" formaction="{{ routes.cart_url }}">
+          {{ 'products.product.buy_now' | t }}
+        </button>
+      {%- endif -%}
+    </div>
+  {%- endform -%}

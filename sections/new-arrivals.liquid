@@ -1,0 +1,46 @@
+{%- comment -%}
+  "Novedades" — new arrivals grid. Horizontal scroll-snap carousel on mobile,
+  4-column grid on desktop. Products pulled dynamically from a collection.
+{%- endcomment -%}
+
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="section-header">
+      <div>
+        <h2 class="section-header__title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-header__subtitle">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.collection != blank -%}
+        <a href="{{ section.settings.collection.url }}" class="section-header__link">{{ 'collection.view_grid' | t }} &rarr;</a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.collection != blank -%}
+      <div class="grid card-grid card-grid--4 card-grid--carousel-mobile">
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product, lazy: forloop.index > 4 %}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="empty-state">
+        <p class="empty-state__text">Selecciona una colección en la configuración de esta sección.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Novedades",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Novedades" },
+    { "type": "text", "id": "subheading", "label": "Subtítulo" },
+    { "type": "collection", "id": "collection", "label": "Colección de novedades" },
+    { "type": "range", "id": "products_to_show", "label": "Número de productos", "min": 4, "max": 12, "step": 1, "default": 8 }
+  ],
+  "presets": [{ "name": "Novedades" }]
+}
+{% endschema %}

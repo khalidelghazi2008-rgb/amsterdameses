@@ -1,99 +1,92 @@
-# Dawn
+# Vanguard — Tema Shopify de moda urbana
 
-[![Build status](https://github.com/shopify/dawn/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Shopify/dawn/actions/workflows/ci.yml?query=branch%3Amain)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?color=informational)](/.github/CONTRIBUTING.md)
+Tema Shopify **Online Store 2.0** construido desde cero en Liquid para una
+tienda de moda/streetwear. Arquitectura limpia basada en secciones y
+snippets reutilizables, 100% editable desde el Theme Editor, sin
+dependencias externas, mobile-first y optimizado para conversión y
+rendimiento.
 
-[Getting started](#getting-started) |
-[Staying up to date with Dawn changes](#staying-up-to-date-with-dawn-changes) |
-[Developer tools](#developer-tools) |
-[Contributing](#contributing) |
-[Code of conduct](#code-of-conduct) |
-[Theme Store submission](#theme-store-submission) |
-[License](#license)
+> Inspirado en la lógica de navegación y merchandising de un ecommerce de
+> moda (header con mega menú, colecciones visuales, PDP orientada a
+> conversión, cart drawer, filtros nativos...), con un sistema de diseño,
+> copy, código y branding propios.
 
-Dawn represents a HTML-first, JavaScript-only-as-needed approach to theme development. It's Shopify's first source available theme with performance, flexibility, and [Online Store 2.0 features](https://www.shopify.com/partners/blog/shopify-online-store) built-in and acts as a reference for building Shopify themes.
+## Stack
 
-* **Web-native in its purest form:** Themes run on the [evergreen web](https://www.w3.org/2001/tag/doc/evergreen-web/). We leverage the latest web browsers to their fullest, while maintaining support for the older ones through progressive enhancement—not polyfills.
-* **Lean, fast, and reliable:** Functionality and design defaults to “no” until it meets this requirement. Code ships on quality. Themes must be built with purpose. They shouldn’t support each and every feature in Shopify.
-* **Server-rendered:** HTML must be rendered by Shopify servers using Liquid. Business logic and platform primitives such as translations and money formatting don’t belong on the client. Async and on-demand rendering of parts of the page is OK, but we do it sparingly as a progressive enhancement.
-* **Functional, not pixel-perfect:** The Web doesn’t require each page to be rendered pixel-perfect by each browser engine. Using semantic markup, progressive enhancement, and clever design, we ensure that themes remain functional regardless of the browser.
+- Shopify Online Store 2.0 (JSON templates, secciones y bloques)
+- Liquid + HTML5 semántico
+- CSS con custom properties (design tokens desde `settings_schema.json`)
+- JavaScript vanilla (sin jQuery, sin frameworks)
+- Sin dependencias externas
 
-You can find a more detailed version of our theme code principles in the [contribution guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md#theme-code-principles).
+## Estructura
 
-## Getting started
-We recommend using Dawn as a starting point for theme development. [Learn more on Shopify.dev](https://shopify.dev/themes/getting-started/create).
-
-> If you're building a theme for the Shopify Theme Store, then you can use Dawn as a starting point. However, the theme that you submit needs to be [substantively different from Dawn](https://shopify.dev/themes/store/requirements#uniqueness) so that it provides added value for merchants. Learn about the [ways that you can use Dawn](https://shopify.dev/themes/tools/dawn#ways-to-use-dawn).
-
-Please note that the main branch may include code for features not yet released. The "stable" version of Dawn is available in the theme store.
-
-## Staying up to date with Dawn changes
-
-Say you're building a new theme off Dawn but you still want to be able to pull in the latest changes, you can add a remote `upstream` pointing to this Dawn repository.
-
-1. Navigate to your local theme folder.
-2. Verify the list of remotes and validate that you have both an `origin` and `upstream`:
-```sh
-git remote -v
 ```
-3. If you don't see an `upstream`, you can add one that points to Shopify's Dawn repository:
-```sh
-git remote add upstream https://github.com/Shopify/dawn.git
+layout/theme.liquid            Layout principal, SEO, JSON-LD, design tokens
+
+templates/                     Plantillas JSON (OS 2.0)
+  index.json  product.json  collection.json  cart.json  search.json
+  page.json  404.json  customers/account.json  customers/login.json
+
+sections/                      Todas las secciones son 100% configurables
+  announcement-bar · header · hero · featured-collections
+  featured-products · new-arrivals · bestseller-products · image-text
+  value-propositions · faq · newsletter · footer
+  main-product · main-collection · main-cart · main-search
+  main-page · main-404 · main-account · main-login
+
+snippets/                      Piezas reutilizables
+  product-card · price · sale-badge · product-form · icon
+  responsive-image · breadcrumbs · cart-drawer · quantity-selector
+  variant-picker · facets
+
+assets/
+  theme.css   Design system + estilos de todos los componentes
+  theme.js    Cart AJAX, drawers, variant picker, quick add, búsqueda...
+
+config/settings_schema.json    Colores, tipografía, layout, header, cart...
+locales/                       es.json (por defecto) + en.default.json
 ```
-4. Pull in the latest Dawn changes into your repository:
-```sh
-git fetch upstream
-git pull upstream main
-```
 
-## Developer tools
+## Personalización desde el Theme Editor
 
-There are a number of really useful tools that the Shopify Themes team uses during development. Dawn is already set up to work with these tools.
+Todo el contenido visible (textos, imágenes, colecciones, productos,
+colores, tipografía, espaciados, radios de borde...) se edita desde
+**Tienda online → Personalizar**. No hay contenido de la home ni de las
+secciones hardcodeado en el código: cada sección tiene su propio
+`{% schema %}` con settings y bloques.
 
-### Shopify CLI
+La navegación (incluido el mega menú) se gestiona 100% desde
+**Tienda online → Navegación**: el header no tiene categorías fijas en el
+código, lee el menú que asignes en la sección "Cabecera".
 
-[Shopify CLI](https://github.com/Shopify/shopify-cli) helps you build Shopify themes faster and is used to automate and enhance your local development workflow. It comes bundled with a suite of commands for developing Shopify themes—everything from working with themes on a Shopify store (e.g. creating, publishing, deleting themes) or launching a development server for local theme development.
-
-You can follow this [quick start guide for theme developers](https://shopify.dev/docs/themes/tools/cli) to get started.
-
-### Theme Check
-
-We recommend using [Theme Check](https://github.com/shopify/theme-check) as a way to validate and lint your Shopify themes.
-
-We've added Theme Check to Dawn's [list of VS Code extensions](/.vscode/extensions.json) so if you're using Visual Studio Code as your code editor of choice, you'll be prompted to install the [Theme Check VS Code](https://marketplace.visualstudio.com/items?itemName=Shopify.theme-check-vscode) extension upon opening VS Code after you've forked and cloned Dawn.
-
-You can also run it from a terminal with the following Shopify CLI command:
+## Desarrollo local
 
 ```bash
-shopify theme check
+shopify theme dev --store tu-tienda.myshopify.com
 ```
 
-### Continuous Integration
+## Funcionalidad incluida
 
-Dawn uses [GitHub Actions](https://github.com/features/actions) to maintain the quality of the theme. [This is a starting point](https://github.com/Shopify/dawn/blob/main/.github/workflows/ci.yml) and what we suggest to use in order to ensure you're building better themes. Feel free to build off of it!
+- Header sticky con mega menú (2 niveles + destacado visual configurable)
+- Drawer de menú móvil, carrito y búsqueda (búsqueda predictiva AJAX)
+- Cart drawer + página de carrito, actualización AJAX de cantidades
+- Barra de progreso de envío gratis configurable
+- Product cards con imagen hover, badges (SALE/NEW/SOLD OUT/Más vendido),
+  swatches de color y quick add
+- PDP con galería, selector de variantes reactivo (precio/disponibilidad/
+  imagen sin recargar), acordeones editables, sticky add-to-cart en móvil
+  y recomendaciones de producto
+- Colección con filtros nativos de Shopify (Search & Discovery), orden,
+  paginación y estado vacío
+- FAQ, propuestas de valor y newsletter totalmente editables por bloques
+- SEO: title/meta dinámicos, canonical, Open Graph, Twitter Cards,
+  JSON-LD (Organization, Product, BreadcrumbList)
+- Accesibilidad: skip link, focus trap en drawers, cierre con ESC,
+  aria-labels, navegación por teclado
+- Rendimiento: imágenes responsive con `srcset`/`sizes`, lazy loading,
+  `width`/`height` explícitos, CSS/JS propios sin librerías pesadas
 
-#### Shopify/lighthouse-ci-action
+## Licencia
 
-We love fast websites! Which is why we created [Shopify/lighthouse-ci-action](https://github.com/Shopify/lighthouse-ci-action). This runs a series of [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) audits for the home, product and collections pages on a store to ensure code that gets added doesn't degrade storefront performance over time.
-
-#### Shopify/theme-check-action
-
-Dawn runs [Theme Check](#Theme-Check) on every commit via [Shopify/theme-check-action](https://github.com/Shopify/theme-check-action).
-
-## Contributing
-
-Want to make commerce better for everyone by contributing to Dawn? We'd love your help! Please read our [contributing guide](https://github.com/Shopify/dawn/blob/main/.github/CONTRIBUTING.md) to learn about our development process, how to propose bug fixes and improvements, and how to build for Dawn.
-
-## Code of conduct
-
-All developers who wish to contribute through code or issues, please first read our [Code of Conduct](https://github.com/Shopify/dawn/blob/main/.github/CODE_OF_CONDUCT.md).
-
-## Theme Store submission
-
-The [Shopify Theme Store](https://themes.shopify.com/) is the place where Shopify merchants find the themes that they'll use to showcase and support their business. As a theme partner, you can create themes for the Shopify Theme Store and reach an international audience of an ever-growing number of entrepreneurs.
-
-Ensure that you follow the list of [theme store requirements](https://shopify.dev/themes/store/requirements) if you're interested in becoming a [Shopify Theme Partner](https://themes.shopify.com/services/themes/guidelines) and building themes for the Shopify platform.
-
-## License
-
-Copyright (c) 2021-present Shopify Inc. See [LICENSE](/LICENSE.md) for further details.
+Ver [LICENSE.md](/LICENSE.md).

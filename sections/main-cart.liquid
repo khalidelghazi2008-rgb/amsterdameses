@@ -1,0 +1,98 @@
+{%- comment -%}
+  Full cart page (used when settings.cart_type == "page", and always
+  reachable at /cart). AJAX quantity/remove hooks reuse the same
+  data-cart-* attributes as the cart drawer, wired in assets/theme.js.
+{%- endcomment -%}
+
+<section class="section" data-cart-page {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <h1 class="collection-header__title" style="margin-bottom:2rem;">{{ 'general.cart.title' | t }}</h1>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-empty">
+        <p class="empty-state__title">{{ 'general.cart.empty' | t }}</p>
+        <p class="empty-state__text">{{ 'general.cart.empty_helper' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'general.cart.start_shopping' | t }}</a>
+      </div>
+    {%- else -%}
+      {%- form 'cart', cart, class: 'cart-form' -%}
+        <div class="collection-layout">
+          <div>
+            {%- if settings.cart_show_shipping_note -%}
+              {%- assign threshold_cents = settings.cart_free_shipping_threshold | times: 100 -%}
+              {%- assign remaining = threshold_cents | minus: cart.total_price -%}
+              <div class="free-shipping-bar" data-free-shipping-bar data-threshold="{{ threshold_cents }}">
+                <p class="free-shipping-bar__text"
+                   data-reached-text="{{ 'general.cart.free_shipping_reached' | t }}"
+                   data-remaining-template="{{ 'general.cart.free_shipping_remaining' | t }}">
+                  {%- if remaining > 0 -%}
+                    {{ 'general.cart.free_shipping_remaining' | t: amount: remaining | money }}
+                  {%- else -%}
+                    {{ 'general.cart.free_shipping_reached' | t }}
+                  {%- endif -%}
+                </p>
+                <div class="free-shipping-bar__track">
+                  <div class="free-shipping-bar__fill" style="width: {{ cart.total_price | times: 100 | divided_by: threshold_cents | at_most: 100 }}%;"></div>
+                </div>
+              </div>
+            {%- endif -%}
+
+            <ul class="cart-items" role="list">
+              {%- for item in cart.items -%}
+                <li class="cart-line-item">
+                  <a href="{{ item.url }}">
+                    <img class="cart-line-item__image" src="{{ item.image | image_url: width: 180 }}" alt="{{ item.image.alt | escape }}" width="90" height="112" loading="lazy">
+                  </a>
+                  <div class="cart-line-item__details">
+                    <a href="{{ item.url }}" class="cart-line-item__title">{{ item.product.title }}</a>
+                    {%- if item.variant.title != 'Default Title' -%}
+                      <p class="cart-line-item__variant">{{ item.variant.title }}</p>
+                    {%- endif -%}
+                    {%- if item.original_line_price != item.final_line_price -%}
+                      <p class="cart-line-item__variant" style="color: var(--color-sale);">
+                        {{ 'products.product.save_percentage' | t: percentage: item.original_line_price | minus: item.final_line_price | times: 100 | divided_by: item.original_line_price }}
+                      </p>
+                    {%- endif -%}
+                    <button type="button" class="cart-line-item__remove" data-cart-remove data-line="{{ forloop.index }}">{{ 'general.cart.remove' | t }}</button>
+                  </div>
+                  <div class="cart-line-item__qty-price">
+                    {% render 'price', variant: item.variant %}
+                    {% render 'quantity-selector', id: 'page-line-' | append: forloop.index, quantity: item.quantity, line: forloop.index %}
+                  </div>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+
+          <div>
+            <div class="cart-summary">
+              <div class="cart-summary__row cart-summary__total">
+                <span>{{ 'general.cart.subtotal' | t }}</span>
+                <span>{{ cart.total_price | money }}</span>
+              </div>
+              <p class="text-subdued" style="font-size:.8rem;margin-bottom:1.25rem;">{{ 'general.cart.shipping_at_checkout' | t }}</p>
+
+              {%- if section.settings.show_cart_note -%}
+                <div class="field cart-note">
+                  <label class="field__label" for="CartNote">{{ 'general.cart.title' | t }} — nota</label>
+                  <textarea name="note" id="CartNote" class="field__input" rows="3">{{ cart.note }}</textarea>
+                </div>
+              {%- endif -%}
+
+              <button type="submit" name="checkout" class="button button--full">{{ 'general.cart.checkout' | t }}</button>
+            </div>
+          </div>
+        </div>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Página de carrito",
+  "settings": [
+    { "type": "checkbox", "id": "show_cart_note", "label": "Mostrar nota del pedido", "default": true }
+  ]
+}
+{% endschema %}

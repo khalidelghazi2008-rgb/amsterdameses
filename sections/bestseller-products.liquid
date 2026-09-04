@@ -1,0 +1,48 @@
+{%- comment -%}
+  "Más vendidos" — best sellers grid with a distinct badge on every card.
+  Sort the source collection by "Best selling" in Shopify admin for a true
+  best-seller order; this section just renders whatever order the collection
+  is set to.
+{%- endcomment -%}
+
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="section-header">
+      <div>
+        <h2 class="section-header__title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="section-header__subtitle">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.collection != blank -%}
+        <a href="{{ section.settings.collection.url }}" class="section-header__link">{{ 'collection.view_grid' | t }} &rarr;</a>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.collection != blank -%}
+      <div class="grid card-grid card-grid--4">
+        {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          {% render 'product-card', product: product, custom_badge: 'sections.bestsellers.badge' | t %}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="empty-state">
+        <p class="empty-state__text">Selecciona una colección (ordenada por "Más vendidos") en la configuración de esta sección.</p>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Más vendidos",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Más vendidos" },
+    { "type": "text", "id": "subheading", "label": "Subtítulo" },
+    { "type": "collection", "id": "collection", "label": "Colección (ordenar por \"Más vendidos\" en el admin)" },
+    { "type": "range", "id": "products_to_show", "label": "Número de productos", "min": 4, "max": 12, "step": 1, "default": 4 }
+  ],
+  "presets": [{ "name": "Más vendidos" }]
+}
+{% endschema %}

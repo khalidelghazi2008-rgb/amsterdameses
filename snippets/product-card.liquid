@@ -1,0 +1,104 @@
+{%- comment -%}
+  Premium product card used across collection grids, homepage sections and
+  predictive search. Shows: primary + hover image, badges, vendor, title,
+  price, optional rating, color swatches and a quick-add button.
+
+  Accepts:
+    product        {Object} required
+    show_vendor    {Boolean} default false
+    show_swatches  {Boolean} default true
+    lazy           {Boolean} default true (set false for above-the-fold cards)
+    custom_badge   {String}  optional extra badge label, e.g. "Más vendido"
+{%- endcomment -%}
+
+{%- liquid
+  assign card_variant = product.selected_or_first_available_variant
+  assign show_vendor_flag = show_vendor | default: false
+  assign show_swatches_flag = show_swatches | default: true
+  assign is_lazy = true
+  if lazy == false
+    assign is_lazy = false
+  endif
+  assign image_ratio_setting = settings.card_image_ratio | default: 'portrait'
+  assign aspect = '3/4'
+  if image_ratio_setting == 'square'
+    assign aspect = '1/1'
+  endif
+-%}
+
+<div class="product-card{% if settings.card_shadow %} product-card--shadow{% endif %}" data-animate>
+  <a href="{{ product.url }}" class="product-card__media-wrap" style="--card-aspect-ratio: {{ aspect }};">
+    {% render 'responsive-image',
+      image: product.featured_media.preview_image,
+      class: 'product-card__image product-card__image--front',
+      sizes: '(min-width: 990px) 25vw, 50vw',
+      loading: is_lazy | default: 'lazy'
+    %}
+    {%- if product.media[1] -%}
+      {% render 'responsive-image',
+        image: product.media[1].preview_image,
+        class: 'product-card__image product-card__image--back',
+        sizes: '(min-width: 990px) 25vw, 50vw'
+      %}
+    {%- endif -%}
+
+    {% render 'sale-badge', product: product, custom_badge: custom_badge %}
+
+    <div class="product-card__quick-add">
+      {%- if product.has_only_default_variant -%}
+        <button
+          type="button"
+          class="button button--secondary button--full button--small"
+          data-quick-add
+          data-quick-add-variant-id="{{ card_variant.id }}"
+          data-quick-add-url="{{ product.url }}"
+          {% unless card_variant.available %}disabled{% endunless %}
+        >
+          {%- if card_variant.available -%}{{ 'products.product.quick_add' | t }}{%- else -%}{{ 'products.product.sold_out' | t }}{%- endif -%}
+        </button>
+      {%- else -%}
+        <a href="{{ product.url }}" class="button button--secondary button--full button--small">
+          {{ 'products.product.choose_options' | t }}
+        </a>
+      {%- endif -%}
+    </div>
+  </a>
+
+  <div class="product-card__info">
+    {%- if show_vendor_flag -%}
+      <p class="product-card__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    {%- if product.metafields.reviews.rating.value -%}
+      <div class="product-card__rating">
+        {% render 'icon', name: 'star', class: 'icon icon--filled' %}
+        <span>{{ product.metafields.reviews.rating.value }} ({{ product.metafields.reviews.rating_count.value | default: 0 }})</span>
+      </div>
+    {%- endif -%}
+
+    <div class="product-card__price-row">
+      {% render 'price', product: product, show_discount: true %}
+    </div>
+
+    {%- if show_swatches_flag -%}
+      {%- assign color_option = product.options_with_values | where: 'name', 'Color' | first -%}
+      {%- unless color_option -%}
+        {%- assign color_option = product.options_with_values | where: 'name', 'Colour' | first -%}
+      {%- endunless -%}
+      {%- if color_option and color_option.values.size > 1 -%}
+        <div class="product-card__swatches">
+          {%- for value in color_option.values limit: 5 -%}
+            <span class="swatch" style="background-color: {{ value | handleize | replace: '-', '' }};" title="{{ value | escape }}"></span>
+          {%- endfor -%}
+          {%- if color_option.values.size > 5 -%}
+            <span class="swatch-more">+{{ color_option.values.size | minus: 5 }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>

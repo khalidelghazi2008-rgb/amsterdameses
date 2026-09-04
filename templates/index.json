@@ -1,494 +1,111 @@
 {
   "sections": {
-    "slideshow_principal": {
-      "type": "slideshow",
+    "hero": {
+      "type": "hero",
       "settings": {
-        "layout": "full_bleed",
-        "slide_height": "large",
-        "slider_visual": "counter",
-        "auto_rotate": true,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": false,
-        "accessibility_info": "Diapositivas de la colección"
+        "heading": "ESTILO QUE MARCA LA DIFERENCIA",
+        "subheading": "Descubre las últimas novedades de la temporada.",
+        "button_label": "Comprar ahora",
+        "button_link": "shopify://collections/all",
+        "content_position": "bottom-left",
+        "show_overlay": true,
+        "overlay_opacity": 25,
+        "show_stats": true
       },
       "blocks": {
-        "slide_zapatillas": {
-          "type": "slide",
-          "settings": {
-            "image_overlay_opacity": 40,
-            "heading": "Nueva colección de zapatillas",
-            "heading_size": "h0",
-            "subheading": "Rendimiento y estilo urbano para cada movimiento",
-            "button_label_1": "Comprar ahora",
-            "button_link_1": "shopify://collections/zapatillas",
-            "button_style_secondary_1": false,
-            "button_label_2": "Ver novedades",
-            "button_link_2": "shopify://collections/novedades",
-            "button_style_secondary_2": true,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-4"
-          }
-        },
-        "slide_ropa": {
-          "type": "slide",
-          "settings": {
-            "image_overlay_opacity": 40,
-            "heading": "Ropa deportiva y streetwear",
-            "heading_size": "h0",
-            "subheading": "Comodidad técnica pensada para entrenar y para la calle",
-            "button_label_1": "Ver colección",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": false,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-4"
-          }
-        }
+        "stat-1": { "type": "stat", "settings": { "number": "50.000+", "label": "Pedidos entregados" } },
+        "stat-2": { "type": "stat", "settings": { "number": "10 años", "label": "De experiencia" } },
+        "stat-3": { "type": "stat", "settings": { "number": "4.8/5", "label": "Valoración media" } },
+        "stat-4": { "type": "stat", "settings": { "number": "24-48h", "label": "Envío rápido" } }
       },
-      "block_order": [
-        "slide_zapatillas",
-        "slide_ropa"
-      ]
+      "block_order": ["stat-1", "stat-2", "stat-3", "stat-4"]
     },
-    "categorias_visuales": {
-      "type": "category-cards",
+    "new-arrivals": {
+      "type": "new-arrivals",
+      "settings": {
+        "heading": "Novedades",
+        "products_to_show": 8
+      }
+    },
+    "featured-collections": {
+      "type": "featured-collections",
       "settings": {
         "heading": "Compra por categoría",
-        "heading_size": "h1",
-        "columns_desktop": 5,
-        "color_scheme": "scheme-1",
-        "padding_top": 52,
-        "padding_bottom": 36
+        "columns_desktop": "4"
       },
       "blocks": {
-        "hombre": {
-          "type": "category",
-          "settings": {
-            "title": "Hombre",
-            "subtitle": "",
-            "link": "shopify://collections/hombre"
-          }
-        },
-        "mujer": {
-          "type": "category",
-          "settings": {
-            "title": "Mujer",
-            "subtitle": "",
-            "link": "shopify://collections/mujer"
-          }
-        },
-        "zapatillas": {
-          "type": "category",
-          "settings": {
-            "title": "Zapatillas",
-            "subtitle": "",
-            "link": "shopify://collections/zapatillas"
-          }
-        },
-        "novedades": {
-          "type": "category",
-          "settings": {
-            "title": "Novedades",
-            "subtitle": "",
-            "link": "shopify://collections/novedades"
-          }
-        },
-        "ofertas": {
-          "type": "category",
-          "settings": {
-            "title": "Ofertas",
-            "subtitle": "",
-            "link": "shopify://collections/ofertas"
-          }
-        }
+        "coll-1": { "type": "collection", "settings": {} },
+        "coll-2": { "type": "collection", "settings": {} },
+        "coll-3": { "type": "collection", "settings": {} },
+        "coll-4": { "type": "collection", "settings": {} }
       },
-      "block_order": [
-        "hombre",
-        "mujer",
-        "zapatillas",
-        "novedades",
-        "ofertas"
-      ]
+      "block_order": ["coll-1", "coll-2", "coll-3", "coll-4"]
     },
-    "parallax_showcase": {
-      "type": "parallax-showcase",
+    "image-text": {
+      "type": "image-text",
       "settings": {
-        "eyebrow": "Colección SS25 — Ref. AMS/SS25",
-        "heading": "Hechos para <em>la calle</em>",
-        "subheading": "<p>Varias piezas, un mismo lenguaje: negro mate, azul intenso, corte urbano. Baja para ver la colección tomar forma — cada imagen se abre a pantalla completa a tu ritmo de scroll.</p>",
-        "show_scroll_cue": true,
-        "scroll_cue_text": "Sigue bajando"
-      },
+        "layout": "left",
+        "eyebrow": "Hecho para durar",
+        "heading": "Calidad que se nota",
+        "text": "<p>Cada prenda pasa por un control de calidad exhaustivo antes de llegar a tu puerta.</p>",
+        "button_label": "Descubre la colección",
+        "button_link": "shopify://collections/all"
+      }
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "heading": "Más productos",
+        "products_to_show": 8
+      }
+    },
+    "bestseller-products": {
+      "type": "bestseller-products",
+      "settings": {
+        "heading": "Más vendidos",
+        "products_to_show": 4
+      }
+    },
+    "value-propositions": {
+      "type": "value-propositions",
+      "settings": { "heading": "Por qué comprar con nosotros" },
       "blocks": {
-        "drop_01": {
-          "type": "panel",
-          "settings": {
-            "color_a": "#0c1830",
-            "color_b": "#2b4cff",
-            "eyebrow_label": "Drop 01",
-            "eyebrow_detail": "Running",
-            "title": "Air Pulse",
-            "description": "<p>Entresuela de doble densidad y malla de punto continuo. La línea azul intenso recorre el lateral como un latido: visible de día, reflectante de noche.</p>",
-            "tag_text": "AMS-AP01 — Negro / Azul intenso",
-            "spec_1_label": "Colorway",
-            "spec_1_value": "Negro / Azul intenso",
-            "spec_2_label": "Precio",
-            "spec_2_value": "129 €",
-            "spec_3_label": "Ref.",
-            "spec_3_value": "AP01-BLK",
-            "button_label": "Ver producto",
-            "button_link": ""
-          }
-        },
-        "drop_02": {
-          "type": "panel",
-          "settings": {
-            "color_a": "#131722",
-            "color_b": "#0c1830",
-            "eyebrow_label": "Drop 02",
-            "eyebrow_detail": "Capa media",
-            "title": "Urban Track Hoodie",
-            "description": "<p>Felpa de 380 g cepillada por dentro, cordón plano y bolsillo canguro reforzado. Bordado tonal, sin ruido visual — la calidad se nota al tacto, no a gritos.</p>",
-            "tag_text": "AMS-UTH02 — Azul marino / Blanco",
-            "spec_1_label": "Colorway",
-            "spec_1_value": "Azul marino / Blanco",
-            "spec_2_label": "Precio",
-            "spec_2_value": "89 €",
-            "spec_3_label": "Ref.",
-            "spec_3_value": "UTH02-NVY",
-            "button_label": "Ver producto",
-            "button_link": ""
-          }
-        },
-        "drop_03": {
-          "type": "panel",
-          "settings": {
-            "color_a": "#0a0a0a",
-            "color_b": "#2b4cff",
-            "eyebrow_label": "Drop 03",
-            "eyebrow_detail": "Cargo",
-            "title": "Street Cargo Pant",
-            "description": "<p>Sarga de algodón con elastano, seis bolsillos y bajo ajustable con cordón oculto. Corte recto pensado para moverse — patinar, entrenar, ir de un sitio a otro.</p>",
-            "tag_text": "AMS-SCP03 — Negro / Blanco",
-            "spec_1_label": "Colorway",
-            "spec_1_value": "Negro / Blanco",
-            "spec_2_label": "Precio",
-            "spec_2_value": "99 €",
-            "spec_3_label": "Ref.",
-            "spec_3_value": "SCP03-BLK",
-            "button_label": "Ver producto",
-            "button_link": ""
-          }
-        },
-        "drop_04": {
-          "type": "panel",
-          "settings": {
-            "color_a": "#0c1830",
-            "color_b": "#2b4cff",
-            "eyebrow_label": "Drop 04",
-            "eyebrow_detail": "Night",
-            "title": "Night Runner",
-            "description": "<p>Suela de tracción multidireccional y upper con hilo reflectante 3M. Pensada para la sesión de después de cenar, cuando la ciudad se queda para los que siguen entrenando.</p>",
-            "tag_text": "AMS-NR04 — Azul intenso / Negro",
-            "spec_1_label": "Colorway",
-            "spec_1_value": "Azul intenso / Negro",
-            "spec_2_label": "Precio",
-            "spec_2_value": "139 €",
-            "spec_3_label": "Ref.",
-            "spec_3_value": "NR04-BLU",
-            "button_label": "Ver producto",
-            "button_link": ""
-          }
-        },
-        "manifiesto": {
-          "type": "statement",
-          "settings": {
-            "text": "<p>No hacemos <em>temporadas.</em> Hacemos piezas que aguantan la calle, el metro y el entrenamiento — en ese orden, el mismo día.</p>"
-          }
-        }
+        "vp-1": { "type": "item", "settings": { "icon": "shield", "title": "Calidad garantizada", "text": "Materiales seleccionados y control de calidad en cada prenda." } },
+        "vp-2": { "type": "item", "settings": { "icon": "lock", "title": "Pago seguro", "text": "Todas las transacciones están cifradas y protegidas." } },
+        "vp-3": { "type": "item", "settings": { "icon": "truck", "title": "Envío rápido", "text": "Preparamos tu pedido en menos de 24-48h." } },
+        "vp-4": { "type": "item", "settings": { "icon": "headset", "title": "Atención al cliente", "text": "Resolvemos tus dudas antes y después de la compra." } }
       },
-      "block_order": [
-        "drop_01",
-        "drop_02",
-        "drop_03",
-        "drop_04",
-        "manifiesto"
-      ]
+      "block_order": ["vp-1", "vp-2", "vp-3", "vp-4"]
     },
-    "iconos_confianza": {
-      "type": "multicolumn",
-      "settings": {
-        "title": "",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "square",
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-1",
-        "columns_desktop": 3,
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 36,
-        "padding_bottom": 36
-      },
+    "faq": {
+      "type": "faq",
+      "settings": { "heading": "Preguntas frecuentes" },
       "blocks": {
-        "envio": {
-          "type": "column",
-          "settings": {
-            "title": "Envío rápido",
-            "text": "<p>Envío gratis en pedidos superiores a 50€. Recíbelo en 24/48h.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "pago": {
-          "type": "column",
-          "settings": {
-            "title": "Pago 100% seguro",
-            "text": "<p>Paga con tarjeta, PayPal o Bizum de forma segura y cifrada.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "devoluciones": {
-          "type": "column",
-          "settings": {
-            "title": "Devoluciones fáciles",
-            "text": "<p>30 días para cambios y devoluciones sin complicaciones.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
+        "q-1": { "type": "question", "settings": { "question": "¿Cuánto tarda el pedido?", "answer": "<p>Los pedidos se preparan en 24-48h y la entrega estimada es de 2 a 5 días laborables.</p>" } },
+        "q-2": { "type": "question", "settings": { "question": "¿Cómo funciona el envío?", "answer": "<p>Enviamos a todo el país. El envío es gratuito a partir del importe mínimo configurado en el carrito.</p>" } },
+        "q-3": { "type": "question", "settings": { "question": "¿Qué métodos de pago existen?", "answer": "<p>Aceptamos tarjeta de crédito/débito y los métodos de pago disponibles en tu checkout.</p>" } },
+        "q-4": { "type": "question", "settings": { "question": "¿Puedo devolver un producto?", "answer": "<p>Sí, dispones de 30 días desde la entrega para solicitar una devolución.</p>" } },
+        "q-5": { "type": "question", "settings": { "question": "¿Cómo contacto con vosotros?", "answer": "<p>Puedes escribirnos desde nuestra página de contacto y te responderemos lo antes posible.</p>" } }
       },
-      "block_order": [
-        "envio",
-        "pago",
-        "devoluciones"
-      ]
-    },
-    "carrusel_zapatillas": {
-      "type": "collection-list",
-      "settings": {
-        "title": "Compra por categoría de zapatillas",
-        "heading_size": "h2",
-        "image_ratio": "square",
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "show_view_all": true,
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
-      },
-      "blocks": {
-        "coleccion_1": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "coleccion_2": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "coleccion_3": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "coleccion_4": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "coleccion_1",
-        "coleccion_2",
-        "coleccion_3",
-        "coleccion_4"
-      ]
-    },
-    "productos_destacados": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Productos destacados",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
-      }
-    },
-    "novedades_productos": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Novedades",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": true,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "mas_vendidos": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Más vendidos",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": true,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "ofertas_productos": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Ofertas",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-4",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": true,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 52
-      }
-    },
-    "vistos_recientemente": {
-      "type": "recently-viewed",
-      "settings": {
-        "heading": "Vistos recientemente",
-        "heading_size": "h2",
-        "max_products": 4,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
+      "block_order": ["q-1", "q-2", "q-3", "q-4", "q-5"]
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 52,
-        "padding_bottom": 52
-      },
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Únete al club",
-            "heading_size": "h1"
-          }
-        },
-        "paragraph": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Suscríbete y entérate antes que nadie de los nuevos lanzamientos y ofertas exclusivas.</p>"
-          }
-        },
-        "email_form": {
-          "type": "email_form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "heading",
-        "paragraph",
-        "email_form"
-      ]
+        "heading": "Únete al club",
+        "text": "Suscríbete y consigue un 10% de descuento en tu primer pedido."
+      }
     }
   },
   "order": [
-    "slideshow_principal",
-    "categorias_visuales",
-    "parallax_showcase",
-    "iconos_confianza",
-    "carrusel_zapatillas",
-    "productos_destacados",
-    "novedades_productos",
-    "mas_vendidos",
-    "ofertas_productos",
-    "vistos_recientemente",
+    "hero",
+    "new-arrivals",
+    "featured-collections",
+    "image-text",
+    "featured-products",
+    "bestseller-products",
+    "value-propositions",
+    "faq",
     "newsletter"
   ]
 }

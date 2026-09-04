@@ -1,0 +1,54 @@
+{%- comment -%}
+  Customer account overview: order history + account details link + log out.
+{%- endcomment -%}
+
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="collection-toolbar" style="padding-top:0;">
+      <h1 class="collection-header__title">{{ 'customer.account.title' | t }}</h1>
+      <a href="{{ routes.account_logout_url }}" class="link-underline">{{ 'customer.account.log_out' | t }}</a>
+    </div>
+
+    {%- if customer.orders.size == 0 -%}
+      <div class="empty-state">
+        <p class="empty-state__title">{{ 'customer.account.no_orders' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="button">{{ 'general.continue_shopping' | t }}</a>
+      </div>
+    {%- else -%}
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:.75rem 0;border-bottom:1px solid var(--color-border);">{{ 'customer.account.order' | t }}</th>
+              <th style="text-align:left;padding:.75rem 0;border-bottom:1px solid var(--color-border);">{{ 'customer.account.date' | t }}</th>
+              <th style="text-align:left;padding:.75rem 0;border-bottom:1px solid var(--color-border);">{{ 'customer.account.payment_status' | t }}</th>
+              <th style="text-align:left;padding:.75rem 0;border-bottom:1px solid var(--color-border);">{{ 'customer.account.fulfillment_status' | t }}</th>
+              <th style="text-align:right;padding:.75rem 0;border-bottom:1px solid var(--color-border);">{{ 'customer.account.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for order in customer.orders -%}
+              <tr>
+                <td style="padding:.9rem 0;border-bottom:1px solid var(--color-border);"><a href="{{ order.customer_url }}" class="link-underline">{{ order.name }}</a></td>
+                <td style="padding:.9rem 0;border-bottom:1px solid var(--color-border);">{{ order.created_at | date: '%d/%m/%Y' }}</td>
+                <td style="padding:.9rem 0;border-bottom:1px solid var(--color-border);">{{ order.financial_status_label }}</td>
+                <td style="padding:.9rem 0;border-bottom:1px solid var(--color-border);">{{ order.fulfillment_status_label }}</td>
+                <td style="padding:.9rem 0;border-bottom:1px solid var(--color-border);text-align:right;">{{ order.total_price | money }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    {%- endif -%}
+
+    <div style="margin-top:2rem;">
+      <a href="{{ routes.account_addresses_url }}" class="link-underline">{{ 'customer.account.view_addresses' | t }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Mi cuenta"
+}
+{% endschema %}

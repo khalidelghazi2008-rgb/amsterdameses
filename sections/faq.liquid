@@ -1,0 +1,58 @@
+{%- comment -%}
+  FAQ accordion. Every question/answer pair is an editable block — no
+  hardcoded copy — built with native <details>/<summary> so it works
+  without JavaScript and stays accessible.
+{%- endcomment -%}
+
+<section class="section section--tight" {{ section.shopify_attributes }}>
+  <div class="page-width" style="max-width: 760px;">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="section-header__title visually-center" style="margin-bottom:2rem;">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    <div class="faq-list">
+      {%- for block in section.blocks -%}
+        <details class="accordion-item" {{ block.shopify_attributes }}>
+          <summary class="accordion-item__trigger">
+            <span>{{ block.settings.question }}</span>
+            <span class="accordion-item__icon">{% render 'icon', name: 'plus' %}</span>
+          </summary>
+          <div class="accordion-item__panel rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Preguntas frecuentes",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Preguntas frecuentes" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pregunta", "default": "¿Cuánto tarda el pedido?" },
+        { "type": "richtext", "id": "answer", "label": "Respuesta", "default": "<p>Los pedidos se preparan en 24-48h y la entrega estimada es de 2 a 5 días laborables.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Preguntas frecuentes",
+      "blocks": [
+        { "type": "question", "settings": { "question": "¿Cuánto tarda el pedido?", "answer": "<p>Los pedidos se preparan en 24-48h y la entrega estimada es de 2 a 5 días laborables.</p>" } },
+        { "type": "question", "settings": { "question": "¿Cómo funciona el envío?", "answer": "<p>Enviamos a todo el país. El envío es gratuito a partir del importe mínimo configurado en el carrito.</p>" } },
+        { "type": "question", "settings": { "question": "¿Qué métodos de pago existen?", "answer": "<p>Aceptamos tarjeta de crédito/débito y los métodos de pago disponibles en tu checkout.</p>" } },
+        { "type": "question", "settings": { "question": "¿Puedo devolver un producto?", "answer": "<p>Sí, dispones de 30 días desde la entrega para solicitar una devolución.</p>" } },
+        { "type": "question", "settings": { "question": "¿Cómo contacto con vosotros?", "answer": "<p>Puedes escribirnos desde nuestra página de contacto y te responderemos lo antes posible.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
