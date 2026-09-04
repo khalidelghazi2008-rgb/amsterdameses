@@ -344,7 +344,35 @@
   }
 </style>
 
-<a class="skip-to-content-link button visually-hidden" href="#MainContent">
+<div id="stories-bar" style="background:#0d0d0d; padding:16px 10px; display:flex; gap:18px; overflow-x:auto; -webkit-overflow-scrolling:touch; border-bottom:1px solid #1a1a1a;">
+
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(45deg,#0057D9,#3B82F6); display:flex; align-items:center; justify-content:center;">
+      <span style="color:#ffffff; font-size:22px;">+</span>
+    </div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 1</span>
+  </a>
+
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(45deg,#0057D9,#3B82F6); display:flex; align-items:center; justify-content:center;">
+      <span style="color:#ffffff; font-size:22px;">+</span>
+    </div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 2</span>
+  </a>
+
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(45deg,#0057D9,#3B82F6); display:flex; align-items:center; justify-content:center;">
+      <span style="color:#ffffff; font-size:22px;">+</span>
+    </div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 3</span>
+  </a>
+
+</div>
+
+<style>
+  #stories-bar::-webkit-scrollbar { display: none; }
+  #stories-bar { scrollbar-width: none; }
+</style><a class="skip-to-content-link button visually-hidden" href="#MainContent">
   {{ 'accessibility.skip_to_text' | t }}
     </a>
 
