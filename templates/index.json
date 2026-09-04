@@ -28,7 +28,7 @@
             "button_link_2": "shopify://collections/novedades",
             "button_style_secondary_2": true,
             "show_text_box": true,
-            "box_align": "middle-center",
+            "box_align": "bottom-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
             "color_scheme": "scheme-4"
@@ -42,8 +42,8 @@
             "heading": "",
             "heading_size": "h0",
             "subheading": "",
-            "button_label_1": "Ver colección",
-            "button_link_1": "shopify://collections/all",
+            "button_label_1": "zapatillas",
+            "button_link_1": "shopify://collections/techo",
             "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "",
@@ -74,6 +74,14 @@
     "categorias_visuales": {
       "type": "category-cards",
       "blocks": {
+        "category_jtgKrV": {
+          "type": "category",
+          "settings": {
+            "title": "Categoría",
+            "subtitle": "",
+            "link": ""
+          }
+        },
         "hombre": {
           "type": "category",
           "settings": {
@@ -116,6 +124,7 @@
         }
       },
       "block_order": [
+        "category_jtgKrV",
         "hombre",
         "mujer",
         "zapatillas",

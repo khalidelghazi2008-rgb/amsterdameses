@@ -148,7 +148,7 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#ffffff",
+          "background": "#FFFFFF",
           "background_gradient": "",
           "text": "#0a0a0a",
           "button": "#0a0a0a",
@@ -159,7 +159,7 @@
       },
       "scheme-2": {
         "settings": {
-          "background": "#f2f2f2",
+          "background": "#E50808",
           "background_gradient": "",
           "text": "#0a0a0a",
           "button": "#0a0a0a",
@@ -188,6 +188,17 @@
           "button_label": "#2b4cff",
           "secondary_button_label": "#ffffff",
           "shadow": "#14224e"
+        }
+      },
+      "scheme-838a1abc-3eb8-42be-bb0b-ab79c6515e44": {
+        "settings": {
+          "background": "rgba(0,0,0,0)",
+          "background_gradient": "",
+          "text": "#0a0a0a",
+          "button": "#0a0a0a",
+          "button_label": "#ffffff",
+          "secondary_button_label": "#0a0a0a",
+          "shadow": "#0a0a0a"
         }
       }
     }
@@ -390,22 +401,22 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ":root{--b:#0057D9;--bl:#3B82F6}",
-      "body{background:#0d0d0d!important;color:#fff!important}",
-      "header,.header{background:#0d0d0d!important;border-bottom:2px solid var(--b)!important}",
-      ".header a,nav a{color:#fff!important;text-transform:uppercase;font-weight:700}",
-      ".header a:hover,nav a:hover{color:var(--bl)!important}",
-      "h1,h2,h3,.product__title,.card__heading{color:#fff!important;text-transform:uppercase;font-weight:800!important}",
-      ".price,.price-item{color:var(--bl)!important;font-weight:700!important}",
-      ".card,.product-card{background:#1a1a1a!important;border:1px solid #2a2a2a!important;border-radius:0!important}",
-      ".card:hover{border-color:var(--b)!important}",
-      ".button,.btn,.product-form__submit{background:var(--b)!important;color:#fff!important;border:2px solid var(--b)!important;border-radius:0!important;text-transform:uppercase;font-weight:700}",
-      ".button:hover,.btn:hover{background:transparent!important;color:var(--bl)!important}",
-      "footer{background:#000!important;color:#a3a3a3!important;border-top:2px solid var(--b)!important}",
-      "footer a{color:#fff!important}",
-      "input,select,textarea{background:#1a1a1a!important;color:#fff!important;border:1px solid #2a2a2a!important;border-radius:0!important}",
-      "input:focus{border-color:var(--b)!important}",
-      ".badge{background:var(--b)!important;color:#fff!important;border-radius:0!important;text-transform:uppercase;font-weight:700}"
+      ":root {--b: #0057d9; --bl: #3b82f6;}",
+      "body {background: #0d0d0d !important; color: #fff !important;}",
+      "header,.header {background: #0d0d0d !important; border-bottom: 2px solid var(--b) !important;}",
+      ".header a,nav a {color: #fff !important; text-transform: uppercase; font-weight: 700;}",
+      ".header a:hover,nav a:hover {color: var(--bl) !important;}",
+      "h1,h2,h3,.product__title,.card__heading {color: #fff !important; text-transform: uppercase; font-weight: 800 !important;}",
+      ".price,.price-item {color: var(--bl) !important; font-weight: 700 !important;}",
+      ".card,.product-card {background: #1a1a1a !important; border: 1px solid #2a2a2a !important; border-radius: 0 !important;}",
+      ".card:hover {border-color: var(--b) !important;}",
+      ".button,.btn,.product-form__submit {background: var(--b) !important; color: #fff !important; border: 2px solid var(--b) !important; border-radius: 0 !important; text-transform: uppercase; font-weight: 700;}",
+      ".button:hover,.btn:hover {background: transparent !important; color: var(--bl) !important;}",
+      "footer {background: #000 !important; color: #a3a3a3 !important; border-top: 2px solid var(--b) !important;}",
+      "footer a {color: #fff !important;}",
+      "input,select,textarea {background: #1a1a1a !important; color: #fff !important; border: 1px solid #2a2a2a !important; border-radius: 0 !important;}",
+      "input:focus {border-color: var(--b) !important;}",
+      ".badge {background: var(--b) !important; color: #fff !important; border-radius: 0 !important; text-transform: uppercase; font-weight: 700;}"
     ]
   }
 }
