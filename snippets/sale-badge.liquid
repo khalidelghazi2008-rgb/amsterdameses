@@ -1,0 +1,32 @@
+{%- comment -%}
+  Renders SALE / NEW / SOLD OUT badges for a product.
+  Accepts:
+    product      {Object}
+    variant      {Object} optional - specific variant to evaluate
+    new_days     {Number} optional - days after publish considered "new" (default 21)
+    custom_badge {String} optional - extra label rendered above the others, e.g. "Más vendido"
+{%- endcomment -%}
+
+{%- liquid
+  assign target = variant | default: product.selected_or_first_available_variant
+  assign days_threshold = new_days | default: 21
+-%}
+
+<div class="product-card__badges">
+  {%- if custom_badge != blank -%}
+    <span class="badge badge--bestseller">{{ custom_badge }}</span>
+  {%- endif -%}
+  {%- unless target.available -%}
+    <span class="badge badge--sold-out">{{ 'products.product.sold_out' | t }}</span>
+  {%- else -%}
+    {%- if target.compare_at_price > target.price -%}
+      <span class="badge badge--sale">{{ 'products.product.on_sale' | t }}</span>
+    {%- endif -%}
+    {%- assign now_ts = 'now' | date: '%s' | plus: 0 -%}
+    {%- assign created_ts = product.created_at | date: '%s' | plus: 0 -%}
+    {%- assign seconds_threshold = days_threshold | times: 86400 -%}
+    {%- if now_ts | minus: created_ts < seconds_threshold -%}
+      <span class="badge badge--new">{{ 'products.product.new' | t }}</span>
+    {%- endif -%}
+  {%- endunless -%}
+</div>

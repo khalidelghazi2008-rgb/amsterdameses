@@ -1,0 +1,70 @@
+{%- comment -%}
+  Customer login page. Handles the sign-in form and, on the same URL, the
+  "recover password" form Shopify swaps in when a recover request fails
+  (both use the customer login_url form conventions).
+{%- endcomment -%}
+
+<section class="section" {{ section.shopify_attributes }}>
+  <div class="page-width" style="max-width:440px;">
+    <h1 class="collection-header__title" style="margin-bottom:2rem;">{{ 'customer.login_page.title' | t }}</h1>
+
+    {%- if form.errors -%}
+      <div class="field__error" role="alert" style="margin-bottom:1rem;color:var(--color-sale);">
+        {{ form.errors | default_errors }}
+      </div>
+    {%- endif -%}
+
+    <div id="recover-password" style="display:none;">
+      <p class="text-subdued" style="margin-bottom:1rem;">{{ 'customer.recover_password.subtext' | t }}</p>
+      {%- form 'recover_customer_password' -%}
+        {%- if form.posted_successfully? -%}
+          <p style="color: var(--color-success); margin-bottom:1rem;">{{ 'customer.recover_password.success' | t }}</p>
+        {%- endif -%}
+        <div class="field">
+          <label class="field__label" for="RecoverEmail">{{ 'customer.login_page.email' | t }}</label>
+          <input type="email" class="field__input" id="RecoverEmail" name="email" autocomplete="email" required>
+        </div>
+        <button type="submit" class="button button--full">{{ 'customer.recover_password.submit' | t }}</button>
+        <button type="button" class="button button--secondary button--full" style="margin-top:.6rem;" onclick="document.getElementById('recover-password').style.display='none';document.getElementById('login-form').style.display='block';">
+          {{ 'customer.login_page.cancel' | t }}
+        </button>
+      {%- endform -%}
+    </div>
+
+    <div id="login-form">
+      {%- form 'customer_login' -%}
+        <div class="field">
+          <label class="field__label" for="CustomerEmail">{{ 'customer.login_page.email' | t }}</label>
+          <input type="email" class="field__input" id="CustomerEmail" name="customer[email]" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label class="field__label" for="CustomerPassword">{{ 'customer.login_page.password' | t }}</label>
+          <input type="password" class="field__input" id="CustomerPassword" name="customer[password]" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="button button--full">{{ 'customer.login_page.sign_in' | t }}</button>
+        <p style="margin-top:1rem;font-size:.85rem;">
+          <a href="#recover" class="link-underline" onclick="document.getElementById('recover-password').style.display='block';document.getElementById('login-form').style.display='none';return false;">
+            {{ 'customer.login_page.forgot_password' | t }}
+          </a>
+        </p>
+        {%- if shop.checkout.guest_login -%}
+          <button type="submit" name="checkout" class="button button--secondary button--full" style="margin-top:.75rem;">
+            {{ 'customer.login_page.guest_continue' | t }}
+          </button>
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if shop.customer_accounts_optional -%}
+        <p style="margin-top:1.5rem;font-size:.85rem;">
+          <a href="{{ routes.account_register_url }}" class="link-underline">{{ 'customer.login_page.create_account' | t }}</a>
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Iniciar sesión"
+}
+{% endschema %}

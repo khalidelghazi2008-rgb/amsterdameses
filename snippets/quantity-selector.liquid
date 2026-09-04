@@ -1,0 +1,43 @@
+{%- comment -%}
+  Accessible quantity stepper.
+  Accepts:
+    id       {String} unique id suffix (required)
+    quantity {Number} initial value (default 1)
+    min      {Number} (default 1)
+    line     {Number} cart line index (only used inside cart, optional)
+{%- endcomment -%}
+
+{%- liquid
+  assign qty = quantity | default: 1
+  assign qty_min = min | default: 1
+-%}
+
+<div class="quantity-selector">
+  <button
+    type="button"
+    class="quantity-selector__btn"
+    data-action="decrease"
+    aria-label="{{ 'accessibility.decrease_quantity' | t }}"
+  >
+    {% render 'icon', name: 'minus' %}
+  </button>
+  <label class="visually-hidden" for="Quantity-{{ id }}">{{ 'products.product.quantity' | t }}</label>
+  <input
+    type="number"
+    id="Quantity-{{ id }}"
+    class="quantity-selector__input"
+    name="quantity"
+    value="{{ qty }}"
+    min="{{ qty_min }}"
+    inputmode="numeric"
+    {% if line %}data-cart-qty-input data-line="{{ line }}"{% endif %}
+  >
+  <button
+    type="button"
+    class="quantity-selector__btn"
+    data-action="increase"
+    aria-label="{{ 'accessibility.increase_quantity' | t }}"
+  >
+    {% render 'icon', name: 'plus' %}
+  </button>
+</div>

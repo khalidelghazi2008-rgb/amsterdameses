@@ -1,0 +1,61 @@
+{%- comment -%}
+  Renders variant option pickers (pills for size, swatches for color) plus
+  the embedded product JSON that assets/theme.js reads to keep price,
+  availability, image and URL in sync without a page reload.
+
+  Accepts:
+    product {Object} required
+{%- endcomment -%}
+
+{%- if product.has_only_default_variant == false -%}
+  <div class="variant-picker" data-variant-picker data-product-id="{{ product.id }}" data-update-url="true">
+    {%- for option in product.options_with_values -%}
+      <div class="variant-picker__group" data-option-index="{{ forloop.index0 }}">
+        <div class="variant-picker__label">
+          <span>{{ option.name }}</span>
+          <span class="variant-picker__value">{{ option.selected_value }}</span>
+        </div>
+        <div class="variant-picker__options">
+          {%- assign option_name_down = option.name | downcase -%}
+          {%- for value in option.values -%}
+            {%- assign input_id = 'Option-' | append: product.id | append: '-' | append: forloop.parentloop.index0 | append: '-' | append: forloop.index0 -%}
+            <input
+              type="radio"
+              class="variant-picker__pill-input"
+              id="{{ input_id }}"
+              name="option-{{ forloop.parentloop.index0 }}"
+              value="{{ value | escape }}"
+              {% if option.selected_value == value %}checked{% endif %}
+            >
+            <label
+              for="{{ input_id }}"
+              class="variant-picker__pill{% if option_name_down contains 'color' or option_name_down contains 'colour' %} variant-picker__swatch{% endif %}"
+              {% if option_name_down contains 'color' or option_name_down contains 'colour' %}style="background-color: {{ value | handleize | replace: '-', '' }};" title="{{ value | escape }}"{% endif %}
+            >
+              {%- unless option_name_down contains 'color' or option_name_down contains 'colour' -%}
+                {{ value }}
+              {%- else -%}
+                <span class="visually-hidden">{{ value }}</span>
+              {%- endunless -%}
+            </label>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+{%- comment -%}
+  Products with only the default variant have nothing to pick, so no
+  [data-variant-picker] element is rendered and theme.js never instantiates
+  a VariantPicker for them — the hidden "id" input in product-form.liquid
+  already points at the single variant.
+{%- endcomment -%}
+
+{%- comment -%}
+  Embedded product data consumed by the VariantPicker class in theme.js.
+  variant.options is Shopify's native flat array of selected option values,
+  which is exactly what getVariant() matches against.
+{%- endcomment -%}
+<script type="application/json" id="ProductJSON-{{ product.id }}">
+  { "id": {{ product.id | json }}, "variants": {{ product.variants | json }} }
+</script>

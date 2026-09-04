@@ -1,0 +1,109 @@
+{%- comment -%}
+  Collection page: header, toolbar (count / sort / filters trigger), native
+  Shopify filters sidebar (collection.filters — populated once Search &
+  Discovery filtering is enabled), responsive product grid (4/3/2 cols) and
+  pagination. Renders a real empty state when filters return nothing.
+{%- endcomment -%}
+
+<section {{ section.shopify_attributes }}>
+  <div class="page-width">
+    <div class="collection-header">
+      {% render 'breadcrumbs' %}
+      <h1 class="collection-header__title">{{ collection.title }}</h1>
+      {%- if collection.description != blank -%}
+        <div class="collection-header__description rte">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- paginate collection.products by section.settings.products_per_page -%}
+      <div class="collection-toolbar">
+        <p class="collection-toolbar__count">
+          {{ 'collection.products_count.other' | t: count: collection.products_count }}
+        </p>
+        <div class="collection-toolbar__controls">
+          <button type="button" class="button button--secondary button--small filters-mobile-trigger" data-drawer-open="FiltersDrawer">
+            {% render 'icon', name: 'search' %}
+            {{ 'collection.filters.filter_and_sort' | t }}
+          </button>
+
+          <form id="SortForm" method="get">
+            <div class="select">
+              <label class="visually-hidden" for="SortBy">{{ 'collection.sort.title' | t }}</label>
+              <select name="sort_by" id="SortBy" onchange="this.form.submit()">
+                {%- for option in collection.sort_options -%}
+                  <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name }}</option>
+                {%- endfor -%}
+              </select>
+              {% render 'icon', name: 'chevron-down', class: 'select__icon' %}
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="collection-layout">
+        <aside class="filters" id="FiltersSidebar">
+          {%- render 'facets', results: collection -%}
+        </aside>
+
+        <div>
+          {%- if collection.products.size == 0 -%}
+            <div class="empty-state">
+              {% render 'icon', name: 'search', class: 'empty-state__icon' %}
+              <p class="empty-state__title">{{ 'collection.filters.no_matches' | t }}</p>
+              <p class="empty-state__text">{{ 'collection.filters.no_matches_helper' | t }}</p>
+              <a href="{{ collection.url }}" class="button button--secondary">{{ 'collection.filters.clear_all' | t }}</a>
+            </div>
+          {%- else -%}
+            <div class="grid card-grid card-grid--4" id="ProductGrid">
+              {%- for product in collection.products -%}
+                {% render 'product-card', product: product, lazy: forloop.index > 8 %}
+              {%- endfor -%}
+            </div>
+
+            {%- if paginate.pages > 1 -%}
+              <nav class="pagination" aria-label="{{ 'general.pagination.current_page' | t: current: paginate.current_page, total: paginate.pages }}">
+                {%- if paginate.previous -%}
+                  <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">{% render 'icon', name: 'chevron-right', class: 'icon' %}</a>
+                {%- endif -%}
+                {%- for part in paginate.parts -%}
+                  {%- if part.is_link -%}
+                    <a href="{{ part.url }}">{{ part.title }}</a>
+                  {%- else -%}
+                    <span {% if part.title == paginate.current_page %}aria-current="page"{% endif %}>{{ part.title }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
+                {%- if paginate.next -%}
+                  <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">{% render 'icon', name: 'chevron-right', class: 'icon' %}</a>
+                {%- endif -%}
+              </nav>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{%- comment -%} Mobile filters drawer reuses the same facets markup {%- endcomment -%}
+<div id="FiltersDrawer" class="drawer drawer--right" role="dialog" aria-modal="true" aria-hidden="true" aria-label="{{ 'collection.filters.title' | t }}" hidden>
+  <div class="drawer__header">
+    <h2 class="drawer__title">{{ 'collection.filters.filter_and_sort' | t }}</h2>
+    <button type="button" class="drawer__close" data-drawer-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+  </div>
+  <div class="drawer__body">
+    {%- render 'facets', results: collection -%}
+  </div>
+  <div class="drawer__footer">
+    <button type="button" class="button button--full" data-drawer-close>{{ 'collection.filters.apply' | t }}</button>
+  </div>
+</div>
+<div class="drawer-overlay" data-drawer-overlay="FiltersDrawer"></div>
+
+{% schema %}
+{
+  "name": "Página de colección",
+  "settings": [
+    { "type": "range", "id": "products_per_page", "label": "Productos por página", "min": 8, "max": 48, "step": 4, "default": 24 }
+  ]
+}
+{% endschema %}
