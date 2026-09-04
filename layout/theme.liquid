@@ -347,27 +347,98 @@
 <div id="stories-bar" style="background:#0d0d0d; padding:16px 10px; display:flex; gap:18px; overflow-x:auto; -webkit-overflow-scrolling:touch; border-bottom:1px solid #1a1a1a;">
 
   <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
-    <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(45deg,#0057D9,#3B82F6); display:flex; align-items:center; justify-content:center;">
-      <span style="color:#ffffff; font-size:22px;">+</span>
-    </div>
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
     <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 1</span>
   </a>
 
   <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
-    <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(45deg,#0057D9,#3B82F6); display:flex; align-items:center; justify-content:center;">
-      <span style="color:#ffffff; font-size:22px;">+</span>
-    </div>
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
     <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 2</span>
   </a>
 
   <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
-    <div style="width:64px; height:64px; border-radius:50%; background:linear-gradient(45deg,#0057D9,#3B82F6); display:flex; align-items:center; justify-content:center;">
-      <span style="color:#ffffff; font-size:22px;">+</span>
-    </div>
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
     <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 3</span>
   </a>
 
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 4</span>
+  </a>
+
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 5</span>
+  </a>
+
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 6</span>
+  </a>
+
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 7</span>
+  </a>
+
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 8</span>
+  </a>
+
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 9</span>
+  </a>
+
+  <a href="#" style="display:flex; flex-direction:column; align-items:center; text-decoration:none; flex-shrink:0; width:70px;">
+    <div class="story-ring"><div class="story-avatar"><span style="color:#ffffff; font-size:22px;">+</span></div></div>
+    <span style="color:#ffffff; font-size:11px; font-weight:600; text-transform:uppercase; margin-top:6px; text-align:center;">Producto 10</span>
+  </a>
+
 </div>
+
+<style>
+  #stories-bar::-webkit-scrollbar { display: none; }
+  #stories-bar { scrollbar-width: none; }
+
+  .story-ring {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .story-ring::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #0057D9, #66B2FF, #0057D9, #001f4d, #0057D9);
+    animation: story-spin 2.5s linear infinite;
+    box-shadow: 0 0 12px 2px rgba(0, 87, 217, 0.8);
+  }
+
+  .story-avatar {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #0d0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  }
+
+  @keyframes story-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
 
 <style>
   #stories-bar::-webkit-scrollbar { display: none; }
