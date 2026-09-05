@@ -1,9 +1,7 @@
 {% comment %}
-  Categorías visuales: movimiento continuo, se detiene al tocar y permite
-  deslizar manualmente hacia delante/atrás con el dedo mientras está parado.
+  Categorias visuales: movimiento continuo, arrastrable, estilos propios
+  (sin heredar el hover del tema que oscurece el texto y desplaza la tarjeta).
 {% endcomment %}
-
-{{ 'section-category-cards.css' | asset_url | stylesheet_tag }}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <div
@@ -21,48 +19,43 @@
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
-      <div class="category-carousel" id="category-carousel-{{ section.id }}">
-       <script>console.log('carousel cargado');</script>
-        <div class="category-carousel__track" id="category-carousel-track-{{ section.id }}">
+      <div class="cv-carousel" id="cv-carousel-{{ section.id }}">
+        <div class="cv-carousel__track" id="cv-carousel-track-{{ section.id }}">
           {%- for block in section.blocks -%}
-            <div class="category-carousel__item" {{ block.shopify_attributes }}>
-              
+            <div class="cv-carousel__item" {{ block.shopify_attributes }}>
+              <a
                 href="{{ block.settings.link | default: '#' }}"
-                class="category-cards__link{% if block.settings.link == blank %} category-cards__link--disabled{% endif %}"
-                {% if block.settings.link == blank %}
-                  role="link" aria-disabled="true" tabindex="-1"
-                {% endif %}
+                class="cv-card"
+                {% if block.settings.link == blank %}role="link" aria-disabled="true" tabindex="-1"{% endif %}
                 draggable="false"
               >
-                <span class="category-cards__media">
+                <span class="cv-card__media">
                   {%- if block.settings.image != blank -%}
-                    {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '90vw', widths: '600, 900, 1200, 1600', class: 'category-cards__image', draggable: false }}
+                    {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '90vw', widths: '600, 900, 1200, 1600', class: 'cv-card__image', draggable: false }}
                   {%- else -%}
-                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg category-cards__image' }}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg cv-card__image' }}
                   {%- endif -%}
                 </span>
-                <span class="category-cards__caption">
-                  {%- if block.settings.title != blank -%}<span class="category-cards__title">{{ block.settings.title | escape }}</span>{%- endif -%}
-                  {%- if block.settings.subtitle != blank -%}<span class="category-cards__subtitle">{{ block.settings.subtitle | escape }}</span>{%- endif -%}
-                  <span class="category-cards__cta link animate-arrow">{{ 'amstershop.category_cards.shop_now' | t }}{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                <span class="cv-card__caption">
+                  {%- if block.settings.title != blank -%}<span class="cv-card__title">{{ block.settings.title | escape }}</span>{%- endif -%}
+                  {%- if block.settings.subtitle != blank -%}<span class="cv-card__subtitle">{{ block.settings.subtitle | escape }}</span>{%- endif -%}
                 </span>
               </a>
             </div>
           {%- endfor -%}
           {%- for block in section.blocks -%}
-            <div class="category-carousel__item" aria-hidden="true">
-              <a href="{{ block.settings.link | default: '#' }}" class="category-cards__link{% if block.settings.link == blank %} category-cards__link--disabled{% endif %}" tabindex="-1" draggable="false">
-                <span class="category-cards__media">
+            <div class="cv-carousel__item" aria-hidden="true">
+              <a href="{{ block.settings.link | default: '#' }}" class="cv-card" tabindex="-1" draggable="false">
+                <span class="cv-card__media">
                   {%- if block.settings.image != blank -%}
-                    {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '90vw', widths: '600, 900, 1200, 1600', class: 'category-cards__image', draggable: false }}
+                    {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '90vw', widths: '600, 900, 1200, 1600', class: 'cv-card__image', draggable: false }}
                   {%- else -%}
-                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg category-cards__image' }}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg cv-card__image' }}
                   {%- endif -%}
                 </span>
-                <span class="category-cards__caption">
-                  {%- if block.settings.title != blank -%}<span class="category-cards__title">{{ block.settings.title | escape }}</span>{%- endif -%}
-                  {%- if block.settings.subtitle != blank -%}<span class="category-cards__subtitle">{{ block.settings.subtitle | escape }}</span>{%- endif -%}
-                  <span class="category-cards__cta link animate-arrow">{{ 'amstershop.category_cards.shop_now' | t }}{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                <span class="cv-card__caption">
+                  {%- if block.settings.title != blank -%}<span class="cv-card__title">{{ block.settings.title | escape }}</span>{%- endif -%}
+                  {%- if block.settings.subtitle != blank -%}<span class="cv-card__subtitle">{{ block.settings.subtitle | escape }}</span>{%- endif -%}
                 </span>
               </a>
             </div>
@@ -86,19 +79,19 @@
     }
   }
 
-  #category-carousel-{{ section.id }} {
+  #cv-carousel-{{ section.id }} {
     overflow: hidden;
     width: 100%;
     cursor: grab;
   }
 
-  #category-carousel-{{ section.id }} .category-carousel__track {
+  #cv-carousel-{{ section.id }} .cv-carousel__track {
     display: flex;
     width: max-content;
     will-change: transform;
   }
 
-  #category-carousel-{{ section.id }} .category-carousel__item {
+  #cv-carousel-{{ section.id }} .cv-carousel__item {
     flex: 0 0 auto;
     width: 58vw;
     margin-right: 16px;
@@ -106,33 +99,84 @@
   }
 
   @media screen and (min-width: 750px) {
-    #category-carousel-{{ section.id }} .category-carousel__item {
+    #cv-carousel-{{ section.id }} .cv-carousel__item {
       width: 34vw;
     }
   }
 
   @media screen and (min-width: 990px) {
-    #category-carousel-{{ section.id }} .category-carousel__item {
+    #cv-carousel-{{ section.id }} .cv-carousel__item {
       width: 22vw;
     }
   }
 
-  #category-carousel-{{ section.id }} .category-cards__media {
-    aspect-ratio: 3 / 4;
+  .cv-card {
+    display: block;
+    text-decoration: none;
+    position: relative;
     border-radius: 16px;
     overflow: hidden;
+    transform: none !important;
+    transition: none !important;
   }
 
-  #category-carousel-{{ section.id }} .category-cards__image {
+  .cv-card__media {
+    display: block;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .cv-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
     border-radius: 16px;
     pointer-events: none;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .cv-card__caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 18px;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cv-card__title {
+    color: #ffffff !important;
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .cv-card__subtitle {
+    color: #ffffff !important;
+    font-size: 13px;
+    opacity: 0.85;
+  }
+
+  .cv-card:hover .cv-card__title,
+  .cv-card:focus .cv-card__title,
+  .cv-card:active .cv-card__title,
+  .cv-card:hover .cv-card__subtitle,
+  .cv-card:focus .cv-card__subtitle {
+    color: #ffffff !important;
   }
 {%- endstyle -%}
 
 <script>
   (function () {
-    const carousel = document.getElementById('category-carousel-{{ section.id }}');
-    const track = document.getElementById('category-carousel-track-{{ section.id }}');
+    const carousel = document.getElementById('cv-carousel-{{ section.id }}');
+    const track = document.getElementById('cv-carousel-track-{{ section.id }}');
     if (!carousel || !track) return;
 
     const totalItems = track.children.length;
@@ -177,12 +221,8 @@
       requestAnimationFrame(loop);
     }
 
-    window.addEventListener('load', function () {
-      halfWidth = calcHalfWidth();
-    });
-    window.addEventListener('resize', function () {
-      halfWidth = calcHalfWidth();
-    });
+    window.addEventListener('load', function () { halfWidth = calcHalfWidth(); });
+    window.addEventListener('resize', function () { halfWidth = calcHalfWidth(); });
     setTimeout(function () { halfWidth = calcHalfWidth(); }, 300);
 
     carousel.addEventListener('mouseenter', function () { isPaused = true; });
@@ -200,9 +240,7 @@
     function dragMove(clientX) {
       if (!isDragging) return;
       const delta = clientX - dragStartX;
-      if (Math.abs(delta) > 6) {
-        hasMovedEnough = true;
-      }
+      if (Math.abs(delta) > 6) { hasMovedEnough = true; }
       position = dragStartPosition + delta;
       normalizePosition();
       render();
@@ -213,12 +251,8 @@
       carousel.style.cursor = 'grab';
     }
 
-    // Bloquea el clic SOLO si de verdad hubo arrastre real (no un simple toque)
     track.addEventListener('click', function (e) {
-      if (hasMovedEnough) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
+      if (hasMovedEnough) { e.preventDefault(); e.stopPropagation(); }
     }, true);
 
     carousel.addEventListener('touchstart', function (e) {
@@ -235,15 +269,9 @@
       setTimeout(function () { isPaused = false; }, 800);
     });
 
-    carousel.addEventListener('mousedown', function (e) {
-      dragStart(e.clientX);
-    });
-    window.addEventListener('mousemove', function (e) {
-      dragMove(e.clientX);
-    });
-    window.addEventListener('mouseup', function () {
-      dragEnd();
-    });
+    carousel.addEventListener('mousedown', function (e) { dragStart(e.clientX); });
+    window.addEventListener('mousemove', function (e) { dragMove(e.clientX); });
+    window.addEventListener('mouseup', function () { dragEnd(); });
 
     requestAnimationFrame(loop);
   })();
@@ -251,15 +279,10 @@
 
 {% schema %}
 {
-  "name": "Categorías visuales",
+  "name": "Categorias visuales",
   "class": "section",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Título",
-      "default": "Compra por categoría"
-    },
+    { "type": "text", "id": "heading", "label": "Titulo", "default": "Compra por categoria" },
     {
       "type": "select",
       "id": "heading_size",
@@ -271,52 +294,26 @@
       "default": "h1",
       "label": "t:sections.all.heading_size.label"
     },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
+    { "type": "color_scheme", "id": "color_scheme", "label": "t:sections.all.colors.label", "default": "scheme-1" },
+    { "type": "header", "content": "t:sections.all.padding.section_padding_heading" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_top", "default": 36 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "t:sections.all.padding.padding_bottom", "default": 36 }
   ],
   "blocks": [
     {
       "type": "category",
-      "name": "Categoría",
+      "name": "Categoria",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Imagen" },
-        { "type": "text", "id": "title", "label": "Título", "default": "Categoría" },
-        { "type": "text", "id": "subtitle", "label": "Subtítulo (opcional)" },
+        { "type": "text", "id": "title", "label": "Titulo", "default": "Categoria" },
+        { "type": "text", "id": "subtitle", "label": "Subtitulo (opcional)" },
         { "type": "url", "id": "link", "label": "Enlace" }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Categorías visuales",
+      "name": "Categorias visuales",
       "blocks": [
         { "type": "category", "settings": { "title": "Hombre" } },
         { "type": "category", "settings": { "title": "Mujer" } },
