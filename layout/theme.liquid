@@ -323,20 +323,7 @@
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
-    <<div id="rotating-bar" style="background:#0057D9; color:#ffffff; padding:10px 0; font-size:14px; font-weight:600; letter-spacing:0.5px; overflow:hidden; white-space:nowrap;">
-  <div id="rotating-bar-track" style="display:inline-block; padding-left:100%; animation: rotating-bar-scroll 30s linear infinite;">
-    <span>🚚 ENVÍO GRATIS 24/48H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⚡️ PAGO CONTRAREEMBOLSO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🚚 ENVÍO GRATIS 24/48H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⚡️ PAGO CONTRAREEMBOLSO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-  </div>
-</div>
-
-<style>
-  @keyframes rotating-bar-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-  }
-</style>
-
-<div id="custom-header" style="background:#0d0d0d; padding:12px 10px; display:flex; align-items:center; gap:20px; overflow-x:auto; -webkit-overflow-scrolling:touch; white-space:nowrap; border-bottom:2px solid #0057D9;">
+   <div id="custom-header" style="background:#0d0d0d; padding:12px 10px; display:flex; align-items:center; gap:20px; overflow-x:auto; -webkit-overflow-scrolling:touch; white-space:nowrap; border-bottom:2px solid #0057D9;">
   <a href="/" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">Inicio</a>
   <a href="/collections/chandal-invierno" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Conjuntos</a>
   <a href="/collections/chalecos" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Chalecos</a>
@@ -347,6 +334,19 @@
 <style>
   #custom-header::-webkit-scrollbar { display: none; }
   #custom-header { scrollbar-width: none; }
+</style>
+
+<div id="rotating-bar" style="background:#0057D9; color:#ffffff; padding:10px 0; font-size:14px; font-weight:600; letter-spacing:0.5px; overflow:hidden; white-space:nowrap;">
+  <div id="rotating-bar-track" style="display:inline-block; padding-left:100%; animation: rotating-bar-scroll 30s linear infinite;">
+    <span>🚚 ENVÍO GRATIS 24/48H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⚡️ PAGO CONTRAREEMBOLSO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🚚 ENVÍO GRATIS 24/48H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⚡️ PAGO CONTRAREEMBOLSO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+  </div>
+</div>
+
+<style>
+  @keyframes rotating-bar-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
 </style>
 
  
