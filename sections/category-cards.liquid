@@ -1,5 +1,6 @@
 {% comment %}
-  Categorías visuales: carrusel de tarjetas grandes, rotación automática lenta, se pausa con el cursor.
+  Categorías visuales: carrusel de tarjetas grandes, rotación automática lenta,
+  se pausa con el cursor, y con flechas para navegar manualmente.
 {% endcomment %}
 
 {{ 'section-category-cards.css' | asset_url | stylesheet_tag }}
@@ -21,6 +22,8 @@
 
     {%- if section.blocks.size > 0 -%}
       <div class="category-carousel" id="category-carousel-{{ section.id }}">
+        <button type="button" class="category-carousel__arrow category-carousel__arrow--prev" aria-label="Anterior">&#10094;</button>
+
         <ul class="category-carousel__track list-unstyled" role="list">
           {%- for block in section.blocks -%}
             <li class="category-carousel__item" {{ block.shopify_attributes }}>
@@ -62,6 +65,8 @@
             </li>
           {%- endfor -%}
         </ul>
+
+        <button type="button" class="category-carousel__arrow category-carousel__arrow--next" aria-label="Siguiente">&#10095;</button>
       </div>
     {%- endif -%}
   </div>
@@ -81,6 +86,7 @@
   }
 
   #category-carousel-{{ section.id }} {
+    position: relative;
     overflow: hidden;
     width: 100%;
   }
@@ -114,6 +120,36 @@
   #category-carousel-{{ section.id }} .category-cards__media {
     aspect-ratio: 3 / 4;
   }
+
+  #category-carousel-{{ section.id }} .category-carousel__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(0,0,0,0.6);
+    color: #ffffff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #category-carousel-{{ section.id }} .category-carousel__arrow:hover {
+    background: #0057D9;
+  }
+
+  #category-carousel-{{ section.id }} .category-carousel__arrow--prev {
+    left: 10px;
+  }
+
+  #category-carousel-{{ section.id }} .category-carousel__arrow--next {
+    right: 10px;
+  }
 {%- endstyle -%}
 
 <script>
@@ -124,16 +160,26 @@
     const items = track.children;
     if (items.length <= 1) return;
 
+    const prevBtn = carousel.querySelector('.category-carousel__arrow--prev');
+    const nextBtn = carousel.querySelector('.category-carousel__arrow--next');
+
     let index = 0;
     let timer = null;
 
-    function nextSlide() {
-      index++;
-      if (index >= items.length) {
-        index = 0;
+    function goTo(newIndex) {
+      if (newIndex < 0) {
+        newIndex = items.length - 1;
       }
+      if (newIndex >= items.length) {
+        newIndex = 0;
+      }
+      index = newIndex;
       const itemWidth = items[0].getBoundingClientRect().width + 20;
       track.style.transform = 'translateX(' + (-itemWidth * index) + 'px)';
+    }
+
+    function nextSlide() {
+      goTo(index + 1);
     }
 
     function start() {
@@ -148,6 +194,41 @@
 
     carousel.addEventListener('mouseenter', stop);
     carousel.addEventListener('mouseleave', start);
+
+    nextBtn.addEventListener('click', function () {
+      stop();
+      goTo(index + 1);
+      start();
+    });
+
+    prevBtn.addEventListener('click', function () {
+      stop();
+      goTo(index - 1);
+      start();
+    });
+
+    // --- Deslizar con el dedo (swipe) ---
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener('touchstart', function (e) {
+      stop();
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', function (e) {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) {
+          goTo(index + 1);
+        } else {
+          goTo(index - 1);
+        }
+      }
+      start();
+    }, { passive: true });
   })();
 </script>
 
