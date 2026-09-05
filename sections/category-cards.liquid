@@ -1,5 +1,5 @@
 {% comment %}
-  Categorías visuales: carrusel de tarjetas grandes, rotación automática lenta.
+  Categorías visuales: carrusel de tarjetas grandes, rotación automática lenta, se pausa con el cursor.
 {% endcomment %}
 
 {{ 'section-category-cards.css' | asset_url | stylesheet_tag }}
@@ -92,22 +92,22 @@
   }
 
   #category-carousel-{{ section.id }} .category-carousel__item {
-    flex: 0 0 85%;
-    max-width: 85%;
+    flex: 0 0 70%;
+    max-width: 70%;
     margin-right: 20px;
   }
 
   @media screen and (min-width: 750px) {
     #category-carousel-{{ section.id }} .category-carousel__item {
-      flex: 0 0 55%;
-      max-width: 55%;
+      flex: 0 0 40%;
+      max-width: 40%;
     }
   }
 
   @media screen and (min-width: 990px) {
     #category-carousel-{{ section.id }} .category-carousel__item {
-      flex: 0 0 40%;
-      max-width: 40%;
+      flex: 0 0 28%;
+      max-width: 28%;
     }
   }
 
@@ -118,12 +118,14 @@
 
 <script>
   (function () {
-    const track = document.querySelector('#category-carousel-{{ section.id }} .category-carousel__track');
+    const carousel = document.querySelector('#category-carousel-{{ section.id }}');
+    const track = carousel ? carousel.querySelector('.category-carousel__track') : null;
     if (!track) return;
     const items = track.children;
     if (items.length <= 1) return;
 
     let index = 0;
+    let timer = null;
 
     function nextSlide() {
       index++;
@@ -134,7 +136,18 @@
       track.style.transform = 'translateX(' + (-itemWidth * index) + 'px)';
     }
 
-    setInterval(nextSlide, 5000);
+    function start() {
+      timer = setInterval(nextSlide, 5000);
+    }
+
+    function stop() {
+      clearInterval(timer);
+    }
+
+    start();
+
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
   })();
 </script>
 
