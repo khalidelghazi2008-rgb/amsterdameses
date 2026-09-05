@@ -1,0 +1,18 @@
+<div id="trust-box" style="background:#0d0d0d; border:2px solid #0057D9; border-radius:10px; margin:20px auto; max-width:700px; padding:20px 24px; text-align:center; box-shadow:0 0 15px rgba(0,87,217,0.4);">
+  <p style="color:#ffffff; font-size:16px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin:0; line-height:1.4;">
+    {% if section.settings.icono != blank %}{{ section.settings.icono }} {% endif %}{{ section.settings.frase }}
+  </p>
+</div>
+
+{% schema %}
+{
+  "name": "Frase de confianza",
+  "settings": [
+    { "type": "text", "id": "frase", "label": "Frase", "default": "Miles de clientes ya confían en nosotros. Compra 100% segura." },
+    { "type": "text", "id": "icono", "label": "Emoji delante (opcional)", "default": "✅" }
+  ],
+  "presets": [
+    { "name": "Frase de confianza" }
+  ]
+}
+{% endschema %}
