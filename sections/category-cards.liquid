@@ -1,8 +1,5 @@
 {% comment %}
-  Categorías visuales: tarjetas grandes con imagen a pantalla completa
-  (ej. HOMBRE / MUJER / ZAPATILLAS / NOVEDADES / OFERTAS). Cada tarjeta es
-  un bloque "category" 100% configurable desde el editor (imagen, título,
-  subtítulo opcional y enlace) — nada va hardcodeado en el código.
+  Categorías visuales: carrusel de tarjetas grandes, rotación automática lenta.
 {% endcomment %}
 
 {{ 'section-category-cards.css' | asset_url | stylesheet_tag }}
@@ -23,57 +20,49 @@
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
-      <ul
-        class="category-cards category-cards--{{ section.settings.columns_desktop }}-col list-unstyled"
-        role="list"
-      >
-        {%- for block in section.blocks -%}
-          <li
-            class="category-cards__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-            {% if settings.animations_reveal_on_scroll %}
-              data-cascade
-              style="--animation-order: {{ forloop.index }};"
-            {% endif %}
-            {{ block.shopify_attributes }}
-          >
-            <a
-              href="{{ block.settings.link | default: '#' }}"
-              class="category-cards__link{% if block.settings.link == blank %} category-cards__link--disabled{% endif %}"
-              {% if block.settings.link == blank %}
-                role="link" aria-disabled="true" tabindex="-1"
-              {% endif %}
-            >
-              <span class="category-cards__media">
-                {%- if block.settings.image != blank -%}
-                  {{
-                    block.settings.image
-                    | image_url: width: 1200
-                    | image_tag:
-                      loading: 'lazy',
-                      sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
-                      widths: '400, 600, 800, 1000, 1200',
-                      class: 'category-cards__image'
-                  }}
-                {%- else -%}
-                  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg category-cards__image' }}
-                {%- endif -%}
-              </span>
-              <span class="category-cards__caption">
-                {%- if block.settings.title != blank -%}
-                  <span class="category-cards__title">{{ block.settings.title | escape }}</span>
-                {%- endif -%}
-                {%- if block.settings.subtitle != blank -%}
-                  <span class="category-cards__subtitle">{{ block.settings.subtitle | escape }}</span>
-                {%- endif -%}
-                <span class="category-cards__cta link animate-arrow">
-                  {{ 'amstershop.category_cards.shop_now' | t }}
-                  {{- 'icon-arrow.svg' | inline_asset_content -}}
+      <div class="category-carousel" id="category-carousel-{{ section.id }}">
+        <ul class="category-carousel__track list-unstyled" role="list">
+          {%- for block in section.blocks -%}
+            <li class="category-carousel__item" {{ block.shopify_attributes }}>
+              
+                href="{{ block.settings.link | default: '#' }}"
+                class="category-cards__link{% if block.settings.link == blank %} category-cards__link--disabled{% endif %}"
+                {% if block.settings.link == blank %}
+                  role="link" aria-disabled="true" tabindex="-1"
+                {% endif %}
+              >
+                <span class="category-cards__media">
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 1600
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: '90vw',
+                        widths: '600, 900, 1200, 1600',
+                        class: 'category-cards__image'
+                    }}
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg category-cards__image' }}
+                  {%- endif -%}
                 </span>
-              </span>
-            </a>
-          </li>
-        {%- endfor -%}
-      </ul>
+                <span class="category-cards__caption">
+                  {%- if block.settings.title != blank -%}
+                    <span class="category-cards__title">{{ block.settings.title | escape }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.subtitle != blank -%}
+                    <span class="category-cards__subtitle">{{ block.settings.subtitle | escape }}</span>
+                  {%- endif -%}
+                  <span class="category-cards__cta link animate-arrow">
+                    {{ 'amstershop.category_cards.shop_now' | t }}
+                    {{- 'icon-arrow.svg' | inline_asset_content -}}
+                  </span>
+                </span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
     {%- endif -%}
   </div>
 </div>
@@ -90,7 +79,64 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  #category-carousel-{{ section.id }} {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  #category-carousel-{{ section.id }} .category-carousel__track {
+    display: flex;
+    transition: transform 1.2s ease-in-out;
+    will-change: transform;
+  }
+
+  #category-carousel-{{ section.id }} .category-carousel__item {
+    flex: 0 0 85%;
+    max-width: 85%;
+    margin-right: 20px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #category-carousel-{{ section.id }} .category-carousel__item {
+      flex: 0 0 55%;
+      max-width: 55%;
+    }
+  }
+
+  @media screen and (min-width: 990px) {
+    #category-carousel-{{ section.id }} .category-carousel__item {
+      flex: 0 0 40%;
+      max-width: 40%;
+    }
+  }
+
+  #category-carousel-{{ section.id }} .category-cards__media {
+    aspect-ratio: 3 / 4;
+  }
 {%- endstyle -%}
+
+<script>
+  (function () {
+    const track = document.querySelector('#category-carousel-{{ section.id }} .category-carousel__track');
+    if (!track) return;
+    const items = track.children;
+    if (items.length <= 1) return;
+
+    let index = 0;
+
+    function nextSlide() {
+      index++;
+      if (index >= items.length) {
+        index = 0;
+      }
+      const itemWidth = items[0].getBoundingClientRect().width + 20;
+      track.style.transform = 'translateX(' + (-itemWidth * index) + 'px)';
+    }
+
+    setInterval(nextSlide, 5000);
+  })();
+</script>
 
 {% schema %}
 {
@@ -107,30 +153,12 @@
       "type": "select",
       "id": "heading_size",
       "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        }
+        { "value": "h2", "label": "t:sections.all.heading_size.options__1.label" },
+        { "value": "h1", "label": "t:sections.all.heading_size.options__2.label" },
+        { "value": "h0", "label": "t:sections.all.heading_size.options__3.label" }
       ],
       "default": "h1",
       "label": "t:sections.all.heading_size.label"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "min": 2,
-      "max": 5,
-      "step": 1,
-      "default": 5,
-      "label": "Columnas en escritorio"
     },
     {
       "type": "color_scheme",
@@ -168,27 +196,10 @@
       "type": "category",
       "name": "Categoría",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Imagen"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Título",
-          "default": "Categoría"
-        },
-        {
-          "type": "text",
-          "id": "subtitle",
-          "label": "Subtítulo (opcional)"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Enlace"
-        }
+        { "type": "image_picker", "id": "image", "label": "Imagen" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Categoría" },
+        { "type": "text", "id": "subtitle", "label": "Subtítulo (opcional)" },
+        { "type": "url", "id": "link", "label": "Enlace" }
       ]
     }
   ],
@@ -196,36 +207,11 @@
     {
       "name": "Categorías visuales",
       "blocks": [
-        {
-          "type": "category",
-          "settings": {
-            "title": "Hombre"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Mujer"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Zapatillas"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Novedades"
-          }
-        },
-        {
-          "type": "category",
-          "settings": {
-            "title": "Ofertas"
-          }
-        }
+        { "type": "category", "settings": { "title": "Hombre" } },
+        { "type": "category", "settings": { "title": "Mujer" } },
+        { "type": "category", "settings": { "title": "Zapatillas" } },
+        { "type": "category", "settings": { "title": "Novedades" } },
+        { "type": "category", "settings": { "title": "Ofertas" } }
       ]
     }
   ]
