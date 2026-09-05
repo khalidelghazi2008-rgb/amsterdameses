@@ -137,7 +137,7 @@
             "image": "shopify://shop_images/Asics_gel_nyc.jpg",
             "title": "ZAPATILLAS",
             "subtitle": "",
-            "link": "shopify://collections/zapatillas"
+            "link": "shopify://products/conjunto-nke-tn"
           }
         },
         "mujer": {
@@ -169,7 +169,7 @@
           "settings": {
             "title": "Ofertas",
             "subtitle": "",
-            "link": "shopify://collections/ofertas"
+            "link": "shopify://products/nike-p6000-tinfany"
           }
         }
       },
