@@ -1,0 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "brand-cards": {
+      "type": "brand-picker-carousel",
+      "settings": {
+        "heading": "Elige tu modelo",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 20
+      },
+      "blocks": {
+        "b1": { "type": "category", "settings": { "title": "Lacoste", "link": "shopify:\/\/collections\/chandal-lacoste" } },
+        "b2": { "type": "category", "settings": { "title": "Nike Tech", "link": "shopify:\/\/collections\/nike-tech" } },
+        "b3": { "type": "category", "settings": { "title": "Nike TN", "link": "shopify:\/\/collections\/chandal-nike-tn" } },
+        "b4": { "type": "category", "settings": { "title": "Nike Miler", "link": "shopify:\/\/collections\/chandal-nike-miler" } },
+        "b5": { "type": "category", "settings": { "title": "Nike", "link": "shopify:\/\/collections\/chandal-nike" } },
+        "b6": { "type": "category", "settings": { "title": "Tech Nocta", "link": "shopify:\/\/collections\/tech-nocta" } },
+        "b7": { "type": "category", "settings": { "title": "Stone Island", "link": "shopify:\/\/collections\/stone-island" } },
+        "b8": { "type": "category", "settings": { "title": "Armani", "link": "shopify:\/\/collections\/armani" } },
+        "b9": { "type": "category", "settings": { "title": "Futbol", "link": "shopify:\/\/collections\/futbol" } },
+        "b10": { "type": "category", "settings": { "title": "Under Armour", "link": "shopify:\/\/collections\/under-armour-chandal" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8", "b9", "b10"]
+    },
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-5"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-2",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "enable_filtering": true,
+        "filter_type": "vertical",
+        "enable_sorting": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["brand-cards", "banner", "product-grid"]
+}
