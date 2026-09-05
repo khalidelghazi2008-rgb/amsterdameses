@@ -11,31 +11,35 @@
   "sections": {
     "brand-cards": {
       "type": "category-cards",
-      "settings": {
-        "heading": "Elige tu marca",
-        "heading_size": "h1",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 20
-      },
       "blocks": {
         "north-face-block": {
           "type": "category",
           "settings": {
             "title": "The North Face",
-            "link": "shopify:\/\/collections\/north-face",
-            "image": "shopify:\/\/shop_images\/14214555070020887.jpg"
+            "subtitle": "",
+            "link": "shopify://collections/north-face"
           }
         },
         "nocta-block": {
           "type": "category",
           "settings": {
             "title": "Nocta",
-            "link": "shopify:\/\/collections\/chaqueta-nocta"
+            "subtitle": "",
+            "link": "shopify://collections/chaqueta-nocta"
           }
         }
       },
-      "block_order": ["north-face-block", "nocta-block"]
+      "block_order": [
+        "north-face-block",
+        "nocta-block"
+      ],
+      "settings": {
+        "heading": "Elige tu marca",
+        "heading_size": "h1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 20
+      }
     },
     "banner": {
       "type": "main-collection-banner",
@@ -66,5 +70,9 @@
       }
     }
   },
-  "order": ["brand-cards", "banner", "product-grid"]
+  "order": [
+    "brand-cards",
+    "banner",
+    "product-grid"
+  ]
 }
