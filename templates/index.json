@@ -9,6 +9,64 @@
  */
 {
   "sections": {
+    "historias_productos_by9ULB": {
+      "type": "historias-productos",
+      "blocks": {
+        "story_B8RPAa": {
+          "type": "story",
+          "settings": {
+            "label": "Producto",
+            "link": ""
+          }
+        },
+        "story_CtUkqH": {
+          "type": "story",
+          "settings": {
+            "label": "Producto",
+            "link": ""
+          }
+        },
+        "story_9wdw6X": {
+          "type": "story",
+          "settings": {
+            "label": "Producto",
+            "link": ""
+          }
+        },
+        "story_TA9ykr": {
+          "type": "story",
+          "settings": {
+            "label": "Producto",
+            "link": ""
+          }
+        },
+        "story_zHBqmb": {
+          "type": "story",
+          "settings": {
+            "label": "Producto",
+            "link": ""
+          }
+        },
+        "story_xzAirV": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/SmLlx.jpg",
+            "label": "CONJUNTO TN",
+            "link": "shopify://products/conjunto-nke-tn"
+          }
+        }
+      },
+      "block_order": [
+        "story_B8RPAa",
+        "story_CtUkqH",
+        "story_9wdw6X",
+        "story_TA9ykr",
+        "story_zHBqmb",
+        "story_xzAirV"
+      ],
+      "name": "Historias productos",
+      "settings": {}
+    },
     "slideshow_principal": {
       "type": "slideshow",
       "blocks": {
@@ -49,7 +107,7 @@
             "button_link_2": "",
             "button_style_secondary_2": true,
             "show_text_box": true,
-            "box_align": "middle-center",
+            "box_align": "bottom-center",
             "text_alignment": "center",
             "text_alignment_mobile": "center",
             "color_scheme": "scheme-4"
@@ -397,10 +455,20 @@
         "padding_top": 52,
         "padding_bottom": 52
       }
+    },
+    "frase_confianza_6FNwUx": {
+      "type": "frase-confianza",
+      "name": "Frase de confianza",
+      "settings": {
+        "frase": "Miles de clientes ya confían en nosotros. Compra 100% segura.",
+        "icono": "✅"
+      }
     }
   },
   "order": [
+    "historias_productos_by9ULB",
     "slideshow_principal",
+    "frase_confianza_6FNwUx",
     "categorias_visuales",
     "iconos_confianza",
     "carrusel_zapatillas",

@@ -159,7 +159,7 @@
       },
       "scheme-2": {
         "settings": {
-          "background": "#FFFFFF",
+          "background": "#ffffff",
           "background_gradient": "",
           "text": "#0a0a0a",
           "button": "#0a0a0a",
@@ -170,7 +170,7 @@
       },
       "scheme-3": {
         "settings": {
-          "background": "#101a33",
+          "background": "#EAEEF8",
           "background_gradient": "",
           "text": "#ffffff",
           "button": "#2b4cff",
