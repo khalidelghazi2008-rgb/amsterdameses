@@ -129,6 +129,14 @@
         "accessibility_info": "Diapositivas de la colección"
       }
     },
+    "frase_confianza_6FNwUx": {
+      "type": "frase-confianza",
+      "name": "Frase de confianza",
+      "settings": {
+        "frase": "Miles de clientes ya confían en nosotros. Compra 100% segura.",
+        "icono": "✅"
+      }
+    },
     "categorias_visuales": {
       "type": "category-cards",
       "blocks": {
@@ -207,7 +215,7 @@
           "type": "column",
           "settings": {
             "title": "Envío rápido",
-            "text": "<p>Envío gratis en pedidos superiores a 50€. Recíbelo en 24/48h.</p>",
+            "text": "<p>Envío gratis Recíbelo en 24/48h.</p>",
             "link_label": "",
             "link": ""
           }
@@ -216,7 +224,7 @@
           "type": "column",
           "settings": {
             "title": "Pago 100% seguro",
-            "text": "<p>Paga con tarjeta, PayPal o Bizum de forma segura y cifrada.</p>",
+            "text": "<p>Paga una vez te llega a la puerta de casa </p><p></p>",
             "link_label": "",
             "link": ""
           }
@@ -246,7 +254,7 @@
         "columns_desktop": 3,
         "column_alignment": "center",
         "background_style": "none",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
         "padding_top": 36,
@@ -456,12 +464,16 @@
         "padding_bottom": 52
       }
     },
-    "frase_confianza_6FNwUx": {
-      "type": "frase-confianza",
-      "name": "Frase de confianza",
+    "cta_sobre_banner_Ha6wLA": {
+      "type": "cta-sobre-banner",
+      "name": "CTA sobre banner",
       "settings": {
+        "overlap": 150,
         "frase": "Miles de clientes ya confían en nosotros. Compra 100% segura.",
-        "icono": "✅"
+        "icono": "✅",
+        "whatsapp_link": "",
+        "instagram_link": "",
+        "tiktok_link": ""
       }
     }
   },
@@ -477,6 +489,7 @@
     "mas_vendidos",
     "ofertas_productos",
     "vistos_recientemente",
-    "newsletter"
+    "newsletter",
+    "cta_sobre_banner_Ha6wLA"
   ]
 }
