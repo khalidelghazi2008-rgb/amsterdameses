@@ -23,7 +23,8 @@
           "type": "category",
           "settings": {
             "title": "The North Face",
-            "link": "shopify:\/\/collections\/north-face"
+            "link": "shopify:\/\/collections\/north-face",
+            "image": "shopify:\/\/shop_images\/14214555070020887.jpg"
           }
         },
         "nocta-block": {
