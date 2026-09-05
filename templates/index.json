@@ -126,9 +126,9 @@
           "type": "category",
           "settings": {
             "image": "shopify://shop_images/2.jpg",
-            "title": "ROPA INVIERNO",
+            "title": "",
             "subtitle": "",
-            "link": "shopify://collections/ropa-de-invierno"
+            "link": "shopify://products/conjunto-nke-tn"
           }
         },
         "hombre": {
