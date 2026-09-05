@@ -129,12 +129,16 @@
         "accessibility_info": "Diapositivas de la colección"
       }
     },
-    "frase_confianza_6FNwUx": {
-      "type": "frase-confianza",
-      "name": "Frase de confianza",
+    "cta_sobre_banner_Ha6wLA": {
+      "type": "cta-sobre-banner",
+      "name": "CTA sobre banner",
       "settings": {
+        "overlap": 30,
         "frase": "Miles de clientes ya confían en nosotros. Compra 100% segura.",
-        "icono": "✅"
+        "icono": "✅",
+        "whatsapp_link": "",
+        "instagram_link": "",
+        "tiktok_link": ""
       }
     },
     "categorias_visuales": {
@@ -463,24 +467,12 @@
         "padding_top": 52,
         "padding_bottom": 52
       }
-    },
-    "cta_sobre_banner_Ha6wLA": {
-      "type": "cta-sobre-banner",
-      "name": "CTA sobre banner",
-      "settings": {
-        "overlap": 150,
-        "frase": "Miles de clientes ya confían en nosotros. Compra 100% segura.",
-        "icono": "✅",
-        "whatsapp_link": "",
-        "instagram_link": "",
-        "tiktok_link": ""
-      }
     }
   },
   "order": [
     "historias_productos_by9ULB",
     "slideshow_principal",
-    "frase_confianza_6FNwUx",
+    "cta_sobre_banner_Ha6wLA",
     "categorias_visuales",
     "iconos_confianza",
     "carrusel_zapatillas",
@@ -489,7 +481,6 @@
     "mas_vendidos",
     "ofertas_productos",
     "vistos_recientemente",
-    "newsletter",
-    "cta_sobre_banner_Ha6wLA"
+    "newsletter"
   ]
 }
