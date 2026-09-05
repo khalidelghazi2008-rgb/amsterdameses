@@ -1,6 +1,5 @@
 {% comment %}
-  Categorías visuales: carrusel de tarjetas grandes, rotación automática lenta,
-  se pausa con el cursor, y con flechas para navegar manualmente.
+  Categorías visuales: carrusel con movimiento continuo y suave, esquinas redondeadas.
 {% endcomment %}
 
 {{ 'section-category-cards.css' | asset_url | stylesheet_tag }}
@@ -22,11 +21,9 @@
 
     {%- if section.blocks.size > 0 -%}
       <div class="category-carousel" id="category-carousel-{{ section.id }}">
-        <button type="button" class="category-carousel__arrow category-carousel__arrow--prev" aria-label="Anterior">&#10094;</button>
-
-        <ul class="category-carousel__track list-unstyled" role="list">
+        <div class="category-carousel__track">
           {%- for block in section.blocks -%}
-            <li class="category-carousel__item" {{ block.shopify_attributes }}>
+            <div class="category-carousel__item" {{ block.shopify_attributes }}>
               
                 href="{{ block.settings.link | default: '#' }}"
                 class="category-cards__link{% if block.settings.link == blank %} category-cards__link--disabled{% endif %}"
@@ -62,11 +59,27 @@
                   </span>
                 </span>
               </a>
-            </li>
+            </div>
           {%- endfor -%}
-        </ul>
-
-        <button type="button" class="category-carousel__arrow category-carousel__arrow--next" aria-label="Siguiente">&#10095;</button>
+          {%- for block in section.blocks -%}
+            <div class="category-carousel__item" aria-hidden="true">
+              <a href="{{ block.settings.link | default: '#' }}" class="category-cards__link{% if block.settings.link == blank %} category-cards__link--disabled{% endif %}" tabindex="-1">
+                <span class="category-cards__media">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '90vw', widths: '600, 900, 1200, 1600', class: 'category-cards__image' }}
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg category-cards__image' }}
+                  {%- endif -%}
+                </span>
+                <span class="category-cards__caption">
+                  {%- if block.settings.title != blank -%}<span class="category-cards__title">{{ block.settings.title | escape }}</span>{%- endif -%}
+                  {%- if block.settings.subtitle != blank -%}<span class="category-cards__subtitle">{{ block.settings.subtitle | escape }}</span>{%- endif -%}
+                  <span class="category-cards__cta link animate-arrow">{{ 'amstershop.category_cards.shop_now' | t }}{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
+                </span>
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
       </div>
     {%- endif -%}
   </div>
@@ -86,151 +99,53 @@
   }
 
   #category-carousel-{{ section.id }} {
-    position: relative;
     overflow: hidden;
     width: 100%;
   }
 
   #category-carousel-{{ section.id }} .category-carousel__track {
     display: flex;
-    transition: transform 1.2s ease-in-out;
-    will-change: transform;
+    width: max-content;
+    animation: category-carousel-scroll-{{ section.id }} 22s linear infinite;
+  }
+
+  #category-carousel-{{ section.id }}:hover .category-carousel__track {
+    animation-play-state: paused;
   }
 
   #category-carousel-{{ section.id }} .category-carousel__item {
-    flex: 0 0 70%;
-    max-width: 70%;
+    flex: 0 0 auto;
+    width: 70vw;
     margin-right: 20px;
   }
 
   @media screen and (min-width: 750px) {
     #category-carousel-{{ section.id }} .category-carousel__item {
-      flex: 0 0 40%;
-      max-width: 40%;
+      width: 40vw;
     }
   }
 
   @media screen and (min-width: 990px) {
     #category-carousel-{{ section.id }} .category-carousel__item {
-      flex: 0 0 28%;
-      max-width: 28%;
+      width: 28vw;
     }
   }
 
   #category-carousel-{{ section.id }} .category-cards__media {
     aspect-ratio: 3 / 4;
+    border-radius: 16px;
+    overflow: hidden;
   }
 
-  #category-carousel-{{ section.id }} .category-carousel__arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    background: rgba(0,0,0,0.6);
-    color: #ffffff;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  #category-carousel-{{ section.id }} .category-cards__image {
+    border-radius: 16px;
   }
 
-  #category-carousel-{{ section.id }} .category-carousel__arrow:hover {
-    background: #0057D9;
-  }
-
-  #category-carousel-{{ section.id }} .category-carousel__arrow--prev {
-    left: 10px;
-  }
-
-  #category-carousel-{{ section.id }} .category-carousel__arrow--next {
-    right: 10px;
+  @keyframes category-carousel-scroll-{{ section.id }} {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 {%- endstyle -%}
-
-<script>
-  (function () {
-    const carousel = document.querySelector('#category-carousel-{{ section.id }}');
-    const track = carousel ? carousel.querySelector('.category-carousel__track') : null;
-    if (!track) return;
-    const items = track.children;
-    if (items.length <= 1) return;
-
-    const prevBtn = carousel.querySelector('.category-carousel__arrow--prev');
-    const nextBtn = carousel.querySelector('.category-carousel__arrow--next');
-
-    let index = 0;
-    let timer = null;
-
-    function goTo(newIndex) {
-      if (newIndex < 0) {
-        newIndex = items.length - 1;
-      }
-      if (newIndex >= items.length) {
-        newIndex = 0;
-      }
-      index = newIndex;
-      const itemWidth = items[0].getBoundingClientRect().width + 20;
-      track.style.transform = 'translateX(' + (-itemWidth * index) + 'px)';
-    }
-
-    function nextSlide() {
-      goTo(index + 1);
-    }
-
-    function start() {
-      timer = setInterval(nextSlide, 5000);
-    }
-
-    function stop() {
-      clearInterval(timer);
-    }
-
-    start();
-
-    carousel.addEventListener('mouseenter', stop);
-    carousel.addEventListener('mouseleave', start);
-
-    nextBtn.addEventListener('click', function () {
-      stop();
-      goTo(index + 1);
-      start();
-    });
-
-    prevBtn.addEventListener('click', function () {
-      stop();
-      goTo(index - 1);
-      start();
-    });
-
-    // --- Deslizar con el dedo (swipe) ---
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    carousel.addEventListener('touchstart', function (e) {
-      stop();
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    carousel.addEventListener('touchend', function (e) {
-      touchEndX = e.changedTouches[0].screenX;
-      const diff = touchStartX - touchEndX;
-
-      if (Math.abs(diff) > 40) {
-        if (diff > 0) {
-          goTo(index + 1);
-        } else {
-          goTo(index - 1);
-        }
-      }
-      start();
-    }, { passive: true });
-  })();
-</script>
 
 {% schema %}
 {
