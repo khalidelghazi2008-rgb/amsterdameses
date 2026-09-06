@@ -43,8 +43,9 @@
         "story_zHBqmb": {
           "type": "story",
           "settings": {
-            "label": "Producto",
-            "link": ""
+            "image": "shopify://shop_images/XS-S.jpg",
+            "label": "THE NORTH FACE",
+            "link": "shopify://products/chaqueta-the-north-face"
           }
         },
         "story_xzAirV": {
@@ -128,7 +129,7 @@
             "image": "shopify://shop_images/2.jpg",
             "title": "",
             "subtitle": "",
-            "link": "shopify://collections/ropa-invierno"
+            "link": "shopify://collections/chandal-invierno"
           }
         },
         "hombre": {
