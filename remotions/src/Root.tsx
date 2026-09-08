@@ -2,12 +2,24 @@ import "./index.css";
 import { Composition } from "remotion";
 import { HelloWorld } from "./HelloWorld";
 import { Logo } from "./HelloWorld/Logo";
+import { AmsterShopAd, AD_TOTAL_DURATION } from "./AmsterShopAd";
 
 // Each <Composition> is an entry in the sidebar!
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        // Vertical (9:16) promo ad for the AmsterShop store.
+        // Render it with: npx remotion render AmsterShopAd
+        id="AmsterShopAd"
+        component={AmsterShopAd}
+        durationInFrames={AD_TOTAL_DURATION}
+        fps={30}
+        width={1080}
+        height={1920}
+      />
+
       <Composition
         // You can take the "id" to render a video:
         // npx remotion render HelloWorld
