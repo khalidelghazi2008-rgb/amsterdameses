@@ -81,7 +81,7 @@
             "heading_size": "h0",
             "subheading": "",
             "button_label_1": "Comprar ahora",
-            "button_link_1": "shopify://collections/zapatillas",
+            "button_link_1": "shopify://collections",
             "button_style_secondary_1": false,
             "button_label_2": "Ver novedades",
             "button_link_2": "shopify://collections/novedades",
