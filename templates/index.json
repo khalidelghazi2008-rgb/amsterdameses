@@ -15,29 +15,32 @@
         "story_B8RPAa": {
           "type": "story",
           "settings": {
-            "label": "Producto",
-            "link": ""
+            "image": "shopify://shop_images/DF96EE98-F266-4A83-9F87-B205C6D961A1.jpg",
+            "label": "UNDER ARMOUR",
+            "link": "shopify://products/conjunto-under-armour-2026-coral"
           }
         },
         "story_CtUkqH": {
           "type": "story",
           "settings": {
-            "label": "Producto",
-            "link": ""
+            "image": "shopify://shop_images/IMG-0116.jpg",
+            "label": "ELITE ACTIVE",
+            "link": "shopify://products/zapatilla-lacoste-2026-beige"
           }
         },
         "story_9wdw6X": {
           "type": "story",
           "settings": {
-            "label": "Producto",
-            "link": ""
+            "image": "shopify://shop_images/912F3C28-FF00-44C5-8D6D-8595B1D7E6EF.jpg",
+            "label": "ELITE ACTIVE",
+            "link": "shopify://products/zapatilla-lacoste-2026-negra"
           }
         },
         "story_TA9ykr": {
           "type": "story",
           "settings": {
             "image": "shopify://shop_images/45917173-3E3F-406E-8549-12D4B620DBF5.jpg",
-            "label": "Producto",
+            "label": "under armour",
             "link": "shopify://products/conjunto-under-armour-2026-turquesa"
           }
         },
