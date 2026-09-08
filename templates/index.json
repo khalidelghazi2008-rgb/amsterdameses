@@ -36,8 +36,9 @@
         "story_TA9ykr": {
           "type": "story",
           "settings": {
+            "image": "shopify://shop_images/45917173-3E3F-406E-8549-12D4B620DBF5.jpg",
             "label": "Producto",
-            "link": ""
+            "link": "shopify://products/conjunto-under-armour-2026-turquesa"
           }
         },
         "story_zHBqmb": {
