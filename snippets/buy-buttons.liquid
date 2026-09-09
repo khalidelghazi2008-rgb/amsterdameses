@@ -87,6 +87,18 @@
             </span>
             {%- render 'loading-spinner' -%}
           </button>
+
+          {%- unless product.selected_or_first_available_variant.available == false or quantity_rule_soldout or product.selected_or_first_available_variant == null -%}
+            <button
+              id="ProductBuyNowButton-{{ section_id }}"
+              type="submit"
+              name="add"
+              class="product-form__submit button button--full-width button--comprar"
+            >
+              <span>COMPRAR</span>
+              {%- render 'loading-spinner' -%}
+            </button>
+          {%- endunless -%}
         </div>
       {%- endform -%}
     </product-form>
@@ -105,3 +117,20 @@
     </div>
   {%- endif -%}
 </div>
+
+<style>
+  .button--comprar {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 2px solid #FF0032 !important;
+    text-shadow: 2px 0 0 #FF0032;
+    font-weight: 800 !important;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+  }
+
+  .button--comprar:hover {
+    background: #fff5f5 !important;
+    color: #000000 !important;
+  }
+</style>
