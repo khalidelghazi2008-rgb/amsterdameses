@@ -1,6 +1,5 @@
 {% comment %}
-  Selector de marcas en carrusel: movimiento continuo, arrastrable,
-  con estilos propios (sin heredar el hover del tema que oscurece y baja).
+  Selector de marcas: cuadricula fija de 3 por fila (sin carrusel).
 {% endcomment %}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
@@ -14,45 +13,25 @@
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
-      <div class="bp-carousel" id="bp-carousel-{{ section.id }}">
-        <div class="bp-carousel__track" id="bp-carousel-track-{{ section.id }}">
-          {%- for block in section.blocks -%}
-            <div class="bp-carousel__item" {{ block.shopify_attributes }}>
-              <a href="{{ block.settings.link | default: '#' }}" class="bp-card" draggable="false">
-                <span class="bp-card__media">
-                  {%- if block.settings.image != blank -%}
-                    {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '45vw', widths: '400, 600, 900, 1200', class: 'bp-card__image', draggable: false }}
-                  {%- else -%}
-                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg bp-card__image' }}
-                  {%- endif -%}
-                </span>
-                <span class="bp-card__caption">
-                  {%- if block.settings.title != blank -%}
-                    <span class="bp-card__title">{{ block.settings.title | escape }}</span>
-                  {%- endif -%}
-                </span>
-              </a>
-            </div>
-          {%- endfor -%}
-          {%- for block in section.blocks -%}
-            <div class="bp-carousel__item" aria-hidden="true">
-              <a href="{{ block.settings.link | default: '#' }}" class="bp-card" tabindex="-1" draggable="false">
-                <span class="bp-card__media">
-                  {%- if block.settings.image != blank -%}
-                    {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '45vw', widths: '400, 600, 900, 1200', class: 'bp-card__image', draggable: false }}
-                  {%- else -%}
-                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg bp-card__image' }}
-                  {%- endif -%}
-                </span>
-                <span class="bp-card__caption">
-                  {%- if block.settings.title != blank -%}
-                    <span class="bp-card__title">{{ block.settings.title | escape }}</span>
-                  {%- endif -%}
-                </span>
-              </a>
-            </div>
-          {%- endfor -%}
-        </div>
+      <div class="bp-grid">
+        {%- for block in section.blocks -%}
+          <div class="bp-grid__item" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: '#' }}" class="bp-card">
+              <span class="bp-card__media">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 33vw, 90vw', widths: '400, 600, 900, 1200', class: 'bp-card__image' }}
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg bp-card__image' }}
+                {%- endif -%}
+              </span>
+              <span class="bp-card__caption">
+                {%- if block.settings.title != blank -%}
+                  <span class="bp-card__title">{{ block.settings.title | escape }}</span>
+                {%- endif -%}
+              </span>
+            </a>
+          </div>
+        {%- endfor -%}
       </div>
     {%- endif -%}
   </div>
@@ -64,29 +43,26 @@
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 
-  #bp-carousel-{{ section.id }} {
-    overflow: hidden;
-    width: 100%;
-    cursor: grab;
+  .bp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
 
-  #bp-carousel-{{ section.id }} .bp-carousel__track {
-    display: flex;
-    width: max-content;
-    will-change: transform;
-  }
-
-  #bp-carousel-{{ section.id }} .bp-carousel__item {
-    flex: 0 0 auto;
-    width: 70vw;
-    margin-right: 16px;
-    user-select: none;
-  }
-
-  @media screen and (min-width: 750px) {
-    #bp-carousel-{{ section.id }} .bp-carousel__item {
-      width: 32vw;
+  @media screen and (max-width: 749px) {
+    .bp-grid {
+      grid-template-columns: repeat(1, 1fr);
     }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .bp-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .bp-grid__item {
+    margin: 0;
   }
 
   .bp-card {
@@ -110,7 +86,6 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    pointer-events: none;
     transform: none !important;
     transition: none !important;
   }
@@ -126,126 +101,21 @@
 
   .bp-card__title {
     color: #ffffff !important;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   .bp-card:hover .bp-card__title,
-  .bp-card:focus .bp-card__title,
-  .bp-card:active .bp-card__title {
+  .bp-card:focus .bp-card__title {
     color: #ffffff !important;
   }
 {%- endstyle -%}
 
-<script>
-  (function () {
-    const carousel = document.getElementById('bp-carousel-{{ section.id }}');
-    const track = document.getElementById('bp-carousel-track-{{ section.id }}');
-    if (!carousel || !track) return;
-
-    const totalItems = track.children.length;
-    if (totalItems <= 1) return;
-
-    const halfCount = totalItems / 2;
-    let position = 0;
-    let speed = 0.5;
-    let isPaused = false;
-    let isDragging = false;
-    let dragStartX = 0;
-    let dragStartPosition = 0;
-    let halfWidth = 0;
-    let hasMovedEnough = false;
-
-    function calcHalfWidth() {
-      let w = 0;
-      for (let i = 0; i < halfCount; i++) {
-        w += track.children[i].getBoundingClientRect().width;
-        const style = window.getComputedStyle(track.children[i]);
-        w += parseFloat(style.marginRight) || 0;
-      }
-      return w;
-    }
-
-    function normalizePosition() {
-      if (halfWidth <= 0) return;
-      while (position <= -halfWidth) position += halfWidth;
-      while (position > 0) position -= halfWidth;
-    }
-
-    function render() {
-      track.style.transform = 'translateX(' + position + 'px)';
-    }
-
-    function loop() {
-      if (!isPaused && !isDragging) {
-        position -= speed;
-        normalizePosition();
-        render();
-      }
-      requestAnimationFrame(loop);
-    }
-
-    window.addEventListener('load', function () { halfWidth = calcHalfWidth(); });
-    window.addEventListener('resize', function () { halfWidth = calcHalfWidth(); });
-    setTimeout(function () { halfWidth = calcHalfWidth(); }, 300);
-
-    carousel.addEventListener('mouseenter', function () { isPaused = true; });
-    carousel.addEventListener('mouseleave', function () { isPaused = false; });
-
-    function dragStart(clientX) {
-      isDragging = true;
-      isPaused = true;
-      hasMovedEnough = false;
-      dragStartX = clientX;
-      dragStartPosition = position;
-      carousel.style.cursor = 'grabbing';
-    }
-
-    function dragMove(clientX) {
-      if (!isDragging) return;
-      const delta = clientX - dragStartX;
-      if (Math.abs(delta) > 6) { hasMovedEnough = true; }
-      position = dragStartPosition + delta;
-      normalizePosition();
-      render();
-    }
-
-    function dragEnd() {
-      isDragging = false;
-      carousel.style.cursor = 'grab';
-    }
-
-    track.addEventListener('click', function (e) {
-      if (hasMovedEnough) { e.preventDefault(); e.stopPropagation(); }
-    }, true);
-
-    carousel.addEventListener('touchstart', function (e) {
-      isPaused = true;
-      dragStart(e.touches[0].clientX);
-    }, { passive: true });
-
-    carousel.addEventListener('touchmove', function (e) {
-      dragMove(e.touches[0].clientX);
-    }, { passive: true });
-
-    carousel.addEventListener('touchend', function () {
-      dragEnd();
-      setTimeout(function () { isPaused = false; }, 800);
-    });
-
-    carousel.addEventListener('mousedown', function (e) { dragStart(e.clientX); });
-    window.addEventListener('mousemove', function (e) { dragMove(e.clientX); });
-    window.addEventListener('mouseup', function () { dragEnd(); });
-
-    requestAnimationFrame(loop);
-  })();
-</script>
-
 {% schema %}
 {
-  "name": "Marcas carrusel",
+  "name": "Marcas (grilla 3x3)",
   "class": "section",
   "settings": [
     { "type": "text", "id": "heading", "label": "Titulo", "default": "Elige tu marca" },
@@ -276,7 +146,7 @@
     }
   ],
   "presets": [
-    { "name": "Marcas carrusel" }
+    { "name": "Marcas (grilla 3x3)" }
   ]
 }
 {% endschema %}
