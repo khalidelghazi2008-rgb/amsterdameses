@@ -91,11 +91,11 @@
           {%- unless product.selected_or_first_available_variant.available == false or quantity_rule_soldout or product.selected_or_first_available_variant == null -%}
             <button
               id="ProductBuyNowButton-{{ section_id }}"
-              type="submit"
-              name="add"
+              type="button"
               class="product-form__submit button button--full-width button--comprar"
+              data-buy-now
             >
-              <span>COMPRAR</span>
+              <span>COMPRAR YA</span>
               {%- render 'loading-spinner' -%}
             </button>
           {%- endunless -%}
@@ -133,4 +133,41 @@
     background: #fff5f5 !important;
     color: #000000 !important;
   }
+
+  .button--comprar[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 </style>
+
+<script>
+  (function () {
+    var btn = document.getElementById('ProductBuyNowButton-{{ section_id }}');
+    if (!btn) return;
+
+    btn.addEventListener('click', function () {
+      var formEl = btn.closest('form');
+      if (!formEl) return;
+
+      var formData = new FormData(formEl);
+      btn.disabled = true;
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(function (res) {
+          if (!res.ok) { throw new Error('add to cart failed'); }
+          return res.json();
+        })
+        .then(function () {
+          window.location.href = '/checkout';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          alert('No se ha podido procesar la compra. Intentalo de nuevo.');
+        });
+    });
+  })();
+</script>
