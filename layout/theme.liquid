@@ -322,38 +322,50 @@
     </script>
   </head>
 
+  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+
   <div id="custom-header" style="background:#0d0d0d; padding:12px 10px; display:flex; align-items:center; justify-content:center; gap:20px; overflow-x:auto; -webkit-overflow-scrolling:touch; white-space:nowrap; border-bottom:2px solid #0057D9;">
-  <a href="/" style="flex-shrink:0; display:flex; align-items:center; padding:4px 16px;">
-  <img src="https://cdn.shopify.com/s/files/1/1073/2797/9850/files/ChatGPT_Image_28_ago_2026_16_57_19.png?v=1787929150" alt="Logo" style="height:44px; width:auto; filter: drop-shadow(0 0 6px #0057D9) drop-shadow(0 0 14px #0057D9) drop-shadow(0 0 22px #3B82F6);">
-</a>
-<a href="/" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">Inicio</a>
-  <a href="/collections/chandal-invierno" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Conjuntos</a>
-  <a href="/collections/chalecos" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Chalecos</a>
-  <a href="/collections/bolsos" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Bolsos</a>
-  <a href="/collections/chaquetas" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Chaquetas</a>
-</div>
+    <a href="/" style="flex-shrink:0; display:flex; align-items:center; padding:4px 16px;">
+      <img src="https://cdn.shopify.com/s/files/1/1073/2797/9850/files/ChatGPT_Image_28_ago_2026_16_57_19.png?v=1787929150" alt="Logo" style="height:44px; width:auto; filter: drop-shadow(0 0 6px #0057D9) drop-shadow(0 0 14px #0057D9) drop-shadow(0 0 22px #3B82F6);">
+    </a>
+    <a href="/" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">Inicio</a>
+    <a href="/collections/chandal-invierno" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Conjuntos</a>
+    <a href="/collections/chalecos" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Chalecos</a>
+    <a href="/collections/bolsos" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Bolsos</a>
+    <a href="/collections/chaquetas" style="color:#ffffff; text-decoration:none; font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:0.5px; flex-shrink:0;">⚡ Chaquetas</a>
 
-<style>
-  #custom-header::-webkit-scrollbar { display: none; }
-  #custom-header { scrollbar-width: none; }
-</style>
+    <a href="{% if customer %}/account{% else %}/account/login{% endif %}" aria-label="Mi perfil" style="flex-shrink:0; display:flex; align-items:center; margin-left:8px; color:#ffffff;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    </a>
 
-<div id="rotating-bar" style="background:#0057D9; color:#ffffff; padding:10px 0; font-size:14px; font-weight:600; letter-spacing:0.5px; overflow:hidden; white-space:nowrap;">
-  <div id="rotating-bar-track" style="display:inline-block; padding-left:100%; animation: rotating-bar-scroll 30s linear infinite;">
-    <span>🚚 ENVÍO GRATIS 24/48H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⚡️ PAGO CONTRAREEMBOLSO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🚚 ENVÍO GRATIS 24/48H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⚡️ PAGO CONTRAREEMBOLSO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <a href="/cart" aria-label="Carrito" style="flex-shrink:0; display:flex; align-items:center; position:relative; color:#ffffff;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      {%- if cart.item_count > 0 -%}
+        <span style="position:absolute; top:-8px; right:-8px; background:#0057D9; color:#ffffff; font-size:10px; font-weight:700; border-radius:50%; width:16px; height:16px; display:flex; align-items:center; justify-content:center;">{{ cart.item_count }}</span>
+      {%- endif -%}
+    </a>
   </div>
-</div>
 
-<style>
-  @keyframes rotating-bar-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-100%); }
-  }
-</style>
+  <style>
+    #custom-header::-webkit-scrollbar { display: none; }
+    #custom-header { scrollbar-width: none; }
+  </style>
 
- 
-</style><a class="skip-to-content-link button visually-hidden" href="#MainContent">
-  {{ 'accessibility.skip_to_text' | t }}
+  <div id="rotating-bar" style="background:#0057D9; color:#ffffff; padding:10px 0; font-size:14px; font-weight:600; letter-spacing:0.5px; overflow:hidden; white-space:nowrap;">
+    <div id="rotating-bar-track" style="display:inline-block; padding-left:100%; animation: rotating-bar-scroll 30s linear infinite;">
+      <span>🚚 ENVÍO GRATIS 24/48H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⚡️ PAGO CONTRAREEMBOLSO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;🚚 ENVÍO GRATIS 24/48H&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⚡️ PAGO CONTRAREEMBOLSO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <style>
+    @keyframes rotating-bar-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      {{ 'accessibility.skip_to_text' | t }}
     </a>
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -389,11 +401,6 @@
         predictive_search_url: '{{ routes.predictive_search_url }}',
       };
 
-      {%- comment -%}
-        Formato de moneda de la tienda, para poder formatear precios en
-        JavaScript (wishlist y "vistos recientemente", que se pintan en el
-        cliente a partir de datos obtenidos por fetch, no por Liquid).
-      {%- endcomment -%}
       window.AmstershopMoneyFormat = {{ shop.money_format | json }};
 
       window.cartStrings = {
