@@ -1,5 +1,6 @@
 {% comment %}
-  Categorias visuales: cuadricula fija de 3 por fila, sin carrusel.
+  Categorias visuales: movimiento continuo, arrastrable, estilos propios
+  (sin heredar el hover del tema que oscurece el texto y desplaza la tarjeta).
 {% endcomment %}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
@@ -18,28 +19,48 @@
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
-      <div class="cv-grid">
-        {%- for block in section.blocks -%}
-          <div class="cv-grid__item" {{ block.shopify_attributes }}>
-            <a
-              href="{{ block.settings.link | default: '#' }}"
-              class="cv-card"
-              {% if block.settings.link == blank %}role="link" aria-disabled="true" tabindex="-1"{% endif %}
-            >
-              <span class="cv-card__media">
-                {%- if block.settings.image != blank -%}
-                  {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 750px) 33vw, 90vw', widths: '400, 600, 900, 1200', class: 'cv-card__image' }}
-                {%- else -%}
-                  {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg cv-card__image' }}
-                {%- endif -%}
-              </span>
-              <span class="cv-card__caption">
-                {%- if block.settings.title != blank -%}<span class="cv-card__title">{{ block.settings.title | escape }}</span>{%- endif -%}
-                {%- if block.settings.subtitle != blank -%}<span class="cv-card__subtitle">{{ block.settings.subtitle | escape }}</span>{%- endif -%}
-              </span>
-            </a>
-          </div>
-        {%- endfor -%}
+      <div class="cv-carousel" id="cv-carousel-{{ section.id }}">
+        <div class="cv-carousel__track" id="cv-carousel-track-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            <div class="cv-carousel__item" {{ block.shopify_attributes }}>
+              <a
+                href="{{ block.settings.link | default: '#' }}"
+                class="cv-card"
+                {% if block.settings.link == blank %}role="link" aria-disabled="true" tabindex="-1"{% endif %}
+                draggable="false"
+              >
+                <span class="cv-card__media">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '90vw', widths: '600, 900, 1200, 1600', class: 'cv-card__image', draggable: false }}
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg cv-card__image' }}
+                  {%- endif -%}
+                </span>
+                <span class="cv-card__caption">
+                  {%- if block.settings.title != blank -%}<span class="cv-card__title">{{ block.settings.title | escape }}</span>{%- endif -%}
+                  {%- if block.settings.subtitle != blank -%}<span class="cv-card__subtitle">{{ block.settings.subtitle | escape }}</span>{%- endif -%}
+                </span>
+              </a>
+            </div>
+          {%- endfor -%}
+          {%- for block in section.blocks -%}
+            <div class="cv-carousel__item" aria-hidden="true">
+              <a href="{{ block.settings.link | default: '#' }}" class="cv-card" tabindex="-1" draggable="false">
+                <span class="cv-card__media">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '90vw', widths: '600, 900, 1200, 1600', class: 'cv-card__image', draggable: false }}
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg cv-card__image' }}
+                  {%- endif -%}
+                </span>
+                <span class="cv-card__caption">
+                  {%- if block.settings.title != blank -%}<span class="cv-card__title">{{ block.settings.title | escape }}</span>{%- endif -%}
+                  {%- if block.settings.subtitle != blank -%}<span class="cv-card__subtitle">{{ block.settings.subtitle | escape }}</span>{%- endif -%}
+                </span>
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
       </div>
     {%- endif -%}
   </div>
@@ -58,21 +79,34 @@
     }
   }
 
-  .cv-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+  #cv-carousel-{{ section.id }} {
+    overflow: hidden;
+    width: 100%;
+    cursor: grab;
   }
 
-  @media screen and (max-width: 749px) {
-    .cv-grid {
-      grid-template-columns: repeat(1, 1fr);
+  #cv-carousel-{{ section.id }} .cv-carousel__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  #cv-carousel-{{ section.id }} .cv-carousel__item {
+    flex: 0 0 auto;
+    width: 58vw;
+    margin-right: 16px;
+    user-select: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    #cv-carousel-{{ section.id }} .cv-carousel__item {
+      width: 34vw;
     }
   }
 
-  @media screen and (min-width: 750px) and (max-width: 989px) {
-    .cv-grid {
-      grid-template-columns: repeat(2, 1fr);
+  @media screen and (min-width: 990px) {
+    #cv-carousel-{{ section.id }} .cv-carousel__item {
+      width: 22vw;
     }
   }
 
@@ -82,12 +116,15 @@
     position: relative;
     border-radius: 16px;
     overflow: hidden;
+    transform: none !important;
+    transition: none !important;
   }
 
   .cv-card__media {
     display: block;
     aspect-ratio: 3 / 4;
     overflow: hidden;
+    border-radius: 16px;
   }
 
   .cv-card__image {
@@ -95,6 +132,10 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: 16px;
+    pointer-events: none;
+    transform: none !important;
+    transition: none !important;
   }
 
   .cv-card__caption {
@@ -102,7 +143,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 16px;
+    padding: 18px;
     background: linear-gradient(to top, rgba(0,0,0,0.75), rgba(0,0,0,0));
     display: flex;
     flex-direction: column;
@@ -111,7 +152,7 @@
 
   .cv-card__title {
     color: #ffffff !important;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -119,17 +160,122 @@
 
   .cv-card__subtitle {
     color: #ffffff !important;
-    font-size: 12px;
-    opacity: 0.9;
+    font-size: 13px;
+    opacity: 0.85;
   }
 
   .cv-card:hover .cv-card__title,
   .cv-card:focus .cv-card__title,
+  .cv-card:active .cv-card__title,
   .cv-card:hover .cv-card__subtitle,
   .cv-card:focus .cv-card__subtitle {
     color: #ffffff !important;
   }
 {%- endstyle -%}
+
+<script>
+  (function () {
+    const carousel = document.getElementById('cv-carousel-{{ section.id }}');
+    const track = document.getElementById('cv-carousel-track-{{ section.id }}');
+    if (!carousel || !track) return;
+
+    const totalItems = track.children.length;
+    if (totalItems <= 1) return;
+
+    const halfCount = totalItems / 2;
+    let position = 0;
+    let speed = 0.6;
+    let isPaused = false;
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartPosition = 0;
+    let halfWidth = 0;
+    let hasMovedEnough = false;
+
+    function calcHalfWidth() {
+      let w = 0;
+      for (let i = 0; i < halfCount; i++) {
+        w += track.children[i].getBoundingClientRect().width;
+        const style = window.getComputedStyle(track.children[i]);
+        w += parseFloat(style.marginRight) || 0;
+      }
+      return w;
+    }
+
+    function normalizePosition() {
+      if (halfWidth <= 0) return;
+      while (position <= -halfWidth) position += halfWidth;
+      while (position > 0) position -= halfWidth;
+    }
+
+    function render() {
+      track.style.transform = 'translateX(' + position + 'px)';
+    }
+
+    function loop() {
+      if (!isPaused && !isDragging) {
+        position -= speed;
+        normalizePosition();
+        render();
+      }
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('load', function () { halfWidth = calcHalfWidth(); });
+    window.addEventListener('resize', function () { halfWidth = calcHalfWidth(); });
+    setTimeout(function () { halfWidth = calcHalfWidth(); }, 300);
+
+    carousel.addEventListener('mouseenter', function () { isPaused = true; });
+    carousel.addEventListener('mouseleave', function () { isPaused = false; });
+
+    function dragStart(clientX) {
+      isDragging = true;
+      isPaused = true;
+      hasMovedEnough = false;
+      dragStartX = clientX;
+      dragStartPosition = position;
+      carousel.style.cursor = 'grabbing';
+    }
+
+    function dragMove(clientX) {
+      if (!isDragging) return;
+      const delta = clientX - dragStartX;
+      if (Math.abs(delta) > 6) { hasMovedEnough = true; }
+      position = dragStartPosition + delta;
+      normalizePosition();
+      render();
+    }
+
+    function dragEnd() {
+      isDragging = false;
+      carousel.style.cursor = 'grab';
+    }
+
+    track.addEventListener('click', function (e) {
+      if (hasMovedEnough) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+
+    carousel.addEventListener('touchstart', function (e) {
+      isPaused = true;
+      dragStart(e.touches[0].clientX);
+    }, { passive: true });
+
+    carousel.addEventListener('touchmove', function (e) {
+      dragMove(e.touches[0].clientX);
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', function () {
+      dragEnd();
+      setTimeout(function () { isPaused = false; }, 800);
+    });
+
+    carousel.addEventListener('mousedown', function (e) { dragStart(e.clientX); });
+    window.addEventListener('mousemove', function (e) { dragMove(e.clientX); });
+    window.addEventListener('mouseup', function () { dragEnd(); });
+
+    requestAnimationFrame(loop);
+  })();
+</script>
 
 {% schema %}
 {
