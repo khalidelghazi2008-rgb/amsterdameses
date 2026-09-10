@@ -50,15 +50,17 @@
         "story_N7y73k": {
           "type": "story",
           "settings": {
-            "label": "Producto",
-            "link": ""
+            "image": "shopify://shop_images/C5AC7E07-C4D2-4FC6-8913-6173D5222EB4.jpg",
+            "label": "Dior B22",
+            "link": "shopify://products/dior-b22-negra"
           }
         },
         "story_hKL4Nm": {
           "type": "story",
           "settings": {
-            "label": "Producto",
-            "link": ""
+            "image": "shopify://shop_images/0E548590-82D4-4E65-A9DF-AE7E306C7EE2.jpg",
+            "label": "New Balance",
+            "link": "shopify://products/new-balance-1906a-azul"
           }
         },
         "story_B8RPAa": {
