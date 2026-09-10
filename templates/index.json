@@ -403,7 +403,7 @@
     "ofertas_productos": {
       "type": "featured-collection",
       "settings": {
-        "collection": "",
+        "collection": "zapatillas-mas-vendidos",
         "products_to_show": 8,
         "title": "Ofertas",
         "heading_size": "h1",
