@@ -12,27 +12,6 @@
     "historias_productos_by9ULB": {
       "type": "historias-productos",
       "blocks": {
-        "story_7zAYmi": {
-          "type": "story",
-          "settings": {
-            "label": "Producto",
-            "link": ""
-          }
-        },
-        "story_4QBMJK": {
-          "type": "story",
-          "settings": {
-            "label": "Producto",
-            "link": ""
-          }
-        },
-        "story_nxGDi3": {
-          "type": "story",
-          "settings": {
-            "label": "Producto",
-            "link": ""
-          }
-        },
         "story_bMLJn6": {
           "type": "story",
           "settings": {
@@ -115,9 +94,6 @@
         }
       },
       "block_order": [
-        "story_7zAYmi",
-        "story_4QBMJK",
-        "story_nxGDi3",
         "story_bMLJn6",
         "story_HnjmFp",
         "story_N7y73k",
