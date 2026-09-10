@@ -11,34 +11,162 @@
   "sections": {
     "brand-cards": {
       "type": "brand-picker-carousel",
+      "blocks": {
+        "b1": {
+          "type": "category",
+          "settings": {
+            "title": "Nike",
+            "link": "shopify://collections/nike"
+          }
+        },
+        "b2": {
+          "type": "category",
+          "settings": {
+            "title": "Nike TN",
+            "link": "shopify://collections/nike-tn"
+          }
+        },
+        "b3": {
+          "type": "category",
+          "settings": {
+            "title": "Nike P6000",
+            "link": "shopify://collections/nike-p6000"
+          }
+        },
+        "b4": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Left_or_Right_Drop_your_comments_below_-_Go_Follow_hyp_for_more_fire_Instagram.jpg",
+            "title": "Nike React",
+            "link": "shopify://collections/nike-react"
+          }
+        },
+        "b5": {
+          "type": "category",
+          "settings": {
+            "title": "Nike Free Metcon 7",
+            "link": "shopify://collections/nike-free-metcon-7"
+          }
+        },
+        "b6": {
+          "type": "category",
+          "settings": {
+            "title": "Shox",
+            "link": "shopify://collections/shox"
+          }
+        },
+        "b7": {
+          "type": "category",
+          "settings": {
+            "title": "Airforce",
+            "link": "shopify://collections/airforce"
+          }
+        },
+        "b8": {
+          "type": "category",
+          "settings": {
+            "title": "Dior B30",
+            "link": "shopify://collections/dior-b30"
+          }
+        },
+        "b9": {
+          "type": "category",
+          "settings": {
+            "title": "Dior B22",
+            "link": "shopify://collections/dior-b22"
+          }
+        },
+        "b10": {
+          "type": "category",
+          "settings": {
+            "title": "Hermes",
+            "link": "shopify://collections/hermes"
+          }
+        },
+        "b11": {
+          "type": "category",
+          "settings": {
+            "title": "EA7 Armani",
+            "link": "shopify://collections/ea7-armani"
+          }
+        },
+        "b12": {
+          "type": "category",
+          "settings": {
+            "title": "Lacoste Elite Active",
+            "link": "shopify://collections/lacoste-elite-active"
+          }
+        },
+        "b13": {
+          "type": "category",
+          "settings": {
+            "title": "New Balance",
+            "link": "shopify://collections/new-balance"
+          }
+        },
+        "b14": {
+          "type": "category",
+          "settings": {
+            "title": "New Balance Abzorb 2000",
+            "link": "shopify://collections/new-balance-abzorb-2000"
+          }
+        },
+        "b15": {
+          "type": "category",
+          "settings": {
+            "title": "Under Armour",
+            "link": "shopify://collections/under-armour"
+          }
+        },
+        "b16": {
+          "type": "category",
+          "settings": {
+            "title": "Alexander McQueen",
+            "link": "shopify://collections/alexander-mcqueen"
+          }
+        },
+        "b17": {
+          "type": "category",
+          "settings": {
+            "title": "LV Trainer",
+            "link": "shopify://collections/lv-trainer"
+          }
+        },
+        "b18": {
+          "type": "category",
+          "settings": {
+            "title": "Asics Gel NYC",
+            "link": "shopify://collections/asics-gel-nyc"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12",
+        "b13",
+        "b14",
+        "b15",
+        "b16",
+        "b17",
+        "b18"
+      ],
       "settings": {
         "heading": "Elige tu modelo",
         "heading_size": "h1",
         "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 20
-      },
-      "blocks": {
-        "b1": { "type": "category", "settings": { "title": "Nike", "link": "shopify:\/\/collections\/nike" } },
-        "b2": { "type": "category", "settings": { "title": "Nike TN", "link": "shopify:\/\/collections\/nike-tn" } },
-        "b3": { "type": "category", "settings": { "title": "Nike P6000", "link": "shopify:\/\/collections\/nike-p6000" } },
-        "b4": { "type": "category", "settings": { "title": "Nike React", "link": "shopify:\/\/collections\/nike-react" } },
-        "b5": { "type": "category", "settings": { "title": "Nike Free Metcon 7", "link": "shopify:\/\/collections\/nike-free-metcon-7" } },
-        "b6": { "type": "category", "settings": { "title": "Shox", "link": "shopify:\/\/collections\/shox" } },
-        "b7": { "type": "category", "settings": { "title": "Airforce", "link": "shopify:\/\/collections\/airforce" } },
-        "b8": { "type": "category", "settings": { "title": "Dior B30", "link": "shopify:\/\/collections\/dior-b30" } },
-        "b9": { "type": "category", "settings": { "title": "Dior B22", "link": "shopify:\/\/collections\/dior-b22" } },
-        "b10": { "type": "category", "settings": { "title": "Hermes", "link": "shopify:\/\/collections\/hermes" } },
-        "b11": { "type": "category", "settings": { "title": "EA7 Armani", "link": "shopify:\/\/collections\/ea7-armani" } },
-        "b12": { "type": "category", "settings": { "title": "Lacoste Elite Active", "link": "shopify:\/\/collections\/lacoste-elite-active" } },
-        "b13": { "type": "category", "settings": { "title": "New Balance", "link": "shopify:\/\/collections\/new-balance" } },
-        "b14": { "type": "category", "settings": { "title": "New Balance Abzorb 2000", "link": "shopify:\/\/collections\/new-balance-abzorb-2000" } },
-        "b15": { "type": "category", "settings": { "title": "Under Armour", "link": "shopify:\/\/collections\/under-armour" } },
-        "b16": { "type": "category", "settings": { "title": "Alexander McQueen", "link": "shopify:\/\/collections\/alexander-mcqueen" } },
-        "b17": { "type": "category", "settings": { "title": "LV Trainer", "link": "shopify:\/\/collections\/lv-trainer" } },
-        "b18": { "type": "category", "settings": { "title": "Asics Gel NYC", "link": "shopify:\/\/collections\/asics-gel-nyc" } }
-      },
-      "block_order": ["b1","b2","b3","b4","b5","b6","b7","b8","b9","b10","b11","b12","b13","b14","b15","b16","b17","b18"]
+      }
     },
     "banner": {
       "type": "main-collection-banner",
@@ -69,5 +197,9 @@
       }
     }
   },
-  "order": ["brand-cards", "banner", "product-grid"]
+  "order": [
+    "brand-cards",
+    "banner",
+    "product-grid"
+  ]
 }

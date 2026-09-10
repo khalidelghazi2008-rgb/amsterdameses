@@ -204,6 +204,7 @@
         "mujer": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/Bennetts_-_Outfits.jpg",
             "title": "conjuntos verano",
             "subtitle": "",
             "link": "shopify://collections/ropa-verano"
