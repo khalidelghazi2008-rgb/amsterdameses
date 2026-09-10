@@ -36,15 +36,17 @@
         "story_bMLJn6": {
           "type": "story",
           "settings": {
-            "label": "Producto",
-            "link": ""
+            "image": "shopify://shop_images/IMG-0212.jpg",
+            "label": "Nike shox",
+            "link": "shopify://products/zapatillas-deportivas-amortiguacion-premium-negro-total"
           }
         },
         "story_HnjmFp": {
           "type": "story",
           "settings": {
-            "label": "Producto",
-            "link": ""
+            "image": "shopify://shop_images/A3056745-931F-4E69-A7D4-7118DC1A99F0.jpg",
+            "label": "Nike React",
+            "link": "shopify://products/nike-react-gris-negro"
           }
         },
         "story_N7y73k": {
