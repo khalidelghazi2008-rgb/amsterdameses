@@ -14,6 +14,7 @@
       "blocks": {
         "b1": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Nike",
             "link": "shopify://collections/nike"
@@ -21,6 +22,7 @@
         },
         "b2": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Nike TN",
             "link": "shopify://collections/nike-tn"
@@ -29,6 +31,7 @@
         "b3": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/Nike_P-6000_Premium_sneakers_Drop_shipping_Whatsapp_8613636943557.jpg",
             "title": "Nike P6000",
             "link": "shopify://collections/nike-p6000"
           }
@@ -41,16 +44,10 @@
             "link": "shopify://collections/nike-react"
           }
         },
-        "b5": {
-          "type": "category",
-          "settings": {
-            "title": "Nike Free Metcon 7",
-            "link": "shopify://collections/nike-free-metcon-7"
-          }
-        },
         "b6": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/Novas_cores_do_Nike_shox_Tl_disponiveis.jpg",
             "title": "Shox",
             "link": "shopify://collections/shox"
           }
@@ -58,12 +55,14 @@
         "b7": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/SNEAKER__NIKE_AIR_FORCE_1_Colour__White.jpg",
             "title": "Airforce",
             "link": "shopify://collections/airforce"
           }
         },
         "b8": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Dior B30",
             "link": "shopify://collections/dior-b30"
@@ -71,20 +70,15 @@
         },
         "b9": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Dior B22",
             "link": "shopify://collections/dior-b22"
           }
         },
-        "b10": {
-          "type": "category",
-          "settings": {
-            "title": "Hermes",
-            "link": "shopify://collections/hermes"
-          }
-        },
         "b11": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "EA7 Armani",
             "link": "shopify://collections/ea7-armani"
@@ -93,6 +87,7 @@
         "b12": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/Lacoste_ELITE_ACTIVE_223_-_Sneaker_low_-_black_navy.jpg",
             "title": "Lacoste Elite Active",
             "link": "shopify://collections/lacoste-elite-active"
           }
@@ -100,12 +95,14 @@
         "b13": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/New_Balance_1906r_Beige.jpg",
             "title": "New Balance",
             "link": "shopify://collections/new-balance"
           }
         },
         "b14": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "New Balance Abzorb 2000",
             "link": "shopify://collections/new-balance-abzorb-2000"
@@ -113,6 +110,7 @@
         },
         "b15": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Under Armour",
             "link": "shopify://collections/under-armour"
@@ -120,6 +118,7 @@
         },
         "b16": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Alexander McQueen",
             "link": "shopify://collections/alexander-mcqueen"
@@ -127,6 +126,7 @@
         },
         "b17": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "LV Trainer",
             "link": "shopify://collections/lv-trainer"
@@ -134,6 +134,7 @@
         },
         "b18": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Asics Gel NYC",
             "link": "shopify://collections/asics-gel-nyc"
@@ -145,12 +146,10 @@
         "b2",
         "b3",
         "b4",
-        "b5",
         "b6",
         "b7",
         "b8",
         "b9",
-        "b10",
         "b11",
         "b12",
         "b13",
