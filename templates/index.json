@@ -212,14 +212,16 @@
         },
         "zapatillas": {
           "type": "category",
+          "disabled": true,
           "settings": {
-            "title": "Zapatillas",
+            "title": "",
             "subtitle": "",
             "link": "shopify://collections/zapatillas"
           }
         },
         "novedades": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Novedades",
             "subtitle": "",
@@ -228,6 +230,7 @@
         },
         "ofertas": {
           "type": "category",
+          "disabled": true,
           "settings": {
             "title": "Ofertas",
             "subtitle": "",
@@ -338,6 +341,7 @@
         "coleccion_3",
         "coleccion_4"
       ],
+      "disabled": true,
       "settings": {
         "title": "Compra por categoría de zapatillas",
         "heading_size": "h2",
@@ -382,7 +386,7 @@
     "novedades_productos": {
       "type": "featured-collection",
       "settings": {
-        "collection": "",
+        "collection": "nike-react",
         "products_to_show": 8,
         "title": "Novedades",
         "heading_size": "h1",
@@ -407,41 +411,13 @@
         "padding_bottom": 36
       }
     },
-    "mas_vendidos": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "",
-        "products_to_show": 8,
-        "title": "Más vendidos",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "standard",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "ofertas_productos": {
       "type": "featured-collection",
       "settings": {
-        "collection": "",
+        "collection": "under-armour-conjuntos-verano",
         "products_to_show": 8,
         "title": "Ofertas",
-        "heading_size": "h2",
+        "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
@@ -517,7 +493,6 @@
     "carrusel_zapatillas",
     "productos_destacados",
     "novedades_productos",
-    "mas_vendidos",
     "ofertas_productos",
     "vistos_recientemente",
     "newsletter"

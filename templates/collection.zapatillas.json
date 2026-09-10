@@ -70,8 +70,8 @@
         },
         "b9": {
           "type": "category",
-          "disabled": true,
           "settings": {
+            "image": "shopify://shop_images/Dior_b22_2025_8829153f-cc3b-4da3-8ba5-32b34d1ffcc5.jpg",
             "title": "Dior B22",
             "link": "shopify://collections/dior-b22"
           }
