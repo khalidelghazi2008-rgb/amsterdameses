@@ -12,38 +12,6 @@
     "historias_productos_by9ULB": {
       "type": "historias-productos",
       "blocks": {
-        "story_bMLJn6": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/IMG-0212.jpg",
-            "label": "Nike shox",
-            "link": "shopify://products/zapatillas-deportivas-amortiguacion-premium-negro-total"
-          }
-        },
-        "story_HnjmFp": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/A3056745-931F-4E69-A7D4-7118DC1A99F0.jpg",
-            "label": "Nike React",
-            "link": "shopify://products/nike-react-gris-negro"
-          }
-        },
-        "story_N7y73k": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/C5AC7E07-C4D2-4FC6-8913-6173D5222EB4.jpg",
-            "label": "Dior B22",
-            "link": "shopify://products/dior-b22-negra"
-          }
-        },
-        "story_hKL4Nm": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/0E548590-82D4-4E65-A9DF-AE7E306C7EE2.jpg",
-            "label": "New Balance",
-            "link": "shopify://products/new-balance-1906a-azul"
-          }
-        },
         "story_B8RPAa": {
           "type": "story",
           "settings": {
@@ -94,10 +62,6 @@
         }
       },
       "block_order": [
-        "story_bMLJn6",
-        "story_HnjmFp",
-        "story_N7y73k",
-        "story_hKL4Nm",
         "story_B8RPAa",
         "story_CtUkqH",
         "story_9wdw6X",
@@ -184,7 +148,6 @@
         "mujer": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/Bennetts_-_Outfits.jpg",
             "title": "conjuntos verano",
             "subtitle": "",
             "link": "shopify://collections/ropa-verano"
@@ -192,16 +155,14 @@
         },
         "zapatillas": {
           "type": "category",
-          "disabled": true,
           "settings": {
-            "title": "",
+            "title": "Zapatillas",
             "subtitle": "",
             "link": "shopify://collections/zapatillas"
           }
         },
         "novedades": {
           "type": "category",
-          "disabled": true,
           "settings": {
             "title": "Novedades",
             "subtitle": "",
@@ -210,7 +171,6 @@
         },
         "ofertas": {
           "type": "category",
-          "disabled": true,
           "settings": {
             "title": "Ofertas",
             "subtitle": "",
@@ -241,7 +201,7 @@
           "type": "column",
           "settings": {
             "title": "Envío rápido",
-            "text": "<p>Envío 24/48h por 15€.</p>",
+            "text": "<p>Envío 24/48h. Pago contrareembolso.</p>",
             "link_label": "",
             "link": ""
           }
@@ -321,7 +281,6 @@
         "coleccion_3",
         "coleccion_4"
       ],
-      "disabled": true,
       "settings": {
         "title": "Compra por categoría de zapatillas",
         "heading_size": "h2",
@@ -366,7 +325,7 @@
     "novedades_productos": {
       "type": "featured-collection",
       "settings": {
-        "collection": "nike-react",
+        "collection": "",
         "products_to_show": 8,
         "title": "Novedades",
         "heading_size": "h1",
@@ -391,13 +350,41 @@
         "padding_bottom": 36
       }
     },
+    "mas_vendidos": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "",
+        "products_to_show": 8,
+        "title": "Más vendidos",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "columns_desktop": 4,
+        "enable_desktop_slider": false,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "standard",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "ofertas_productos": {
       "type": "featured-collection",
       "settings": {
-        "collection": "under-armour-conjuntos-verano",
+        "collection": "",
         "products_to_show": 8,
         "title": "Ofertas",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
@@ -473,6 +460,7 @@
     "carrusel_zapatillas",
     "productos_destacados",
     "novedades_productos",
+    "mas_vendidos",
     "ofertas_productos",
     "vistos_recientemente",
     "newsletter"
