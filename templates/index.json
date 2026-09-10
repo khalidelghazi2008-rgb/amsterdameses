@@ -15,8 +15,9 @@
         "story_7zAYmi": {
           "type": "story",
           "settings": {
+            "image": "shopify://shop_images/469381AA-ADEA-4B40-92A6-9DCBA14E5563.jpg",
             "label": "Producto",
-            "link": ""
+            "link": "shopify://products/nike-p6000-blanca-negro"
           }
         },
         "story_bMLJn6": {
