@@ -347,7 +347,7 @@
     "productos_destacados": {
       "type": "featured-collection",
       "settings": {
-        "collection": "all",
+        "collection": "lacoste-elite-active",
         "products_to_show": 8,
         "title": "⚡️LO MAS VENDIDO ⚡️",
         "heading_size": "h1",
