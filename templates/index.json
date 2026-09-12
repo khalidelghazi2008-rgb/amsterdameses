@@ -250,7 +250,7 @@
           "type": "column",
           "settings": {
             "title": "Envío rápido",
-            "text": "<p>Envío 24/48h por 15€.</p>",
+            "text": "<p>Envío gratis 24/48h.</p>",
             "link_label": "",
             "link": ""
           }
