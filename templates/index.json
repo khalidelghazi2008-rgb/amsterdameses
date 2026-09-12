@@ -375,7 +375,7 @@
     "novedades_productos": {
       "type": "featured-collection",
       "settings": {
-        "collection": "",
+        "collection": "emporio-armani-2026",
         "products_to_show": 8,
         "title": "Novedades",
         "heading_size": "h1",
@@ -402,6 +402,7 @@
     },
     "ofertas_productos": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "collection": "zapatillas-mas-vendidos",
         "products_to_show": 8,
