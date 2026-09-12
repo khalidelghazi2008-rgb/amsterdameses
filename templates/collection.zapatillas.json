@@ -139,6 +139,13 @@
             "title": "Asics Gel NYC",
             "link": "shopify://collections/asics-gel-nyc"
           }
+        },
+        "b19": {
+          "type": "category",
+          "settings": {
+            "title": "Emporio Armani 2026",
+            "link": "shopify://collections/emporio-armani-2026"
+          }
         }
       },
       "block_order": [
@@ -157,7 +164,8 @@
         "b15",
         "b16",
         "b17",
-        "b18"
+        "b18",
+        "b19"
       ],
       "settings": {
         "heading": "Elige tu modelo",
