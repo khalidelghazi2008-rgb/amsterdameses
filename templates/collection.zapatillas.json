@@ -87,7 +87,7 @@
         "b12": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/Lacoste_ELITE_ACTIVE_223_-_Sneaker_low_-_black_navy.jpg",
+            "image": "shopify://shop_images/IMG_7901.jpg",
             "title": "Lacoste Elite Active",
             "link": "shopify://collections/lacoste-elite-active"
           }
@@ -143,6 +143,7 @@
         "b19": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/IMG_0411.jpg",
             "title": "Emporio Armani 2026",
             "link": "shopify://collections/emporio-armani-2026"
           }
